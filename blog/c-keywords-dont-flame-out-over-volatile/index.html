@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Website Description">
+
+<base href="https://eff-kay.github.io/">
+<title>
+
+
+     C keywords: Don&#39;t flame out over volatile 
+
+</title>
+<link rel="canonical" href="https://eff-kay.github.io/blog/c-keywords-dont-flame-out-over-volatile/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500|Work+Sans">
+
+
+
+    
+    <link rel="stylesheet" href="https://eff-kay.github.io/css/light-style.css?t=1506078346">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://eff-kay.github.io/img/fav.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+<body lang="en">
+  
+
+<div class="section" id="top">
+
+    <div class="container hero  fade-in one ">
+    <h1 class="bold-title is-1">Faizan's Blog</h1>
+    </div>
+
+
+<div class="section  fade-in two ">
+
+    <div class="container">
+    <hr>
+<nav class="nav nav-center">
+    <span id="nav-toggle" class="nav-toggle"  onclick="document.getElementById('nav-menu').classList.toggle('is-active');">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+    <div id="nav-menu" class="nav-left nav-menu">
+      <span class="nav-item">
+        <a href="https://eff-kay.github.io/">Main</a>
+      </span>
+      <span class="nav-item">
+        <a href="https://eff-kay.github.io/#about">About</a> 
+      </span>
+    
+      <span class="nav-item">
+        <a href="https://eff-kay.github.io/#projects">Projects</a> 
+      </span>
+    
+    
+      <span class="nav-item">
+        <a href="https://eff-kay.github.io/#blog">Back to blog</a> 
+      </span>
+    
+      <span class="nav-item">
+        <a href="https://eff-kay.github.io/#contact">Contact</a>
+      </span>
+    
+      <span class="nav-item">
+        <a href="https://eff-kay.github.io/index.xml"><i class="fa fa-rss"></i></a>
+      </span>
+    
+    </div>
+</nav>
+<hr>
+    </div>
+
+    <div class="container  fade-in two ">
+        <h2 class="title is-1 top-pad strong-post-title"><a href="https://eff-kay.github.io/blog/c-keywords-dont-flame-out-over-volatile/">C keywords: Don&#39;t flame out over volatile</a></h2>
+            <div class="post-data">
+                Mar 12, 2017 |
+                16 minutes read
+            </div>
+
+            
+                <div class="blog-share">
+                Share this:
+                
+                <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Read%20C%20keywords%3a%20Don%27t%20flame%20out%20over%20volatile%20https%3a%2f%2feff-kay.github.io%2fblog%2fc-keywords-dont-flame-out-over-volatile%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+                </a>
+                
+                 
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2feff-kay.github.io%2fblog%2fc-keywords-dont-flame-out-over-volatile%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+                </a>
+                
+                
+                
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2feff-kay.github.io%2fblog%2fc-keywords-dont-flame-out-over-volatile%2f"
+                onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+                </a>
+                
+                </div>
+            
+
+    </div>
+
+    <div class="container markdown  fade-in two  top-pad">
+        
+
+<p>faizan khan - August 05, 2016
+<em>originally published in published in <a href="http://www.embedded.com/design/programming-languages-and-tools/4442490/C-keywords--Don-t-flame-out-over-volatile">embedded.com</a> .Selected as the <a href="http://www.embedded.com/electronics-blogs/say-what-/4443190/Top-Embedded-articles-in-2016-">best design article of 2016</a> by the editors.</em></p>
+
+<p>Consider the following code,</p>
+
+<pre><code>struct _a_struct{
+    int x;
+    int y
+    volatile bool alive=false;
+} ASTRUCT;
+
+ASTRUCT a_struct;
+
+//Thread 1
+a_struct.x = x;
+a_struct.y = y;
+a_struct.alive =true;
+
+//thread 2
+if (a_struct.alive==true)
+{
+    draw_struct(a_struct.x, a_struct.y);
+}
+</code></pre>
+
+<p>This is a normal scenario of an object being shared between two threads, one thread is updating its value and the other is waiting for the updated values. The above code seems harmless but there is something wrong with it. It will not produce the <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ee418650">desired results</a>. We could try to make everything in the structure volatile but this would produce inefficient code. We don’t want to lose efficiency; we just want to share data between the two threads. In this article, I will show you what problems can be caused by the above code, and why should we avoid the solution of placing volatile with everything.</p>
+
+<p>This article will have two parts. The first part will try to resolve all the confusion surrounding volatile. We will discuss its semantics: declaration and assignments, its use in a multi-threaded environment and its use in a kernel setting. The second part will lay out use cases where volatile is considered necessary like in a setjmp and longjmp, signal handling and inline assembly.</p>
+
+<p>My motivation for writing this article is to make some sense of the chaos surrounding volatile. I wanted this article to be a complete guide for the use of volatile. But from what I have researched, it’s not that we don’t know how to use this keyword, it’s just that we don’t know when to stop using it. The basic use cases, which are as follows, <a href="https://barrgroup.com/Embedded-Systems/How-To/C-Volatile-Keyword">are well known</a>.</p>
+
+<ol>
+<li>Use volatile on memory mapped IO</li>
+<li>Use volatile on global data shared between multiple tasks</li>
+<li>Use volatile on data used in ISR.</li>
+</ol>
+
+<p>A lot has been written on them, and it is because of this reiteration of these basic use cases that we tend to start using volatile everywhere. All of the code I see seems to lie in one of the above categories. For example I was faced with a problem related to global data accessed in an ISR. I placed volatile with everything I thought could cause the problem and the code worked fine. But as we will see later, this solution hid the problem as opposed to solving it. Naturally an issue was reported after a few months regarding loss of data synchronization.</p>
+
+<h3 id="the-setting">The Setting</h3>
+
+<p>The <a href="http://www.embedded.com/design/programming-languages-and-tools/4442490/1/K&amp;R%2520Dennis%2520Ritchie">second edition</a> of K&amp;R introduced volatile as follows.</p>
+
+<blockquote>
+<p>&ldquo;The purpose of volatile is to force an implementation to suppress optimization that could otherwise occur. For example, for a machine with memory-mapped input/output, a pointer to a device register might be declared as a pointer to volatile, in order to prevent the compiler from removing apparently redundant references through the pointer.&rdquo; — Dennis Ritchie.</p>
+</blockquote>
+
+<p>Volatile was introduced to inform the compiler of special memory mapped regions. There is a <a href="https://groups.google.com/forum/#!msg/comp.std.c/tHvQhiKFtD4/zfIgJhbkCXcJ">usenet group post</a> that says that before volatile, compilers had to use strange heuristics to identify which regions were memory mapped and which were not. So volatile was a necessary addition to the C language at the time. But beyond this basic use case, <a href="https://blog.regehr.org/archives/28">volatile is widely misused</a>.</p>
+
+<p>Back in those days most processors were single core and executed the instructions <a href="https://courses.cs.washington.edu/courses/csep548/06au/lectures/introOOO.pdf">in-order</a>. What you wrote and the order you wrote it in got executed without a scratch. Nowadays the code that we write, known as abstract machine by the C standard, is a lot different from the actual implementation that gets executed. In fact according to the C standard the only thing the compiler has to make sure to produce executable code is the end result.</p>
+
+<p>The only thing the compiler cannot do is remove or reorder accesses to volatile qualified objects (<a href="http://www.open-std.org/jtc1/sc22/wg14/www/C99RationaleV5.10.pdf">C-99 rationale</a>). But it can freely remove or reorder non-volatile accesses around it. The compiler can also upgrade some objects to become volatile qualified after certain expressions. Therefore <a href="http://www.embedded.com/design/programming-languages-and-tools/4415475/Guidelines-for-handling-volatile-variables">understanding the usage of volatile</a> in basic use cases like declarations and assignments is also necessary. Some developers still struggle to differentiate between a volatile object and a volatile pointer. In the next section I will start with addressing these points of confusions one by one. They are arranged in order of their increasing confusion regarding the usage of volatile.</p>
+
+<h3 id="semantics">SEMANTICS</h3>
+
+<h4 id="declarations">Declarations</h4>
+
+<p>Lets start with the basics.</p>
+
+<pre><code>int* pi; // is a pointer to an int.
+
+
+int volatile* pvi; // is a pointer to a volatile int; meaning the object it is pointing to, is volatile
+
+int* volatile vpi; // is a volatile pointer to an int; pointer is volatile, the object it is pointing to is an int. This is of fairly less use.
+
+int volatile* volatile vpvi; // volatile pointer to a volatile int; both the pointer and the memory location it is pointing to, are volatile int.
+</code></pre>
+
+<p>As a general rule of thumb, when reading complex declarations the rule is to start reading from the right and go all the way to the left. This rule is helpful in other declarations as well. The rule is also one of the reasons you should <a href="http://www.embedded.com/electronics-blogs/programming-pointers/4025609/Place-volatile-accurately.">put qualifiers to the right</a> of the type it is qualifying.</p>
+
+<blockquote>
+<p>The logic for deciding such semantics of declarations was that it should correspond to its use in expressions. Thus *pi, when used in an expression would yield an int, and *pvi when used in an expression would yield a volatile int. &mdash; Dennis Ritchie, <a href="https://www.bell-labs.com/usr/dmr/www/chist.html">The Development of C Language</a></p>
+</blockquote>
+
+<h4 id="complex-objects">Complex Objects</h4>
+
+<p>You can declare a volatile struct as</p>
+
+<pre><code>struct volatile _a
+{
+    int mem_i;
+    int* pmem_i;
+} A;
+</code></pre>
+
+<p>Thus every A and its members from now on will be volatile.</p>
+
+<blockquote>
+<p>CHECKPOINT: In C, if a collective is volatile then all its members are volatile.</p>
+</blockquote>
+
+<p>Consider the code</p>
+
+<pre><code>A a_struct; //a_struct is volatile
+</code></pre>
+
+<p>What about its members</p>
+
+<pre><code>a_struct.mem_i ; // the type is volatile int
+</code></pre>
+
+<pre><code>a_struct.pmem_i; // the type is, wait for it, int* volatile
+(the pointer is volatile not the object it is pointing to)
+</code></pre>
+
+<p>The second line is a very important point to keep in mind when declaring structs. Since the pointer is volatile but the object it is pointing to is an int, all accesses to int can be optimized out. This introduces a lot of problems in conversions, and if you are unlucky you might not get any warnings by the compiler at all.</p>
+
+<blockquote>
+<p>CHECKPOINT: When using volatile on a collective such as structs, volatile is prepended to left of the identifier and to the right of the type.</p>
+</blockquote>
+
+<p>Assignments
+So what happens when we try to modify a <a href="http://www.embedded.com/electronics-blogs/programming-pointers/4025624/Volatile-as-a-promise">volatile qualified object with a non-qualified type</a>. How does our beloved compiler deal with it.</p>
+
+<pre><code>int volatile *pvi; //pointer to volatile int.
+</code></pre>
+
+<pre><code>int* pi ; //pointer to an int.
+</code></pre>
+
+<pre><code>pvi = pi;
+</code></pre>
+
+<p>What happens or should happen is that the compiler will upgrade the non-volatile type to a volatile qualified type. The best way, if you want to stop the compiler from optimizing the accesses to *pi is to cast it as a volatile qualified type and then recast it.</p>
+
+<blockquote>
+<p>&ldquo;If it is necessary to access a nonvolatile object using volatile semantics, the technique is to cast the address of the object to the appropriate pointer-to- qualified type, then dereference that pointer.&rdquo; - C99 standard:</p>
+
+<p>CHECKPOINT: When modifying a volatile type with non-volatile type, the compiler will implicitly cast the non- volatile type to a volatile type.</p>
+</blockquote>
+
+<p>What about the other way around. What would happen if we do</p>
+
+<pre><code>pi = pvi;
+</code></pre>
+
+<p>Now the compiler would or should throw a warning that says something like I don’t get what you are trying to do so I am just dropping the volatile keyword. Some older compilers might not complain at all, in which case you have screwed up badly and you don’t even know it yet.</p>
+
+<h4 id="function-parameters">Function Parameters</h4>
+
+<p>The above problem is more profound when using volatile with functions. Consider the following
+code.</p>
+
+<pre><code>int i;
+int* pi;
+int volatile* pvi;
+int func(int i, int* pi);
+</code></pre>
+
+<pre><code>func(i,pvi);
+</code></pre>
+
+<p>In this case the compiler will again throw a warning or an error complaining that the function func expects pi and you are passing pvi so I am just discarding the volatile. Avoid this type of code in all cases. According to the C standard this is an undefined behavior, which means anything can happen, including <a href="http://www.catb.org/jargon/html/N/nasal-demons.html">demons flying out from your nose</a>. Yes, nasal demons are possible if the compiler writers consider it to be an important language extension and they are even allowed by the C standard to do that.</p>
+
+<blockquote>
+<p>&ldquo;If an attempt is made to refer to an object defined with a volatile-qualified type through us of an lvalue with non-volatile-qualified type, the behavior is undefined&rdquo;&mdash; C99 Standard.</p>
+
+<p>CHECKPOINT: When modifying a non-volatile type with volatile type, the compiler should throw a warning, if it doesn’t then raise a ticket to your compiler team.</p>
+</blockquote>
+
+<h3 id="volatile-and-atomic-accesses">VOLATILE AND ATOMIC ACCESSES</h3>
+
+<blockquote>
+<p>“ ‘Atomic’ means that the access to the variable is in ‘one piece’, and cannot be interrupted, or performed in multiple steps which can be interrupted.” — <a href="https://en.wikipedia.org/wiki/Linearizability">Master yoda, wikipedia</a></p>
+</blockquote>
+
+<h4 id="problem">Problem</h4>
+
+<p>The following code is representative of an ISR, where wait() is a function called by the user and timer_interrupt() which is an ISR, increments the variable on which wait() takes a decision. This situation can also occur in multiple threads where one threads increments a variable and the other takes a decision on the incremented variable.</p>
+
+<pre><code>volatile uint16_t my_delay;
+</code></pre>
+
+<pre><code>void wait(uint16_t time) {
+    my_delay = 0;
+    while (my_delay&lt;time) {
+    /* wait .... */
+}
+}
+</code></pre>
+
+<pre><code>void timer_interrupt(void) {
+    my_delay++;
+}[i]
+</code></pre>
+
+<p>We now know that the compiler won’t optimize the while loop, because my_delay is declared volatile. It won’t produce the desired effect, because increment is not an atomic operation. There are some architectures that do provide atomic increment instructions. As a general rule you can&rsquo;t be sure if this is an atomic operation. In other words the compiler will use three separate instructions for increment: it will first read, modify and then write to my_delay.</p>
+
+<p>For example if an ISR occurs, the value of my_delay is read and modified, and before it is written, another interrupt occurs. The wait() function will read my_delay in the meantime and get the old value, this is called a torn read.</p>
+
+<p>The problem that we are dealing with now is different, and as we will see later, the solution might also take care of the need for volatile so we might not need volatile at all. This is an important use case and we have to understand when volatile is not enough to solve the problem. So we should understand which instructions are atomic, and when atomic instructions are needed in multiple threads.</p>
+
+<h4 id="understanding-atomic-instructions">Understanding Atomic Instructions</h4>
+
+<p>First we need to define a rule about where atomic instructions are necessary. As a general rule of thumb, any time two threads operate on a shared variable concurrently, and one of those operations perform a write, both threads must use atomic operations. Find more information about atomicity <a href="http://preshing.com/20130618/atomic-vs-non-atomic-operations/">here</a>.</p>
+
+<p>Increment is one operation for which the compiler explicitly uses three separate instructions but there are certain operations for which the compiler uses one instruction but the actual implementation treats it as two separate instructions. Like in <a href="http://web.eecs.umich.edu/~prabal/teaching/eecs373-f10/readings/ARMv7-M_ARM.pdf">armv7 strd</a> is an instruction that stores the value of two 32-bit registers to one 64-bit memory location, but under the hood it performs two 32-bit stores. So you just can&rsquo;t be sure which operations are atomic until you have read the compiler specifications or hardware vendors manual. Following are a few checkpoints about atomicity</p>
+
+<blockquote>
+<p>CHECKPOINTS:</p>
+
+<p>All C, C++ operations are non-atomic unless specified by the compiler and hardware vendor</p>
+
+<p>Naturally aligned reads are atomic. But we can’t be sure if 8-byte word accesses are atomic or not.</p>
+
+<p>Naturally unaligned reads are non-atomic.</p>
+
+<p>Composite operations, the read modify write type, are non-atomic.</p>
+</blockquote>
+
+<h4 id="solution">Solution</h4>
+
+<p>So the solution to the above problem is to make accesses atomic. We can do this by using locks on our critical code. In our case the critical code is accessing my_delay so we should acquire the lock before an access and release it after the access. Locks can perform a number of functions, but in our case we want it to disable the interrupts so that no interrupt occurs during the access.</p>
+
+<p>In the following code EnterCritical and ExitCritical disables the interrupts.</p>
+
+<pre><code>volatile uint16_t my_delay;
+</code></pre>
+
+<pre><code>void wait(uint16_t time) {
+    uint16_t tmp;
+</code></pre>
+
+<pre><code>    EnterCritical();
+    my_delay = 0;
+    ExitCritical();
+</code></pre>
+
+<pre><code>    do {
+        EnterCritical();
+        tmp = my_delay;
+        ExitCritical();
+</code></pre>
+
+<pre><code>    } while(tmp&lt;time);
+}
+</code></pre>
+
+<pre><code>void TimerInterrupt(void) {
+    EnterCritical();
+    my_delay++;
+    ExitCritical();
+}
+</code></pre>
+
+<h3 id="volatile-and-reordering">VOLATILE AND REORDERING</h3>
+
+<p>Another issue with using volatile in a multiple threads or an ISR is the lack of understanding of reordering. In order to show you the severity of this problem let&rsquo;s discuss an example.</p>
+
+<h4 id="problem-1">Problem</h4>
+
+<p>The following is a simple example of a complex situation that is very common in embedded world. We often have multiple threads where one is sending a message and then updating a flag and the other is waiting for the flag to get updated to read the message. Consider the following <a href="https://software.intel.com/en-us/blogs/2007/11/30/volatile-almost-useless-for-multi-threaded-programming/">code</a>:</p>
+
+<pre><code>volatile int ready;
+int Message[100];
+</code></pre>
+
+<pre><code>void foo( int i )
+{
+    Message[i/10] = 42;
+    Ready = 1;
+}
+</code></pre>
+
+<pre><code>void Thread2(i)
+{
+    while(ready != 1);
+    //read message
+}
+</code></pre>
+
+<p>In the above code foo() is updating the message array and subsequently updating the flag, informing thread 2 that the data is ready. Thread2 is waiting for the ready flag value to be equal to one, after which it could read the message. Notice the use of volatile with ready, If ready wasn’t volatile then the compiler might have removed the while block altogether, but this is not enough.</p>
+
+<p>If you compile the above code with gcc with -O2 optimization the ready flag will be updated before the message is updated. Thus thread 2 will be forced to read the old value of the message.</p>
+
+<p>The most common solution to this problem, which is generally our default solution as developers, is to make message volatile as well. This will solve the problem but it will result in an inefficient code. Worse yet it might not even fix the problem because the machine has yet to do some reordering of its own. Yes, the machine also reorders our code.</p>
+
+<p>In order to break this problem down we need to understand reordering. There are two types of reordering.</p>
+
+<h4 id="compiler-reordering">Compiler Reordering</h4>
+
+<p>The above code is a clear case of compiler reordering. In fact the compiler is at liberty to reorder any code that it deems necessary as long as the output is the same. Thus in order to make sure that the reads and writes are performed in a specific order, there is a language extension availableby most compilers called the compiler barrier.</p>
+
+<pre><code>asm volatile (&quot;&quot; : : : &quot;memory&quot;);
+</code></pre>
+
+<p>This is how we use it to solve our problem.</p>
+
+<pre><code>volatile int ready;
+int message[100];
+</code></pre>
+
+<pre><code>void foo (int i) {
+    message[i/10] = 42;
+    asm volatile (&quot;&quot; : : : &quot;memory&quot;);
+    ready = 1;
+}
+</code></pre>
+
+<p>This instruction dumps all of RAM before the barrier and reloads them afterwards. Plus the compiler is not allowed to reorder code across this barrier.</p>
+
+<p>Another solution would be to use a call to an external function which the compiler cannot see inside. This is also the reason most bugs magically disappear when you use printf debugging.</p>
+
+<p>Although major compilers like gcc, intel CC, and LLVM do provide this option, compiler barrier itself is not an elegant solution as some compilers might not provide it. The best solution is to use memory barriers.</p>
+
+<h4 id="cpu-reordering">CPU Reordering</h4>
+
+<p>CPU reordering, also known as machine reordering, is more subtle and difficult to catch but happens in most modern machines. The idea is that while one read is happening at the bus level, and the data is not available yet, another independent instruction can be executed and the read can be completed after the data is available. This is, of course, only one way of machine reordering, there are a lot of ways in which code on an <a href="https://en.wikipedia.org/wiki/Out-of-order_execution">out-of-order</a> machine gets executed.</p>
+
+<p>The solution for CPU reordering is to use memory barriers. Memory barriers are provided by almost all processors. Following is an example of <a href="https://github.com/arthurjrfloripa/mcuoneclipse/blob/master/Drivers/freeRTOS/port.c">FreeRTOS code</a> that creates a context switch within an ISR. We need memory barriers here so that before the context switch, all the data and instruction code is synchronized.</p>
+
+<pre><code>void vPortYieldFromISR(void) {
+</code></pre>
+
+<pre><code>/* Set a PendSV to request a context switch. */
+</code></pre>
+
+<pre><code>*(portNVIC_INT_CTRL) = portNVIC_PENDSVSET_BIT;
+</code></pre>
+
+<pre><code>/* Barriers are normally not required but do ensure the
+code is completely within the specified behavior for the
+architecture. */
+</code></pre>
+
+<pre><code>__asm volatile(&quot;dsb&quot;);
+</code></pre>
+
+<pre><code>__asm volatile(&quot;isb&quot;);
+</code></pre>
+
+<pre><code>}
+</code></pre>
+
+<p>The two assembly instructions dsb, and isb are “data synchronization barrier” and “instruction synchronization barrier respectively”. These will ensure that data and instructions sections of the code get serialized. Read more about them <a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dai0321a/index.html">here</a>.</p>
+
+<p>In most multi-threaded setting you will use a variant of enter_critical and exit_critical region that will enforce serialization within and across the region, they serve as locks. These locks should be properly implemented to make sure that no unwanted reordering across the region occurs. Also once inside the region we can be sure the locks will prevent unwanted optimizations. Thus having volatile objects inside this region serves no purpose.</p>
+
+<h3 id="volatile-in-a-kernel-setting">VOLATILE IN A KERNEL SETTING</h3>
+
+<blockquote>
+<p>&ldquo;volatile&rdquo; on kernel data is basically always a bug, and you should use locking. &ldquo;volatile&rdquo; doesn&rsquo;t help anything at all with memory ordering and friends, so it&rsquo;s insane to think it &ldquo;solves&rdquo; anything on its own.” — LINUS TROVALDS, <a href="https://lwn.net/Articles/233484/">Linux Group Post</a></p>
+</blockquote>
+
+<p>This seems redundant at this point but has a special significance to it. There has been a lot of <a href="https://lwn.net/Articles/233479/">debate in the linux community</a> around the use of volatile. This section is especially dedicated to summarizing the confusion around this use case. This section is also here to differentiate the application of volatile on baremetal where there is no kernel. Thus if you are not in a kernel setting you only have to take care of the above problems.</p>
+
+<p>In a kernel setting as in multithreaded environment you can be sure to have kernel locking primitives which make the data safe i.e. mutexes, spinlocks and barriers. These locks are designed to also prevent unwanted optimizations and make sure the operations are atomic on both the cpu and compiler level. Thus if they are being used properly then you don’t need volatile.</p>
+
+<p>Thus the only significant use of volatile (that one can think of) in a kernel setting can be for accessing a memory mapped IO. Since you don’t want the compiler to optimize out the register accesses within the critical region, you still have to use volatile inside the critical region even if you use locks around those accesses. But in most kernel settings you have special accessor functions for accessing IO memory regions, because accessing this memory region directly is frowned upon in a kernel setting. These accessor functions must make sure to prevent any unwanted optimizations and if they do it properly then volatile is not needed.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>In this article, I have tried to discuss the problems that one should consider when using volatile. These use cases are important because they address behaviors of compilers and machine which is not commonly understood. I hope you can now find out what is wrong with the code discussed in the introduction and how you can fix it. In the next article, I will address the use cases where volatile is necessary.</p>
+
+<p>Editor&rsquo;s note: Updated for corrections 7 Aug 2016.</p>
+
+    </div>
+
+    <div class="container top-pad">
+        <form style="border:1px solid #ccc;padding:3px;text-align:center;" action="https://tinyletter.com/faizank" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/faizank', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+
+                <p><label for="tlemail">Like what you read, and would love to read stuff like this regularly</label></p>
+
+                <input type="text" style="width:140px" name="email" id="tlemail" />
+
+                <input type="hidden" value="1" name="embed"/>
+                <input type="submit" value="Subscribe" style="background:#00b8d4;color:white"/>
+        </form>
+ 
+    </div>
+
+    <div class="disqus">
+        
+    </div>
+
+<div class="container has-text-centered top-pad">
+<hr>
+<a href="https://eff-kay.github.io/blog/c-keywords-dont-flame-out-over-volatile/#top"><i class="fa fa-arrow-up"></i></a>
+<hr>
+</div>
+
+<div class="section" id="footer">
+    <div class="container has-text-centered">
+        
+            Theme inspiration from Introduction by hivickylai
+        
+    </div>
+</div>
+</div>
+</div>
+
+
+<script>
+$('a[href^="https:\/\/eff-kay.github.io\/blog\/c-keywords-dont-flame-out-over-volatile\/#"]').click(function(e) {
+    e.preventDefault();
+    var target = this.hash;
+    $('html, body').animate({
+    scrollTop: $(target).offset().top
+    }, 500);
+    return false;
+})
+
+$('p > img').parent().addClass("container has-text-centered");
+$('p > img').parent().css({"padding-bottom":"0px", "margin-bottom":"0px"});
+$('p > img').parent().next().addClass("container has-text-centered")
+
+</script>
+
+</body>

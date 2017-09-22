@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Faizans Den</title>
+    <link>https://eff-kay.github.io/</link>
+    <description>Recent content on Faizans Den</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 12 Jul 2017 11:55:50 +0800</lastBuildDate>
+    
+	<atom:link href="https://eff-kay.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Understanding C terminologies, a dummies perspective</title>
+      <link>https://eff-kay.github.io/blog/understanding-c-terminologies-a-dummies-perspective/</link>
+      <pubDate>Wed, 12 Jul 2017 11:55:50 +0800</pubDate>
+      
+      <guid>https://eff-kay.github.io/blog/understanding-c-terminologies-a-dummies-perspective/</guid>
+      <description>Consider the following example, lets call this tcode1 for future reference.
+/*tocode1.c*/ void func(int a, int b); void f(int i); void func( int a, int b){ printf(“%d %d”, a, b) } void f(int i) { func(i++, i); } int main(void){ f(5); }  This hypothetical example came up in a discussion at lunch in my office, when a friend said that he expected a to be 6, b to be 5 but he got a=5, and b=6.</description>
+    </item>
+    
+    <item>
+      <title>C keywords: Don&#39;t flame out over volatile</title>
+      <link>https://eff-kay.github.io/blog/c-keywords-dont-flame-out-over-volatile/</link>
+      <pubDate>Sun, 12 Mar 2017 11:55:50 +0800</pubDate>
+      
+      <guid>https://eff-kay.github.io/blog/c-keywords-dont-flame-out-over-volatile/</guid>
+      <description>faizan khan - August 05, 2016 originally published in published in embedded.com .Selected as the best design article of 2016 by the editors.
+Consider the following code,
+struct _a_struct{ int x; int y volatile bool alive=false; } ASTRUCT; ASTRUCT a_struct; //Thread 1 a_struct.x = x; a_struct.y = y; a_struct.alive =true; //thread 2 if (a_struct.alive==true) { draw_struct(a_struct.x, a_struct.y); }  This is a normal scenario of an object being shared between two threads, one thread is updating its value and the other is waiting for the updated values.</description>
+    </item>
+    
+    <item>
+      <title>contact</title>
+      <link>https://eff-kay.github.io/contact/</link>
+      <pubDate>Thu, 09 Mar 2017 13:23:28 +0800</pubDate>
+      
+      <guid>https://eff-kay.github.io/contact/</guid>
+      <description>You can contact me via email or any of the social links available&amp;hellip;.</description>
+    </item>
+    
+    <item>
+      <title>about</title>
+      <link>https://eff-kay.github.io/about/</link>
+      <pubDate>Thu, 09 Mar 2017 13:19:25 +0800</pubDate>
+      
+      <guid>https://eff-kay.github.io/about/</guid>
+      <description>I am a tinkerer at heart, I have dabbled in a lot of technologies ranging from embedded software to web dev, from hardware signals to the application UI and everything inbetween. Looking for a place where my esoteric knowledge in arts, hardware and software is fused into a hot amalagam. I think I might have found it. See interests and figure out the trend.
+Recent Interests
+ Crowdsourcing DAPPS Smart Contracts Incentives Effective prose Large Projects where &amp;ldquo;time_delta &amp;gt;= 1 year&amp;rdquo;  Senior Software Development Engineer @ Mentor Graphics</description>
+    </item>
+    
+  </channel>
+</rss>

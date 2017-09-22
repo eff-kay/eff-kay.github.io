@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Website Description">
+
+<base href="https://eff-kay.github.io/">
+<title>
+
+
+     Understanding C terminologies, a dummies perspective 
+
+</title>
+<link rel="canonical" href="https://eff-kay.github.io/blog/understanding-c-terminologies-a-dummies-perspective/">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500|Work+Sans">
+
+
+
+    
+    <link rel="stylesheet" href="https://eff-kay.github.io/css/light-style.css?t=1506078346">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://eff-kay.github.io/img/fav.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+<body lang="en">
+  
+
+<div class="section" id="top">
+
+    <div class="container hero  fade-in one ">
+    <h1 class="bold-title is-1">Faizan's Blog</h1>
+    </div>
+
+
+<div class="section  fade-in two ">
+
+    <div class="container">
+    <hr>
+<nav class="nav nav-center">
+    <span id="nav-toggle" class="nav-toggle"  onclick="document.getElementById('nav-menu').classList.toggle('is-active');">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+    <div id="nav-menu" class="nav-left nav-menu">
+      <span class="nav-item">
+        <a href="https://eff-kay.github.io/">Main</a>
+      </span>
+      <span class="nav-item">
+        <a href="https://eff-kay.github.io/#about">About</a> 
+      </span>
+    
+      <span class="nav-item">
+        <a href="https://eff-kay.github.io/#projects">Projects</a> 
+      </span>
+    
+    
+      <span class="nav-item">
+        <a href="https://eff-kay.github.io/#blog">Back to blog</a> 
+      </span>
+    
+      <span class="nav-item">
+        <a href="https://eff-kay.github.io/#contact">Contact</a>
+      </span>
+    
+      <span class="nav-item">
+        <a href="https://eff-kay.github.io/index.xml"><i class="fa fa-rss"></i></a>
+      </span>
+    
+    </div>
+</nav>
+<hr>
+    </div>
+
+    <div class="container  fade-in two ">
+        <h2 class="title is-1 top-pad strong-post-title"><a href="https://eff-kay.github.io/blog/understanding-c-terminologies-a-dummies-perspective/">Understanding C terminologies, a dummies perspective</a></h2>
+            <div class="post-data">
+                Jul 12, 2017 |
+                9 minutes read
+            </div>
+
+            
+                <div class="blog-share">
+                Share this:
+                
+                <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Read%20Understanding%20C%20terminologies%2c%20a%20dummies%20perspective%20https%3a%2f%2feff-kay.github.io%2fblog%2funderstanding-c-terminologies-a-dummies-perspective%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+                </a>
+                
+                 
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2feff-kay.github.io%2fblog%2funderstanding-c-terminologies-a-dummies-perspective%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+                </a>
+                
+                
+                
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2feff-kay.github.io%2fblog%2funderstanding-c-terminologies-a-dummies-perspective%2f"
+                onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+                </a>
+                
+                </div>
+            
+
+    </div>
+
+    <div class="container markdown  fade-in two  top-pad">
+        <hr />
+
+<p>Consider the following example, lets call this tcode1 for future reference.</p>
+
+<pre><code>/*tocode1.c*/
+void func(int a, int b);
+void f(int i);
+
+void func( int a, int b){
+ printf(“%d %d”, a, b)
+}
+
+void f(int i) {
+ func(i++, i);
+}
+
+int main(void){
+ f(5);
+}
+</code></pre>
+
+<p>This hypothetical example came up in a discussion at lunch in my office, when a
+friend said that he expected a to be 6, b to be 5 but he got a=5, and b=6. I
+knew that the order in which arguments are passed to a function is unspecified,
+so it could have been a=6, and b=5. But then my friend questioned me in detail
+about unspecified behavior and what is the logic of making these things
+unspecified in the first place and then I realized that I only knew the jargon
+but didn’t actually understand them. I couldn’t convey the meaning of the terms
+to him. So I went on to do my research again and it turns out that in tcode1 the
+call to func is an “*undefined behavior*”, which is bad; how bad? lets find out.</p>
+
+<p>Lets start with why I thought it was an unspecified behavior, from the C99
+standard 3.4.4</p>
+
+<blockquote>
+<p><strong>unspecified behavior</strong> is the use of an unspecified value, or other behavior
+where this International Standard provides two or more possibilities and imposes
+no further requirements on which is chosen in any instance.</p>
+</blockquote>
+
+<p>there is also implementation defined behavior which is the same as unspecified,
+but in this case the compiler has documented the implementation as to which
+choice is taken in a certain instance. From the standard** 3.4.1**</p>
+
+<blockquote>
+<p><strong>implementation-defined behavior</strong> is an unspecified behavior where each
+implementation documents how the choice is made.
+An example of implementation-defined behavior is the propagation of the
+high-order bit when a signed integer is shifted right.</p>
+</blockquote>
+
+<p>So things such as the size of an int, whether char is signed or unsigned or the
+size of a pointer can be either unspecified or implementation defined behavior.
+This behavior should be consistent for one implementation but they can vary for
+others. So the size of an int can be different on different machines.</p>
+
+<p>And also from the C Standard, 6.5.2.2, paragraph 10 [<a href="https://www.securecoding.cert.org/confluence/display/c/AA.+Bibliography#AA.Bibliography-ISO-IEC9899-2011">ISO/IEC
+9899:2011</a>]</p>
+
+<blockquote>
+<p>Every evaluation in the calling function (including other function calls) that
+is not otherwise specifically sequenced before or after the execution of the
+body of the called function, is indeterminately sequenced with respect to the
+execution of the called function.</p>
+</blockquote>
+
+<p>In simple terms the above rule means that the order of evaluation for function
+call arguments is unspecified and can happen in any order. The evaluation can be
+left to right or right to left for different machines and different
+implementations on the same machines. In other words its unspecified.</p>
+
+<p>Consider the following example of code which depends on an unspecified behavior
+and thus is wrong.</p>
+
+<pre><code>/* example1.c */
+void fun(int n, int m);
+
+int fun1()
+{
+ pritnf(“fun1”);
+ return 1;
+}
+
+int fun2()
+{
+ printf( “fun2” );
+ return 2;
+}
+
+…
+fun(fun1(), fun2()); // which one is executed first?
+
+/* From &lt;
+&gt;*/
+</code></pre>
+
+<p>As explained above, we cant be sure whether func1 is executed first or func2, it
+is upto the compiler to do whatever it wants.</p>
+
+<p>In tcode1.c, inside foo(i++,I), the code depended on the arguments passed and
+its bad because you cant depend on the arguments passed. This proves that the
+code in tcode1.c is at best unspecified, which is bad if you want to write
+portable code. But as I said this code is <em>undefined</em> not <em>unspecified</em>, so lets
+define <em>undefined behavior</em> .</p>
+
+<p>From the C standard 3.4.3</p>
+
+<blockquote>
+<p><strong>undefined behavior</strong> is the behavior, upon use of a nonportable or erroneous
+program construct or of erroneous data, for which this International Standard imposes no requirements</p>
+</blockquote>
+
+<p>The famous undefined behaviors are</p>
+
+<ul>
+<li>Divide by zero</li>
+<li>Dereference a null pointer</li>
+<li>Signed integer overflow</li>
+<li>Using an initialized variable.</li>
+</ul>
+
+<p>In case of unspecified or implementation defined behavior the compiler had two
+or more options defined by the standard and it had to take either one and
+document it or not. But in case of undefined behavior, there is no option
+specified by the standard so the compiler can do whatever it wants.</p>
+
+<p>From the C standard in the same place where it defines the undefined behavior,
+there is a note that says</p>
+
+<blockquote>
+<p>Possible undefined behavior ranges from ignoring the situation completely with
+unpredictable results, to behaving during translation or program execution in a
+documented manner characteristic of the environment (with or without the
+issuance of a diagnostic message), to terminating a translation or execution
+(with the issuance of a diagnostic message).</p>
+</blockquote>
+
+<p>So compilers may chose to avoid certain errors in the program or do anything that it wants instead of throwing an error. The famous things that compilers do
+when they come across an undefined behavior are format your hard drive, get your
+girlfriend pregnant, and make nasal daemons fly out of your nostrils.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/1100/0*l2B-SECYYeaHmSrA.jpg" alt="nostril_demons" /></p>
+
+<p><em>Nostril demons, image referenced from <a href="%5Bhttp://scienceblogs.com/stoat/2014/12/06/4082/">http://scienceblogs.com/stoat/2014/12/06/4082/</a></em></p>
+
+<p>Now that we have unspecified behavior and undefined behavior lets have a look at
+how easily can shit hit the ceiling when dealing with unspecified behavior. We
+know passing arguments to the function is unspecified.</p>
+
+<p>Have a look at the following code.</p>
+
+<pre><code>/* example2.c */
+extern void c(int i, int j);
+int glob;
+
+int a(void) {
+ return glob + 10;
+}
+
+int b(void) {
+ glob = 42;
+ return glob;
+}
+
+void func(void) {
+ c(a(), b());
+}
+
+/* copied from
+*https://www.securecoding.cert.org/confluence/display/c/EXP30-C.+Do+not+depend+on+the+order+of+evaluation+for+side+effects
+*/
+</code></pre>
+
+<p>It can happen that b() is called first, and glob is assigned a value, or it
+might happen that a() is called first and glob is accessed uninitialized, which
+is undefined. Also remember the principle rule of undefined behavior</p>
+
+<blockquote>
+<p>“If a part of a code is undefined, the whole code is undefined.”
+<a href="http://blog.regehr.org/archives/213">regehr awsome blog</a></p>
+</blockquote>
+
+<p>In case of our tcode1 only <strong>foo(i++,i)</strong> is undefined. What makes this
+undefined and not unspecified. For this we need to understand sequence points
+first.</p>
+
+<p>From the c standard 5.1.2.3</p>
+
+<blockquote>
+<p>At certain specified points in the execution sequence called sequence points,
+all side effects of previous evaluations shall be complete and no side effects
+of subsequent evaluations shall have taken place.</p>
+</blockquote>
+
+<p>In short it’s the place when the dust has been settled. So if you place a
+breakpoint between a sequence point you will see the updated values of
+expressions till that instructions. What is this “side effects” used in the
+above definition, from the C standard 5.1.2.3</p>
+
+<blockquote>
+<p><em>Accessing a volatile object, modifying an object, modifying a file, or calling
+a function that does any of those operations are all side effects, which are
+changes in the state of the execution environment. Evaluation of an expression
+may produce side effects.</em></p>
+</blockquote>
+
+<p>In other words side effects are the micro instructions beyond which the code
+cant be broken down (on the abstraction level at least). Think of these as
+atoms, you have nutrons, protons, electrons inside an atom but still atom is the
+lowest unit, if you break an atom then you release a large amount of
+uncontrolled energy.</p>
+
+<p>So according to standard only the following are side effects</p>
+
+<ol>
+<li>accessing a volatile object</li>
+<li>modifying an object</li>
+<li>modifying a file</li>
+<li>a call to a function which performs any of the above side effects</li>
+</ol>
+
+<p>In summary an expression is made up of side effects and sequence points occur
+between expressions. The following are the places where sequence points occur,
+from the C standard annex C</p>
+
+<ol>
+<li>The call to a function, after the arguments have been evaluated.</li>
+<li>The end of the first operand of the following operators: logical AND &amp;&; logical
+OR || ; conditional ? ; comma , .</li>
+<li>The end of a full declarator;</li>
+<li>The end of a full expression: an initializer; the expression in an expression
+statement; the controlling expression of a selection statement (if or switch) ;
+the controlling expression of a while or do statement ; each of the expressions
+of a for statement; the expression in a return statement.</li>
+<li>Immediately before a library function returns.</li>
+<li>After the actions associated with each formatted input/output function
+conversion</li>
+<li>specifier.</li>
+<li>Immediately before and immediately after each call to a comparison function, and</li>
+<li>also between any call to a comparison function and any movement of the objects</li>
+<li>passed as arguments to that call.</li>
+</ol>
+
+<p>From the above we see that there are no sequence points between function
+arguments (remember this as the silver_rule) .</p>
+
+<p>So we have side effects, we know what and where sequence points are but how is
+tcode1 undefined. Lets have a look at the golden_rule of undefinededness. from
+the clang_faqs</p>
+
+<blockquote>
+<p><em>Between the previous and next sequence point an object shall have its stored
+value modified at most once by the evaluation of an expression. Furthermore, the
+prior value shall be accessed only to determine the value to be stored.</em></p>
+</blockquote>
+
+<p>This rule has two parts,</p>
+
+<ol>
+<li>In an expression an object shall have its value modified at most once</li>
+<li>Any access to prior value should be done to determine the value to be stored.</li>
+</ol>
+
+<p>According to the rule the following is an undefined behavior,</p>
+
+<pre><code>i=i++;
+</code></pre>
+
+<p>Because the value of i is modified twice in an expression it breaks part 1 of
+the golden_rule. Now consider the following</p>
+
+<pre><code>a[i]=i++;
+</code></pre>
+
+<p>This is wrong because it breaks part 2 of the golden_rule. There are multiple
+accesses to <strong>i</strong>; and one of them <strong>is not</strong> for determining the value to be
+stored in <strong>i.</strong> If <strong>i=2</strong>, then when the compiler is done with the expression,
+we just cant be sure if the final values are a[1]=1 or, a[2]=2, or a[1]=2 (the
+access is done first or the value is incremented first). Also you can see that
+this connects with a host of other undefined behaviors. For example the array
+might only have a size of 2, and there is no such thing as a[2], so when our
+code accesse a[2] we get a garbage value which when manipulated on executes a
+code that formats our hard drive.</p>
+
+<p>So finally lets have a look back at tcode1, why is this undefined behavior.</p>
+
+<pre><code>foo(i++,i)
+</code></pre>
+
+<p>I am sure you can guess by now. We now know that there are no sequence points
+between arguments (silver_rule), and from the above example it should be clear
+that it breaks part 2 of the golden_rule. Thus this is an undefined behavior.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/1100/0*CoZ_jgiLV3MlGvRX.jpg" alt="" /></p>
+
+<p><em>image referecend from somewhere on google</em></p>
+
+<p>When I compile and run tcode1 I get the following answer</p>
+
+<pre><code>$ ./tcode1
+
+5, 6
+</code></pre>
+
+<p>which shows that a=5, b-6, no warning, no error. But this does not mean that
+this will happen everytime.</p>
+
+<p>From <a href="http://blog.regehr.org/archives/213">regehrs blog</a></p>
+
+<blockquote>
+<p><em>Somebody once told me that in basketball you can’t hold the ball and run. I got
+a basketball and tried it and it worked just fine. He obviously didn’t
+understand basketball.</em></p>
+
+<p><em>(</em><a href="http://www.eskimo.com/~scs/readings/undef.950311.html">This explanation is due to Roger Miller via Steve
+Summit</a><em>.)</em></p>
+</blockquote>
+
+    </div>
+
+    <div class="container top-pad">
+        <form style="border:1px solid #ccc;padding:3px;text-align:center;" action="https://tinyletter.com/faizank" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/faizank', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+
+                <p><label for="tlemail">Like what you read, and would love to read stuff like this regularly</label></p>
+
+                <input type="text" style="width:140px" name="email" id="tlemail" />
+
+                <input type="hidden" value="1" name="embed"/>
+                <input type="submit" value="Subscribe" style="background:#00b8d4;color:white"/>
+        </form>
+ 
+    </div>
+
+    <div class="disqus">
+        
+    </div>
+
+<div class="container has-text-centered top-pad">
+<hr>
+<a href="https://eff-kay.github.io/blog/understanding-c-terminologies-a-dummies-perspective/#top"><i class="fa fa-arrow-up"></i></a>
+<hr>
+</div>
+
+<div class="section" id="footer">
+    <div class="container has-text-centered">
+        
+            Theme inspiration from Introduction by hivickylai
+        
+    </div>
+</div>
+</div>
+</div>
+
+
+<script>
+$('a[href^="https:\/\/eff-kay.github.io\/blog\/understanding-c-terminologies-a-dummies-perspective\/#"]').click(function(e) {
+    e.preventDefault();
+    var target = this.hash;
+    $('html, body').animate({
+    scrollTop: $(target).offset().top
+    }, 500);
+    return false;
+})
+
+$('p > img').parent().addClass("container has-text-centered");
+$('p > img').parent().css({"padding-bottom":"0px", "margin-bottom":"0px"});
+$('p > img').parent().next().addClass("container has-text-centered")
+
+</script>
+
+</body>
