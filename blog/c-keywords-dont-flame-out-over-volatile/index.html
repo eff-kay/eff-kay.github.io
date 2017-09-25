@@ -43,16 +43,17 @@
 
 
 
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet " href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500|Work+Sans">
 
 
 
     
-    <link rel="stylesheet" href="https://eff-kay.github.io/css/light-style.css?t=1506080298">
+    <link rel="stylesheet" href="https://eff-kay.github.io/css/light-style.css?t=1506366174">
     
 
 
@@ -227,9 +228,12 @@ if (a_struct.alive==true)
 
 int volatile* pvi; // is a pointer to a volatile int; meaning the object it is pointing to, is volatile
 
-int* volatile vpi; // is a volatile pointer to an int; pointer is volatile, the object it is pointing to is an int. This is of fairly less use.
+int* volatile vpi; // is a volatile pointer to an int; pointer is volatile, the object it is pointing to is an int. 
 
-int volatile* volatile vpvi; // volatile pointer to a volatile int; both the pointer and the memory location it is pointing to, are volatile int.
+//This is of fairly less use.
+
+int volatile* volatile vpvi; // volatile pointer to a volatile int; both the pointer and
+//the memory location it is pointing to, are volatile int.
 </code></pre>
 
 <p>As a general rule of thumb, when reading complex declarations the rule is to start reading from the right and go all the way to the left. This rule is helpful in other declarations as well. The rule is also one of the reasons you should <a href="http://www.embedded.com/electronics-blogs/programming-pointers/4025609/Place-volatile-accurately.">put qualifiers to the right</a> of the type it is qualifying.</p>
@@ -568,7 +572,7 @@ $('a[href^="https:\/\/eff-kay.github.io\/blog\/c-keywords-dont-flame-out-over-vo
 
 $('p > img').parent().addClass("container has-text-centered");
 $('p > img').parent().css({"padding-bottom":"0px", "margin-bottom":"0px"});
-$('p > img').parent().next().addClass("container has-text-centered")
+$('p > img').parent().next().addClass("container has-text-centered");
 
 </script>
 

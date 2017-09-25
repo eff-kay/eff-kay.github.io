@@ -184,7 +184,7 @@ pre {
 pre code {
     background: none;
     color: inherit;
-    display: block;
+    /*display: block;*/
     font-size: 1em;
     overflow-x: auto;
     padding: 1.25rem 1.5rem
@@ -5006,7 +5006,8 @@ img {
 }
 .markdown code {
     background-color: #dbdbdb;
-    color: #4a4a4a
+    color: #4a4a4a;
+    display: inline-block;
 }
 .markdown pre {
     border-radius: 3px
