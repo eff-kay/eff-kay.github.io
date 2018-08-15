@@ -47,10 +47,10 @@ struct _a_struct{ int x; int y volatile bool alive=false; } ASTRUCT; ASTRUCT a_s
       <pubDate>Thu, 09 Mar 2017 13:19:25 +0800</pubDate>
       
       <guid>https://eff-kay.github.io/about/</guid>
-      <description>I am a tinkerer at heart, I have dabbled in a lot of technologies ranging from embedded software to web dev, from hardware signals to the application UI and everything inbetween.
+      <description>I have dabbled in a lot of technologies ranging from embedded software to web dev, from hardware signals to the application UI and everything inbetween.
 Recent Interests
  Crowdsourcing DAPPS Smart Contracts Incentives Effective prose Large Projects where &amp;ldquo;time_delta &amp;gt;= 1 year&amp;rdquo;  Senior Software Development Engineer @ Mentor Graphics
- By day, I port Nucleus RTOS to different architectures. Implemented a bootloader from scratch for Nucleus for a variety of targets.</description>
+ I ported Nucleus RTOS to different architectures. Implemented a bootloader from scratch for Nucleus for a variety of targets. Restructured/Implemented drivers for Safety Certification of Nucleus Have resolved bugs and ported almost all of the drivers available, CAN, USB, ETHERNET, SD/MMC, I2C, SPI, DISPLAY, TOUCHSCREEN, AUDIO, to name a few&amp;hellip; Implemented hibernate and deep sleep support in Nucleus Worked on SMP support for a lot of vendor boards.</description>
     </item>
     
   </channel>
