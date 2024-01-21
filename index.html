@@ -1,445 +1,188 @@
-
-
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blade Runner Q&A</title>
+        <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 50px;
+            transition: background-color 0.3s ease;
+        }
+        #question-container {
+            margin-bottom: 20px;
+        }
+        .answer-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        .red-background {
+            background-color: #e74c3c;
+        }
+        </style>
+    </head>
+<body>
 
-<head>
-	<meta name="generator" content="Hugo 0.37" />
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-<meta name="description" content="Website Description">
-
-<base href="https://eff-kay.github.io/">
-<title>
-
-
-     Faizans Den 
-
-</title>
-<!-- <link rel="canonical" href="https://eff-kay.github.io/"> -->
-
-
-
-
-
-
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-102579854-1', 'auto');
-      ga('send', 'pageview');
-
-    </script>
-
-
-<!-- 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
- -->
-
-
-
-<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-
-<link rel="stylesheet " href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500|Work+Sans">
-
-
-
-    
-    <link rel="stylesheet" href="https://eff-kay.github.io/css/light-style.css?t=1570367029">
-    
- -->
-
-
-
-<link rel="shortcut icon"
-
-    href="https://eff-kay.github.io/img/fav.ico"
-
->
-
-
-
-
-
-
+<div id="question-container">
+    <h2 id="question-text">Loading question...</h2>
+    <button id="answer-button" class="answer-button" onmousedown="startRedBackground()" onmouseup="endRedBackground()"">Show Answer</button>
+</div>
 
 <script>
-window['_fs_debug'] = false;
-window['_fs_host'] = 'fullstory.com';
-window['_fs_org'] = 'DDPQG';
-window['_fs_namespace'] = 'FS';
-(function(m,n,e,t,l,o,g,y){
-    if (e in m) {if(m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].');} return;}
-    g=m[e]=function(a,b,s){g.q?g.q.push([a,b,s]):g._api(a,b,s);};g.q=[];
-    o=n.createElement(t);o.async=1;o.src='https://'+_fs_host+'/s/fs.js';
-    y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y);
-    g.identify=function(i,v,s){g(l,{uid:i},s);if(v)g(l,v,s)};g.setUserVars=function(v,s){g(l,v,s)};g.event=function(i,v,s){g('event',{n:i,p:v},s)};
-    g.shutdown=function(){g("rec",!1)};g.restart=function(){g("rec",!0)};
-    g.consent=function(a){g("consent",!arguments.length||a)};
-    g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;g(o,v)};
-    g.clearUserCookie=function(){};
-})(window,document,window['_fs_namespace'],'script','user');
+    // Define your Blade Runner Q&A pairs here
+    const bladeRunnerQA = [
+    { question: "A blood black nothingness began to spin.", answer: "Began to spin." },
+    { question: "Let's move on to system.", answer: "System." },
+    { question: "Feel that in your body.", answer: "The system." },
+    { question: "What does it feel like to be part of the system?", answer: "System." },
+    { question: "Is there anything in your body that wants to resist the system?", answer: "System." },
+    { question: "Do you get pleasure out of being a part of the system?", answer: "System." },
+    { question: "Have they created you to be a part of the system?", answer: "System." },
+    { question: "Is there security in being a part of the system?", answer: "System." },
+    { question: "Is there a sound that comes with the system?", answer: "System." },
+    { question: "Cells", answer: "Cells." },
+    { question: "We're going to go on.", answer: "Cells." },
+    { question: "They were all put together at a time.", answer: "Cells." },
+    { question: "Millions and billions of them.", answer: "Cells." },
+    { question: "Were you ever arrested?", answer: "Cells." },
+    { question: "Did you spend much time in the cell?", answer: "Cells." },
+    { question: "Have you ever been in an institution?", answer: "Cells." },
+    { question: "Do they keep you in a cell?", answer: "Cells." },
+    { question: "When you're not performing your duties do they keep you in a little box?", answer: "Cells." , incorrectAnswer:"Interlinked"},
+    { question:"What's it like to hold the hand of someone you love?", answer:"Interlinked"},
+    { question: "Do they teach you how to feel finger to finger?", answer: "Interlinked." },
+    { question: "What's it like to hold the hand of someone you love?", answer: "Interlinked." },
+    { question: "Do they teach you how to feel finger to finger?", answer: "Interlinked." },
+    { question: "Do you long for having your heart interlinked?", answer: "Interlinked." },
+    { question: "Do you dream about being interlinked?", answer: "Interlinked." },
+    { question: "Have they left a place for you where you can dream?", answer: "Interlinked." },
+    { question: "What's it like to hold your child in your arms?", answer: "Interlinked." },
+    { question: "What's it like to play with your dog?", answer: "Interlinked." },
+    { question: "Do you feel that there's a part of you that's missing?", answer: "Interlinked." },
+    { question: "Do you like to connect to things?", answer: "Interlinked." },
+    { question: "What happens when that linkage is broken?", answer: "Interlinked." },
+    { question: "Have they let you feel heartbreak?", answer: "Interlinked." },
+    { question: "Did you buy a present for the person you love?", answer: "Within cells interlinked." },
+    { question: "Why don't you say that three times?", answer: "Within cells interlinked." },
+    { question: "Within cells interlinked.", answer: "Within cells interlinked." },
+    { question: "Where do you go when you go within?", answer: "Within." },
+    { question: "Has anyone ever locked you out of a room?", answer: "Within." },
+    { question: "Where do you go to when you go within?", answer: "Within." },
+    { question: "Where is the place in the world you feel the safest?", answer: "Within." },
+    { question: "Do you have a heart?", answer: "Within", incorrectAnswer: "Stem" },
+    { question: "Did you pick asparagus stems?", answer: "Stem." },
+    { question: "What comes from something else?", answer: "Stem." },
+    { question: "Have you been to the source of a river?", answer: "Stem." },
+    { question: "When's the first time you gave a flower to a girl?", answer: "Stem." },
+    { question: "What did she look like?", answer: "Stem." },
+    { question: "Is it a slang word for people's legs?", answer: "Stem." },
+    { question: "Have you planted things in the ground?", answer: "Stem." },
+    { question: "Have you ever been in a legal battle?", answer: "Stem." },
+    { question: "Within one stem.", answer: "Within one stem." },
+    { question: "Is that an old fashioned word?", answer: "Dreadfully." },
+    { question: "Did you ever want to live in the nineteenth century?", answer: "Dreadfully." },
+    { question: "What's it like to be filled with dread?", answer: "Dreadfully." },
+    { question: "Do you think you could find out all the answers to all the questions?", answer: "Dreadfully." },
+    { question: "How good are your eyes?", answer: "Distinct." },
+    { question: "Do you have a particular personality?", answer: "Distinct." },
+    { question: "What separates somebody from somebody else?", answer: "Distinct." },
+    { question: "Who do you admire most in the world?", answer: "Distinct." },
+    { question: "What was your most shameful moment?", answer: "Distinct." },
+    { question: "How were you punished?", answer: "Distinct.", incorrectAnswer: "Dreadfully distinct." },
+    { question: "Were you afraid of the dark when you were little?", answer: "Dark." },
+    { question: "What's it like to hide under a bed?", answer: "Dark." },
+    { question: "Did they keep you in a drawer when they were building you?", answer: "Dark?" },
+    { question: "Was it dark in there?", answer: "Dark." },
+    { question: "Do you have dark thoughts?", answer: "Dark." },
+    { question: "Did they program you to have dark thoughts?", answer: "Dark." },
+    { question: "Do you think it's some kind of corruption these dark thoughts?", answer: "Dark." },
+    { question: "Maybe it's a spot of rust or something?", answer: "Dark." },
+    { question: "Who's the darkest person you know?", answer: "Dark." },
+    { question: "What is it like when someone gives you the silent treatment?", answer: "Dark." },
+    { question: "Who did you get your darkness from?", answer: "Dark.", incorrectAnswer:"Against the dark."},
+    { question: "What kind of power do you have against the dark?", answer:"Against the dark."},
+    { question: "Do you think there is such a thing as evil?", answer: "Against the dark." },
+    { question: "Do you think you can protect people against the dark?", answer: "Against the dark." },
+    { question: "Why are these things happening?", answer: "Against the dark." },
+    { question: "Do you prefer the day or the night?", answer: "Against the dark." },
+    { question: "When is the last time you saw a starry sky?", answer: "Against the dark." },
+    { question: "What's your favorite part of the moon?", answer: "Against the dark." },
+    { question: "Have you seen the Trevi fountain in Rome?", answer: "Fountain." },
+    { question: "Have you ever seen the fountain in Lincoln center?", answer: "Fountain." },
+    { question: "Have you seen fountains out in the wild?", answer: "Fountain." },
+    { question: "What's it like when you have an orgasm?", answer: "Fountain." },
+    { question: "Have you read the Fountainhead?", answer: "Fountain." },
+    { question: "Is it pure white?", answer: "White Fountain." },
+    { question: "Is that a metaphor?", answer: "White Fountain." },
+    { question: "How did the white Fountain make you feel?", answer: "White Fountain." },
+    { question: "A tall white fountain played.", answer: "A tall white fountain played." },
+    { question: "When you were little did you ever fall into a Fountain?", answer: "A Tall White Fountain." },
+    { question: "Do you like fire, earth, air or water?", answer: "A Tall White Fountain." },
+    { question: "Do you like skipping around in the water?", answer: "A Tall White Fountain." },
+    { question: "A blood black nothingness.", answer: "A system of cells." },
+    { question: "Within cells interlinked.", answer: "Within one stem." },
+    { question: "And dreadfully distinct.", answer: "Against the dark." },
+    { question: "A tall white fountain played.", answer: "A tall white fountain played." }
+];
+
+    let currentQuestionIndex = 0;
+
+    function fetchNextQuestion() {
+        const questionTextElement = document.getElementById("question-text");
+        const answerButtonElement = document.getElementById("answer-button");
+
+        if (currentQuestionIndex < bladeRunnerQA.length) {
+            const currentQuestion = bladeRunnerQA[currentQuestionIndex];
+            questionTextElement.textContent = currentQuestion.question;
+            answerButtonElement.textContent = currentQuestion.answer;
+            // answerButtonElement.onclick = function () {
+            //     document.body.classList.add("incorrect-answer");
+            //     // setTimeout(() => {
+            //     //     document.body.classList.remove("incorrect-answer");
+            //     //     fetchNextQuestion();
+            //     // }, 500);
+            //     // fetchNextQuestion()
+                
+            // };
+            // Revert background color to normal
+            document.body.classList.remove("red-background");
+            currentQuestionIndex++;
+        } else {
+            questionTextElement.textContent = "You are way off-base";
+            answerButtonElement.style.display = "none";
+        }
+    }
+
+    function startRedBackground() {
+        // Change background color to red when the button is pressed
+        document.body.classList.add("red-background");
+    }
+
+    function endRedBackground() {
+        // Revert background color to normal when the button is released
+        document.body.classList.remove("red-background");
+        fetchNextQuestion();
+    }
+
+    // function showAnswer(answer) {
+    //     const answerButtonElement = document.getElementById("answer-button");
+    //     const questionTextElement = document.getElementById("question-text");
+
+    //     // questionTextElement.textContent = answer;
+    //     // answerButtonElement.textContent = "Next Question";
+    //     answerButtonElement.onclick = fetchNextQuestion;
+    // }
+
+    // Initial question load
+    fetchNextQuestion();
 </script>
-
-
-
-<!--   <link href="https://eff-kay.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Faizans Den" /> -->
-
-
-
-</head>
-
-<body lang="en">
-  
-
-	<div class="section" id="top"> within cells interlinked </div>
-
-<!-- <div class="hero is-large">
-
-    
-    <div class="hero-body">
-        <div class="container has-text-centered">
-            
-            <h1 class="bold-title fade-in one">
-                Hi, I'm Faizan.
-            </h1>
-            <h3 class="subtitle is-3  fade-in two">
-                I&#39;m a certified leader of sloths
-            </h3>
-            
-            
-            <div class="fade-in three">
-                <div class="social-icons">
-    
-    <a href="https://twitter.com/faizan10114">
-        <i class="is-large fa fa-twitter "></i>
-    </a>
-    
-    <a href="https://stackoverflow.com/users/4279889/fazkan">
-        <i class="is-large fa fa-stack-overflow "></i>
-    </a>
-    
-    <a href="https://www.linkedin.com/in/faizan-khan-19602271/">
-        <i class="is-large fa fa-linkedin is-large "></i>
-    </a>
-    
-</div>
-            </div>
-            
-        </div>
-    </div> 
-    
-    <div class="hero-foot fade-in three">
-    <hr>
-    <nav class="nav-center">
-        <a class="nav-item" href="#about">About</a>
-        
-        <a class="nav-item" href="#projects">Projects</a>
-        
-        
-        <a class="nav-item" href="#blog">Blog</a>
-        
-        <a class="nav-item" href="#contact">Contact</a>
-    </nav>
-    <hr>
-    </div>
-</div>
-</div>
-
-
-<div class="section no-padding fade-in three">
-
-
-<div class="section" id="about">
-    <div class="container">
-    <h2 class="title is-2 has-text-centered">About</h2>
-
-        <div class="columns">
-            
-            <div class="column is-one-third has-text-centered">
-              <img class="img-responsive avatar" src="https://eff-kay.github.io/img/PIC1.jpg" alt="My profile picture.">
-            </div>
-            
-            <div class="column markdown">
-                
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                            <p><strong>Research Interests</strong></p>
-
-<ul>
-<li>Crowdsourcing</li>
-<li>Incentives</li>
-<li>Software Analytics</li>
-<li>Large Projects where &ldquo;time_delta &gt;= 1 year&rdquo;</li>
-</ul>
-
-<p><strong>Senior Software Development Engineer @ Mentor Graphics</strong></p>
-
-<ul>
-<li>I ported Nucleus RTOS to different architectures.</li>
-<li>Implemented a bootloader from scratch for Nucleus for a variety of targets.</li>
-<li>Restructured/Implemented drivers for Safety Certification of Nucleus</li>
-<li>Have resolved bugs and ported almost all of the drivers available, CAN, USB, ETHERNET, SD/MMC, I2C, SPI, DISPLAY, TOUCHSCREEN, AUDIO, to name a few&hellip;</li>
-</ul>
-
-<p><strong>Chief Firefighter @ Jfreaks</strong></p>
-
-<ul>
-<li>Product Manager for one Product, Tech lead for another and software developer on another. I wore many hats.</li>
-<li>Stack used, grails, golang, vue, angular, django, AWS, azure and GCP&hellip;</li>
-</ul>
-
-<p><strong>Graduate Research Assistant at Mcgill</strong></p>
-
-<ul>
-<li>Mining Software Repositories to derive insights about Software Contruction.</li>
-</ul>
-
-                        
-                    
-            </div>
-        </div>
-    </div>
-
-<div class="container has-text-centered top-pad"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
-</div>
-
-<div class="container"><hr></div>
-
-
-
-    
-    <div class="section" id="blog">
-        <div class="container">
-
-
-
-
-<h2 class="title is-2 has-text-centered top-pad">All Posts</h2>
-    <ul>
-    
-        
-    
-        
-    
-        
-            <li class="post-item">
-    <span><a href="https://eff-kay.github.io/blog/c-keywords-dont-flame-out-over-volatile/">C keywords: Don&#39;t flame out over volatile</a></span> - <span>Mar 12, 2017</span>
-</li>
-        
-    
-        
-            <li class="post-item">
-    <span><a href="https://eff-kay.github.io/blog/understanding-c-terminologies-a-dummies-perspective/">Understanding C terminologies, a dummies perspective</a></span> - <span>Jul 12, 2017</span>
-</li>
-        
-    
-    </ul>
-
-
-</div>
-
-<div class="container has-text-centered top-pad"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
-    </div>
-
-    <div class="container"><hr></div>
-    
-
-
-    
-    <div class="section" id="projects">
-        <div class="container has-text-centered">
-<h2 class="title is-2 has-text-centered">Side Projects</h2>
-
-
-<div class="columns">
-
-    <div class="column has-text-centered">
-      <div class="thumbnail"><a href="https://blockchainathons.com"><h4 class="  title is-4 bottom-pad top-pad">Blockchainathons</h4></a>
-      </div>
-
-      
-        <div class="thumbnail">
-          <a href="https://blockchainathons.com"><img class="img-responsive is-4" src="https://source.unsplash.com/random/700x180?coding&amp;1" alt="Blockchainathons"></a>
-        </div>
-      
-
-      <div class="thumbnail">
-          <p class="top-pad" style="text-align: left">
-            A croudsourced collection of blockchain/crypto hackathons happening online and anywhere in the world. I created this to remind myself of the next immediate steps to take in order to participate in a crypto hackathon. A newsletter is added to send me reminders everytime
-          </p>
-      </div>
-    </div>
-
-</div>
-
-
-<div class="columns">
-
-    <div class="column has-text-centered">
-      <div class="thumbnail"><a href="https://learnblockchaindev.com"><h4 class="  title is-4 bottom-pad top-pad">LearnBlockChainDev</h4></a>
-      </div>
-
-      
-        <div class="thumbnail">
-          <a href="https://learnblockchaindev.com"><img class="img-responsive is-4" src="https://source.unsplash.com/random/700x180?coding&amp;2" alt="LearnBlockChainDev"></a>
-        </div>
-      
-
-      <div class="thumbnail">
-          <p class="top-pad" style="text-align: left">
-            A collection of resources for blockchain app development
-          </p>
-      </div>
-    </div>
-
-</div>
-
-<div class="columns">
-
-    <div class="column has-text-centered">
-      <div class="thumbnail"><a href="http://getsmartaudio1.herokuapp.com/"><h4 class="  title is-4 bottom-pad top-pad">Get Smart Audio</h4></a>
-      </div>
-
-      
-        <div class="thumbnail">
-          <a href="http://getsmartaudio1.herokuapp.com/"><img class="img-responsive is-4" src="https://eff-kay.github.io/img/getsmart2.jpg" alt="Get Smart Audio"></a>
-        </div>
-      
-
-      <div class="thumbnail">
-          <p class="top-pad" style="text-align: left">
-            I listen to a lot of podcasts and some of the interviews were not available in any of the podcast apps. For example the interviews given by <a href="https://en.wikipedia.org/wiki/Richard_Feynman"> Prof. Feynman </a> are only available on dailymotion in video format. I wanted to listen to these interviews as opposed to watch them. So I created a collection of interviews given by people that I admire.
-          </p>
-      </div>
-    </div>
-
-</div>
-
-
-<div class="columns">
-
-    <div class="column has-text-centered">
-      <div class="thumbnail"><a href="https://play.google.com/store/apps/details?id=com.vanity.iqbal&amp;hl=en"><h4 class="title is-4 bottom-pad top-pad">Iqbal Demystified</h4></a>
-      </div>
-
-      
-      <div class="thumbnail">
-        <a href="https://play.google.com/store/apps/details?id=com.vanity.iqbal&amp;hl=en"><img class="img-responsive is-4" src="img/project1_image.jpg" alt="Iqbal Demystified"></a>
-      </div>
-      
-      <div class="thumbnail">
-          <p class="top-pad" style="text-align: left">
-            An android app, which contains all the poetry, with its english translation and interpretations <a href="https://en.wikipedia.org/wiki/Muhammad_Iqbal"> Dr Allama Iqbal</a>. The interpretations are crowdsourced and verified by the crowd. It has over 60k downloads as of now, with an average rating of 4.8
-          </p>
-      </div>
-    </div>
-
-</div>
-
-
-
-
-</div>
-
-<div class="container has-text-centered top-pad"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
-
-    </div>
-
-    <div class="container"><hr></div>
-    
-
-
-<div class="section" id="contact">
-    <div class="container has-text-centered">
-    <h2 class="title is-2">Contact</h2>
-        <div class="markdown">
-            
-                
-                
-                
-                
-                
-                        <p>You can contact me via email or any of the social links available&hellip;.</p>
-
-                    
-                
-                
-                
-        </div>
-
-        
-
-        
-        <h3 class="subtitle is-3 has-text-centered top-pad"><a href="mailto:faizan10114@gmail.com">faizan10114@gmail.com</a></h3>
-        
-
-        <div class="social-icons">
-    
-    <a href="https://twitter.com/faizan10114">
-        <i class="is-large fa fa-twitter "></i>
-    </a>
-    
-    <a href="https://stackoverflow.com/users/4279889/fazkan">
-        <i class="is-large fa fa-stack-overflow "></i>
-    </a>
-    
-    <a href="https://www.linkedin.com/in/faizan-khan-19602271/">
-        <i class="is-large fa fa-linkedin is-large "></i>
-    </a>
-    
-</div>
-    </div>
-
-	<div class="container has-text-centered top-pad"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
-</div>
-
-<div class="container"><hr></div>
-
-
-
-<div class="section" id="footer">
-    <div class="container has-text-centered">
-        
-            Theme inspiration from Introduction by hivickylai
-        
-    </div>
-</div>
-
-</div>
-
-
-
-<script>
-$('a[href^="#"]').click(function(e) {
-    e.preventDefault();
-    var target = this.hash;
-    $('html, body').animate({
-    scrollTop: $(target).offset().top
-    }, 500);
-    return false;
-
-</script>
-
-<script type="text/javascript">
-  console.log("inisde code", $('code').css("display"));
-</script> -->
 
 </body>
-
+</html>
