@@ -92,8 +92,10 @@ window.addEventListener('load', () => {
             }
         });
     }
+
+
     // start with one open
-    // coll[0].click();
+    coll[0].click();
     setFullWidthHeader();
 })
 

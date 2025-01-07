@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petri-Nets (notes)!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.11.0/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #2d3436;
+        }
+        h1 {
+            color: #2d3436;
+            font-size: 2em;
+        }
+        .cool-note {
+            background: #dfe6e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .diagram {
+            margin: 20px 0;
+            text-align: center;
+        }
+        code {
+            background: #dfe6e9;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+
+    
+</head>
+<body>
+    <h1>Petri-Nets</h1>
+
+    <!-- <div class="cool-note"> -->
+        TLDR: Think of Petri nets as state diagrams that can have two edges coming out of a state instead of just one.
+    <!-- </div> -->
+
+    <h2>1. The Basic Stuff</h2>
+    <p>
+        Here's what we're working with:
+    </p>
+    <ul>
+        <li>⭕ Places (circles) - like variables that can hold multiple tokens</li>
+        <li>▢ Transitions (rectangles) - like functions that do stuff</li>
+        <li>→ Arrows - show how stuff moves around</li>
+    </ul>
+
+    <div class="diagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" style="max-width: 400px;">
+            <circle cx="50" cy="50" r="20" fill="white" stroke="black"/>
+            <rect x="120" y="30" width="40" height="40" fill="white" stroke="black"/>
+            <circle cx="210" cy="50" r="20" fill="white" stroke="black"/>
+            <line x1="70" y1="50" x2="120" y2="50" stroke="black" marker-end="url(#arrowhead)"/>
+            <line x1="160" y1="50" x2="190" y2="50" stroke="black" marker-end="url(#arrowhead)"/>
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="black"/>
+                </marker>
+            </defs>
+            <text x="50" y="85" text-anchor="middle" font-size="12">Place</text>
+            <text x="140" y="85" text-anchor="middle" font-size="12">Transition</text>
+            <text x="210" y="85" text-anchor="middle" font-size="12">Place</text>
+        </svg>
+    </div>
+
+    <h2>2. Why They're Cool</h2>
+    <p>
+        Remember how in state diagrams you can only be in one state at a time? Well, Petri nets let you be in multiple states at once.
+    </p>
+
+    <h2>3. Printer Example</h2>
+    Two processes fighting over one printer. In a state diagram, this would be messy. In a Petri net, it's piece of cake!
+
+    <h3>3.1 State Diagram Version (The Messy Way)</h3>
+    <div class="diagram">
+        <div class="mermaid">
+        stateDiagram-v2
+            [*] --> Idle
+            Idle --> P1Using: Process1 starts
+            Idle --> P2Using: Process2 starts
+            P1Using --> P1Done: Process1 finishes
+            P2Using --> P2Done: Process2 finishes
+            P1Done --> Idle: Release printer
+            P2Done --> Idle: Release printer
+            P1Using --> P1P2Waiting: Process2 requests
+            P2Using --> P2P1Waiting: Process1 requests
+            P1P2Waiting --> P2Using: Process1 finishes
+            P2P1Waiting --> P1Using: Process2 finishes
+        </div>
+    </div>
+
+    <p>
+        In a state diagram, we need separate states for:
+    </p>
+    <ul>
+        <li>Idle (nobody using printer)</li>
+        <li>Process1 using printer</li>
+        <li>Process2 using printer</li>
+        <li>Process1 using, Process2 waiting</li>
+        <li>Process2 using, Process1 waiting</li>
+    </ul>
+
+    <h3>3.2 Petri Net Version (The Elegant Way)</h3>
+
+    <div class="diagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" style="max-width: 300px;">
+            <circle cx="150" cy="50" r="20" fill="white" stroke="black"/>
+            <circle cx="75" cy="150" r="20" fill="white" stroke="black"/>
+            <circle cx="225" cy="150" r="20" fill="white" stroke="black"/>
+            <line x1="150" y1="70" x2="85" y2="130" stroke="black" marker-end="url(#arrowhead2)"/>
+            <line x1="150" y1="70" x2="215" y2="130" stroke="black" marker-end="url(#arrowhead2)"/>
+            <text x="150" y="30" text-anchor="middle" font-size="12">Printer</text>
+            <text x="75" y="180" text-anchor="middle" font-size="12">Process 1</text>
+            <text x="225" y="180" text-anchor="middle" font-size="12">Process 2</text>
+            <defs>
+                <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="black"/>
+                </marker>
+            </defs>
+        </svg>
+    </div>
+
+    <h2>4. When To Use Them</h2>
+    <p>
+        Use Petri nets when you need to show:
+    </p>
+    <ul>
+        <li>Multiple things happening at once (like multithreading)</li>
+        <li>Resources being shared (like memory or printers)</li>
+        <li>Things that need to wait for other things (like process synchronization)</li>
+    </ul>
+
+    <p>
+        And that's basically it! Petri nets are just state diagrams that grew up and learned how to multitask.
+    </p>
+
+</body>
+</html>
