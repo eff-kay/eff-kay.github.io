@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Next 700 ML Model Serving Systems (WIP)</title>
+</head>
+<body class="p-8 max-w-6xl mx-auto">
+    <header class="mb-8">
+        <h1 class="text-3xl font-bold mb-4">The Next 700 ML Model Serving Systems</h1>
+        <div class="text-sm text-gray-600 mb-4">A Theoretical Framework for ML Deployment Systems</div>
+    </header>
+
+    <nav class="mb-8 p-4 bg-gray-100 rounded">
+        <h2 class="text-xl font-semibold mb-2">Contents</h2>
+        <ul class="space-y-1">
+            <li><a href="#abstract" class="text-blue-600 hover:underline">Abstract</a></li>
+            <li><a href="#introduction" class="text-blue-600 hover:underline">1. Introduction</a></li>
+            <li><a href="#preliminaries" class="text-blue-600 hover:underline">2. Preliminaries</a></li>
+            <li><a href="#calculus" class="text-blue-600 hover:underline">3. A Calculus for ML Model Serving</a></li>
+            <li><a href="#platforms" class="text-blue-600 hover:underline">4. Platform Analysis</a></li>
+            <li><a href="#patterns" class="text-blue-600 hover:underline">5. Common Patterns and Differences</a></li>
+            <li><a href="#future" class="text-blue-600 hover:underline">6. Future Directions</a></li>
+        </ul>
+    </nav>
+
+    <main class="space-y-8">
+        <section id="abstract" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">Abstract</h2>
+            <p class="mb-4">
+                We present a theoretical framework for understanding and comparing machine learning model serving systems in cloud environments. Our analysis focuses on three major platforms - Amazon SageMaker, Google Cloud Vertex AI, and Azure ML - demonstrating how their serving mechanisms can be understood through a common lens.
+            </p>
+        </section>
+
+        <section id="calculus" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">3. A Calculus for ML Model Serving</h2>
+            
+            <div class="bg-gray-50 p-4 rounded mb-4">
+                <h3 class="text-xl font-semibold mb-2">Core Concepts</h3>
+                <pre class="bg-gray-100 p-4 rounded">
+ModelArtifact ::= (code, weights, metadata)
+Container ::= (ModelArtifact, runtime, deps)
+Endpoint ::= (Container, scaling_config, routing)
+Version ::= (Endpoint, traffic_weight)
+                </pre>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded mb-4">
+                <h3 class="text-xl font-semibold mb-2">Operations</h3>
+                <pre class="bg-gray-100 p-4 rounded">
+package : ModelArtifact → Container
+deploy : Container → Endpoint
+scale : Endpoint × Config → Endpoint
+route : Version × Version × Weight → Version
+                </pre>
+            </div>
+        </section>
+
+        <section id="platforms" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">4. Platform Analysis</h2>
+
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold mb-4">4.1 Amazon SageMaker</h3>
+                
+                <div class="bg-gray-50 p-4 rounded mb-4">
+                    <h4 class="font-semibold mb-2">Basic Model Deployment</h4>
+                    <div class="mb-4">
+                        <h5 class="font-medium mb-2">Theoretical Representation:</h5>
+                        <pre class="bg-gray-100 p-4 rounded">
+ModelArtifact = (
+    code = "sklearn_model.pkl",
+    weights = "model.joblib",
+    metadata = {"framework": "sklearn", "version": "1.0"}
+)
+                        </pre>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5 class="font-medium mb-2">Implementation:</h5>
+                        <pre class="bg-gray-100 p-4 rounded">
+from sagemaker.sklearn import SKLearnModel
+
+model = SKLearnModel(
+    model_data="s3://bucket/sklearn_model.tar.gz",
+    role=role,
+    framework_version="0.24-1",
+    py_version="py3",
+    entry_point="inference.py"
+)
+                        </pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold mb-4">4.2 Google Cloud Vertex AI</h3>
+                
+                <div class="bg-gray-50 p-4 rounded mb-4">
+                    <h4 class="font-semibold mb-2">Basic Model Deployment</h4>
+                    <div class="mb-4">
+                        <h5 class="font-medium mb-2">Theoretical Representation:</h5>
+                        <pre class="bg-gray-100 p-4 rounded">
+ModelArtifact = (
+    code = "model.pkl",
+    framework = "tensorflow",
+    metadata = {
+        "framework_version": "2.8.0",
+        "python_version": "3.9"
+    }
+)
+                        </pre>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5 class="font-medium mb-2">Implementation:</h5>
+                        <pre class="bg-gray-100 p-4 rounded">
+from google.cloud import aiplatform
+
+model = aiplatform.Model.upload(
+    display_name='tensorflow-model',
+    artifact_uri='gs://bucket/model/',
+    serving_container_image_uri='us-docker.pkg.dev/vertex-ai/prediction/tf2-cpu.2-8'
+)
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="patterns" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">5. Common Patterns and Differences</h2>
+            
+            <div class="space-y-4">
+                <h3 class="text-xl font-semibold">Key Patterns</h3>
+                <ul class="list-disc pl-8 space-y-2">
+                    <li>Container-based deployment is universal across platforms</li>
+                    <li>Auto-scaling based on metrics is a common feature</li>
+                    <li>Version management and traffic splitting are standard</li>
+                    <li>Monitoring and observability are integrated</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold mt-4">Platform Differences</h3>
+                <ul class="list-disc pl-8 space-y-2">
+                    <li>SageMaker offers more fine-grained control over containers</li>
+                    <li>Vertex AI provides tighter integration with Google Cloud services</li>
+                    <li>Scaling granularity varies between platforms</li>
+                    <li>Cost optimization strategies differ significantly</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="future" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">6. Future Directions</h2>
+            
+            <div class="space-y-4">
+                <h3 class="text-xl font-semibold">Proposed Improvements</h3>
+                <pre class="bg-gray-100 p-4 rounded">
+DynamicResource ::= (
+    GranularAllocation,
+    ElasticScaling,
+    CostAwareScheduling
+)
+
+SharedModelConfig ::= (
+    CrossEndpointSharing,
+    DynamicModelLoading,
+    ResourcePooling
+)
+
+EnhancedMonitoring ::= (
+    PredictiveAlerts,
+    AutomaticDiagnosis,
+    AdaptiveOptimization
+)
+                </pre>
+            </div>
+        </section>
+    </main>
+
+    <footer class="mt-8 pt-8 border-t border-gray-200">
+        <p class="text-sm text-gray-600">© 2025 - The Next 700 ML Model Serving Systems</p>
+    </footer>
+</body>
+</html>
