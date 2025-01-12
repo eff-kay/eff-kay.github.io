@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>The Next 700 ML Model Serving Systems (WIP)</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Next 700 ML Model Serving Systems</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -30,158 +32,533 @@
             padding: 2px 4px;
             border-radius: 3px;
         }
+        pre {
+            background: #dfe6e9;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        h2 {
+            margin-top: 30px;
+            color: #2d3436;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin: 10px 0;
+        }
     </style>
 </head>
-<body class="p-8 max-w-6xl mx-auto">
-    <header class="mb-8">
-        <h1 class="text-3xl font-bold mb-4">The Next 700 ML Model Serving Systems</h1>
-        <div class="text-sm text-gray-600 mb-4">A Theoretical Framework for ML Deployment Systems</div>
-    </header>
+<body>
+    <h1>The Next 700 ML Model Serving Systems</h1>
 
-    <nav class="mb-8 p-4 bg-gray-100 rounded">
-        <h2 class="text-xl font-semibold mb-2">Contents</h2>
-        <ul class="space-y-1">
-            <li><a href="#abstract" class="text-blue-600 hover:underline">Abstract</a></li>
-            <li><a href="#introduction" class="text-blue-600 hover:underline">1. Introduction</a></li>
-            <li><a href="#preliminaries" class="text-blue-600 hover:underline">2. Preliminaries</a></li>
-            <li><a href="#calculus" class="text-blue-600 hover:underline">3. A Calculus for ML Model Serving</a></li>
-            <li><a href="#platforms" class="text-blue-600 hover:underline">4. Platform Analysis</a></li>
-            <li><a href="#patterns" class="text-blue-600 hover:underline">5. Common Patterns and Differences</a></li>
-            <li><a href="#future" class="text-blue-600 hover:underline">6. Future Directions</a></li>
-        </ul>
-    </nav>
+    <div class="cool-note">
+        TLDR: A theoretical framework for understanding and comparing machine learning model serving systems in cloud environments, focusing on SageMaker, Vertex AI, and Azure ML. Just as previous "Next 700" papers sought to distill the essence of programming languages, we extract core concepts underlying ML model deployment systems.
+    </div>
 
-    <main class="space-y-8">
-        <section id="abstract" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">Abstract</h2>
-            <p class="mb-4">
-                We present a theoretical framework for understanding and comparing machine learning model serving systems in cloud environments. Our analysis focuses on three major platforms - Amazon SageMaker, Google Cloud Vertex AI, and Azure ML - demonstrating how their serving mechanisms can be understood through a common lens.
-            </p>
-        </section>
+    <h2>1. Abstract</h2>
+    <p>
+        We present a theoretical framework for understanding and comparing machine learning model serving systems in cloud environments. Just as previous "Next 700" papers sought to distill the essence of programming languages and data description languages, we aim to extract the core concepts underlying ML model deployment systems. Our analysis focuses on three major platforms - Amazon SageMaker, Google Cloud Vertex AI, and Azure ML - demonstrating how their serving mechanisms can be understood through a common lens.
+    </p>
 
-        <section id="calculus" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">3. A Calculus for ML Model Serving</h2>
-            
-            <div class="bg-gray-50 p-4 rounded mb-4">
-                <h3 class="text-xl font-semibold mb-2">Core Concepts</h3>
-                <pre class="bg-gray-100 p-4 rounded">
+    <h2>2. Introduction</h2>
+    <p>
+        The deployment of machine learning models has become a critical challenge in modern software systems. While substantial work has focused on model development and training, the serving of these models in production environments presents its own complex set of challenges. Today's ML engineers must choose between various serving systems, each with their own abstractions, terminology, and trade-offs.
+    </p>
+    <p>
+        The major cloud providers have developed sophisticated platforms for ML model serving. However, these platforms differ in their approaches to fundamental concepts like:
+    </p>
+    <ul>
+        <li>Model containerization and packaging</li>
+        <li>Scaling and resource allocation</li>
+        <li>Version management and deployment strategies</li>
+        <li>Monitoring and observability</li>
+        <li>Resource optimization and cost management</li>
+    </ul>
+
+    <h2>3. A Calculus for ML Model Serving</h2>
+    <h3>Core Concepts</h3>
+    <pre>
 ModelArtifact ::= (code, weights, metadata)
 Container ::= (ModelArtifact, runtime, deps)
 Endpoint ::= (Container, scaling_config, routing)
-Version ::= (Endpoint, traffic_weight)
-                </pre>
-            </div>
+Version ::= (Endpoint, traffic_weight)</pre>
 
-            <div class="bg-gray-50 p-4 rounded mb-4">
-                <h3 class="text-xl font-semibold mb-2">Operations</h3>
-                <pre class="bg-gray-100 p-4 rounded">
+    <h3>Operations</h3>
+    <pre>
 package : ModelArtifact → Container
 deploy : Container → Endpoint
 scale : Endpoint × Config → Endpoint
-route : Version × Version × Weight → Version
-                </pre>
-            </div>
-        </section>
+route : Version × Version × Weight → Version</pre>
 
-        <section id="platforms" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">4. Platform Analysis</h2>
+    <h2>4. Platform Analysis</h2>
+    
+    <h3>4.1 Amazon SageMaker</h3>
+    <p>SageMaker's approach closely mirrors our theoretical model, with explicit container building and endpoint management. Key mappings include:</p>
+    <ul>
+        <li>Model artifacts are packaged into ECR containers</li>
+        <li>Endpoints provide real-time inference with automatic scaling</li>
+        <li>Production variants enable traffic splitting</li>
+    </ul>
 
-            <div class="mb-8">
-                <h3 class="text-xl font-semibold mb-4">4.1 Amazon SageMaker</h3>
-                
-                <div class="bg-gray-50 p-4 rounded mb-4">
-                    <h4 class="font-semibold mb-2">Basic Model Deployment</h4>
-                    <div class="mb-4">
-                        <h5 class="font-medium mb-2">Theoretical Representation:</h5>
-                        <pre class="bg-gray-100 p-4 rounded">
-ModelArtifact = (
-    code = "sklearn_model.pkl",
-    weights = "model.joblib",
-    metadata = {"framework": "sklearn", "version": "1.0"}
-)
-                        </pre>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <h5 class="font-medium mb-2">Implementation:</h5>
-                        <pre class="bg-gray-100 p-4 rounded">
-from sagemaker.sklearn import SKLearnModel
-
-model = SKLearnModel(
-    model_data="s3://bucket/sklearn_model.tar.gz",
-    role=role,
-    framework_version="0.24-1",
-    py_version="py3",
-    entry_point="inference.py"
-)
-                        </pre>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-8">
-                <h3 class="text-xl font-semibold mb-4">4.2 Google Cloud Vertex AI</h3>
-                
-                <div class="bg-gray-50 p-4 rounded mb-4">
-                    <h4 class="font-semibold mb-2">Basic Model Deployment</h4>
-                    <div class="mb-4">
-                        <h5 class="font-medium mb-2">Theoretical Representation:</h5>
-                        <pre class="bg-gray-100 p-4 rounded">
-ModelArtifact = (
-    code = "model.pkl",
-    framework = "tensorflow",
-    metadata = {
-        "framework_version": "2.8.0",
-        "python_version": "3.9"
+    <h4>Basic Model Deployment</h4>
+    <p>Theoretical Representation:</p>
+    <pre>
+# SageMaker strict implementation of core grammar
+ModelArtifact ::= (
+    code = "s3://bucket/model.tar.gz",    # Model code and artifacts
+    weights = "s3://bucket/weights",       # Model weights
+    metadata = {                           # Essential metadata only
+        "framework": str,     # e.g., "huggingface"
+        "version": str,      # e.g., "4.37"
+        "py_version": str    # e.g., "py310"
     }
 )
-                        </pre>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <h5 class="font-medium mb-2">Implementation:</h5>
-                        <pre class="bg-gray-100 p-4 rounded">
+
+Container ::= (
+    ModelArtifact,
+    runtime = {
+        "image": str,           # ECR image URI
+        "execution_role": str   # IAM role
+    },
+    deps = {
+        "environment": dict,    # Environment variables
+        "entry_point": str     # Inference script
+    }
+)
+
+Endpoint ::= (
+    Container,
+    scaling_config = {
+        "instance_count": int,
+        "instance_type": str
+    },
+    routing = {
+        "variants": list[str],  # Production variant names
+        "weights": list[float]  # Traffic weights
+    }
+)
+
+Version ::= (
+    Endpoint,
+    traffic_weight = float    # Simple weight for this version
+)
+
+# Core operations
+package : ModelArtifact → Container     # Create SageMaker model
+deploy : Container → Endpoint           # Deploy to endpoint
+scale : Endpoint × Config → Endpoint    # Update instance count/type
+route : Version × Version × Weight → Version  # Update traffic split
+</pre>
+
+    <p>Implementation:</p>
+    <pre>
+from sagemaker.huggingface import HuggingFaceModel
+from sagemaker.huggingface.model import get_huggingface_llm_image_uri
+
+# Define the model image
+image_uri = get_huggingface_llm_image_uri(
+    "huggingface",
+    version="1.4.2"
+)
+
+# Create the model (packaging step)
+huggingface_model = HuggingFaceModel(
+    env=env,  # Environment variables for the container
+    role=SAGEMAKER_ROLE,
+    transformers_version="4.37",
+    pytorch_version="2.1",
+    py_version="py310",
+    image_uri=image_uri
+)
+
+# Deploy the model (endpoint creation)
+predictor = huggingface_model.deploy(
+    initial_instance_count=deployment.instance_count,
+    instance_type=deployment.instance_type,
+    endpoint_name=endpoint_name,
+)
+
+# Inference invocation
+predictor = HuggingFacePredictor(
+    endpoint_name=endpoint_name,
+    sagemaker_session=sagemaker_session
+)
+response = predictor.predict(input)
+</pre>
+
+    <h3>4.2 Azure ML SDK</h3>
+    <p>Azure ML implements a workspace-centric approach with managed online endpoints, emphasizing environment management and model registry integration.</p>
+    <ul>
+        <li>Managed deployments handle container creation implicitly</li>
+        <li>Scaling is defined through deployment configurations</li>
+        <li>Blue-green deployments manage version transitions</li>
+    </ul>
+
+    <p>Theoretical Representation:</p>
+    <pre>
+# Azure ML implementation of our core grammar
+ModelArtifact ::= (
+    code = "model/path",          # Local or registry path
+    weights = "weights/path",
+    metadata = {
+        "name": str,              # e.g., "hf-model"
+        "type": AssetType,        # e.g., CUSTOM_MODEL
+        "description": str,
+        "registry": optional[str]  # e.g., "HuggingFace"
+    }
+)
+
+Container ::= (
+    ModelArtifact,
+    runtime = {
+        "image": str,     # e.g., "mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04"
+        "conda_file": {
+            "channels": list[str],
+            "dependencies": list[str]
+        }
+    },
+    deps = {
+        "environment_variables": dict[str, str],
+        "pip_packages": list[str]
+    }
+)
+
+Endpoint ::= (
+    Container,
+    scaling_config = {
+        "instance_type": str,     # e.g., "Standard_DS3_v2"
+        "instance_count": int,
+        "min_replicas": int,
+        "max_replicas": int
+    },
+    routing = {
+        "deployment_name": str,
+        "traffic_percentage": int
+    }
+)
+
+Version ::= (
+    Endpoint,
+    traffic_weight = {
+        "blue_green_config": {
+            "active": str,         # blue or green
+            "percentage": int,
+            "evaluation_rules": dict
+        }
+    }
+)
+
+# Core operations
+package(ModelArtifact) → Container  # Creates Azure container environment
+deploy(Container) → Endpoint        # Deploys to Azure managed endpoint
+scale(Endpoint × Config) → Endpoint # Updates endpoint scaling
+route(Version × Weight) → Version   # Updates traffic routing
+
+</pre>
+
+    <p>Implementation:</p>
+    <pre>
+from azure.ai.ml import MLClient
+from azure.identity import DefaultAzureCredential
+from azure.ai.ml.entities import (
+    Environment,
+    Model,
+    ManagedOnlineEndpoint,
+    ManagedOnlineDeployment
+)
+from azure.ai.ml.constants import AssetTypes
+
+# Initialize workspace client
+credential = DefaultAzureCredential()
+ml_client = MLClient(
+    credential=credential,
+    subscription_id=subscription_id,
+    resource_group_name=resource_group,
+    workspace_name=workspace_name
+)
+
+# Define environment with dependencies
+environment = Environment(
+    name="bert-env",
+    image="mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04:latest",
+    conda_file={
+        "channels": ["conda-forge", "pytorch"],
+        "dependencies": [
+            "python=3.11",
+            "pip",
+            "pytorch",
+            "transformers",
+            "numpy"
+        ]
+    }
+)
+
+# Register model from registry
+model = Model(
+    path=f"hf://{model_id}",
+    type=AssetTypes.CUSTOM_MODEL,
+    name="hf-model",
+    description="HuggingFace model from Model Hub"
+)
+
+# Create and configure endpoint
+endpoint_name = f"hf-ep-{int(time.time())}"
+ml_client.begin_create_or_update(
+    ManagedOnlineEndpoint(name=endpoint_name)
+).wait()
+
+# Deploy model
+deployment = ml_client.online_deployments.begin_create_or_update(
+    ManagedOnlineDeployment(
+        name="demo",
+        endpoint_name=endpoint_name,
+        model=model_id,
+        environment=environment,
+        instance_type="Standard_DS3_v2",
+        instance_count=1,
+    )
+).wait()
+
+# Update traffic rules
+endpoint = ml_client.online_endpoints.get(endpoint_name)
+endpoint.traffic = {"demo": 100}
+ml_client.begin_create_or_update(endpoint).result()
+
+</pre>
+
+    <h3>4.3 Google Cloud Vertex AI</h3>
+    <p>Vertex AI takes a streamlined approach to model deployment, with strong integration with Google Cloud's container infrastructure and emphasis on GPU acceleration.
+    </p>
+    <p>Theoretical Representation:</p>
+<pre>
+# Vertex AI implementation of our core grammar
+ModelArtifact ::= (
+    code = "gs://model/path",    # GCS path
+    weights = "gs://weights/path",
+    metadata = {
+        "model_id": str,         # e.g., "hf-bert-base"
+        "framework": str,        # e.g., "huggingface"
+        "generation_config": dict
+    }
+)
+
+Container ::= (
+    ModelArtifact,
+    runtime = {
+        "image_uri": str,  # e.g., "us-docker.pkg.dev/vertex-ai/prediction/..."
+        "accelerator": str # e.g., "NVIDIA_TESLA_A100"
+    },
+    deps = {
+        "env_vars": {
+            "MODEL_ID": str,
+            "MAX_INPUT_LENGTH": str,
+            "MAX_TOTAL_TOKENS": str,
+            "NUM_SHARD": str
+        }
+    }
+)
+
+Endpoint ::= (
+    Container,
+    scaling_config = {
+        "machine_type": str,      # e.g., "a2-highgpu-4g"
+        "min_replica_count": int,
+        "max_replica_count": int,
+        "accelerator_count": int
+    },
+    routing = {
+        "traffic_split": dict[str, int],
+        "prediction_config": dict
+    }
+)
+
+Version ::= (
+    Endpoint,
+    traffic_weight = {
+        "split_name": str,
+        "percentage": int,
+        "monitoring_config": dict
+    }
+)
+
+# Core operations
+package(ModelArtifact) → Container  # Creates Vertex AI container
+deploy(Container) → Endpoint        # Deploys to Vertex endpoint
+scale(Endpoint × Config) → Endpoint # Updates endpoint scaling
+route(Version × Weight) → Version   # Updates traffic routing
+</pre>
+
+    <p>Implementation:</p>
+    <pre>
 from google.cloud import aiplatform
 
-model = aiplatform.Model.upload(
-    display_name='tensorflow-model',
-    artifact_uri='gs://bucket/model/',
-    serving_container_image_uri='us-docker.pkg.dev/vertex-ai/prediction/tf2-cpu.2-8'
+def deploy_hf_model(
+    project_id: str,
+    location: str,
+    model_id: str,
+    machine_type: str = "a2-highgpu-4g",
+):
+    aiplatform.init(project=project_id, location=location)
+    
+    env_vars = {
+        "MODEL_ID": model_id,
+        "MAX_INPUT_LENGTH": "512",
+        "MAX_TOTAL_TOKENS": "1024",
+        "MAX_BATCH_PREFILL_TOKENS": "2048",
+        "NUM_SHARD": "1"
+    }
+
+    # Upload model with container configuration
+    model = aiplatform.Model.upload(
+        display_name=f"hf-{model_id.replace('/', '-')}",
+        serving_container_image_uri=(
+            "us-docker.pkg.dev/deeplearning-platform-release/gcr.io/"
+            "huggingface-text-generation-inference-cu121.2-2.ubuntu2204.py310"
+        ),
+        serving_container_environment_variables=env_vars
+    )
+    
+    # Deploy model with compute configuration
+    endpoint = model.deploy(
+        machine_type=machine_type,
+        min_replica_count=1,
+        max_replica_count=1,
+        accelerator_type="NVIDIA_TESLA_A100",
+        accelerator_count=1,
+        sync=True
+    )
+    
+    return endpoint
+
+def create_completion(
+    endpoint,
+    prompt: str,
+    max_tokens: int = 100,
+    temperature: float = 0.7
+):
+    response = endpoint.predict({
+        "text": prompt,
+        "parameters": {
+            "max_new_tokens": max_tokens,
+            "temperature": temperature,
+            "top_p": 0.95,
+            "top_k": 40,
+        }
+    })
+    return response
+</pre>
+
+    <h2>5. Hypothetical Frameworks</h2>
+    
+    <h3>5.1 ServerlessML</h3>
+    <p>ServerlessML takes a radical approach by completely eliminating the concept of endpoints and containers, instead treating models as pure functions:</p>
+    
+    <p>Theoretical Representation:</p>
+    <pre>
+ModelArtifact ::= (code, weights, metadata, scaling_rules)
+Function ::= (ModelArtifact, memory_size, timeout)
+Invocation ::= (Function, cold_start_policy)
+
+# Key innovation: No explicit container or endpoint
+deploy : ModelArtifact → Function
+invoke : Function → Response
+scale : automatic based on concurrent invocations</pre>
+
+    <p>Implementation:</p>
+    <pre>
+from serverlessml import MLFunction
+
+model = MLFunction(
+    model_path="model.pkl",
+    framework="pytorch",
+    memory_size="2GB",
+    scaling_rules={
+        "cold_start_policy": "eager_loading",
+        "max_concurrent": 1000,
+        "idle_timeout": "10m"
+    }
 )
-                        </pre>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section id="patterns" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">5. Common Patterns and Differences</h2>
-            
-            <div class="space-y-4">
-                <h3 class="text-xl font-semibold">Key Patterns</h3>
-                <ul class="list-disc pl-8 space-y-2">
-                    <li>Container-based deployment is universal across platforms</li>
-                    <li>Auto-scaling based on metrics is a common feature</li>
-                    <li>Version management and traffic splitting are standard</li>
-                    <li>Monitoring and observability are integrated</li>
-                </ul>
+# Deployment is implicit - function is ready to serve
+function_url = model.deploy()</pre>
 
-                <h3 class="text-xl font-semibold mt-4">Platform Differences</h3>
-                <ul class="list-disc pl-8 space-y-2">
-                    <li>SageMaker offers more fine-grained control over containers</li>
-                    <li>Vertex AI provides tighter integration with Google Cloud services</li>
-                    <li>Scaling granularity varies between platforms</li>
-                    <li>Cost optimization strategies differ significantly</li>
-                </ul>
-            </div>
-        </section>
+    <p>Pros:</p>
+    <ul>
+        <li>Zero infrastructure management - models are treated as pure functions</li>
+        <li>True pay-per-invocation pricing with no idle costs</li>
+        <li>Automatic scaling from zero to thousands of concurrent requests</li>
+    </ul>
 
-        <section id="future" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4">6. Future Directions</h2>
-            
-            <div class="space-y-4">
-                <h3 class="text-xl font-semibold">Proposed Improvements</h3>
-                <pre class="bg-gray-100 p-4 rounded">
+    <p>Cons:</p>
+    <ul>
+        <li>Cold starts can impact latency-sensitive applications</li>
+        <li>Limited control over underlying infrastructure</li>
+        <li>May be more expensive for constant high-throughput workloads</li>
+    </ul>
+
+    <h3>5.2 StatefulML</h3>
+    <p>StatefulML introduces a novel approach by making model state and caching first-class concepts:</p>
+
+    <p>Theoretical Representation:</p>
+    <pre>
+ModelArtifact ::= (code, weights, metadata)
+ModelState ::= (cache, warm_weights, dynamic_config)
+Container ::= (ModelArtifact, ModelState, runtime)
+StateManager ::= (Container, caching_policy, update_strategy)
+
+# Key innovation: Explicit state management
+deploy : (ModelArtifact, StateManager) → Container
+update_state : (Container, ModelState) → Container
+cache_forward : (Container, Request) → Response</pre>
+
+    <p>Implementation:</p>
+    <pre>
+from statefulml import MLContainer, StateManager
+
+state_manager = StateManager(
+    caching_policy={
+        "strategy": "predictive_cache",
+        "cache_size": "4GB",
+        "eviction_policy": "feature_based_lru"
+    },
+    update_strategy={
+        "type": "incremental",
+        "frequency": "5m",
+        "warm_up": True
+    }
+)
+
+model = MLContainer(
+    model_path="model.pkl",
+    framework="tensorflow",
+    state_manager=state_manager,
+    dynamic_config={
+        "feature_importance_tracking": True,
+        "automatic_cache_tuning": True
+    }
+)
+
+endpoint = model.deploy()</pre>
+
+    <p>Pros:</p>
+    <ul>
+        <li>Intelligent caching reduces latency for common patterns</li>
+        <li>State persistence improves warm start performance</li>
+        <li>Dynamic optimization based on actual usage patterns</li>
+    </ul>
+
+    <p>Cons:</p>
+    <ul>
+        <li>More complex deployment and management</li>
+        <li>Higher memory requirements for state maintenance</li>
+        <li>Potential consistency issues with distributed state</li>
+    </ul>
+
+    <h2>7. Future Directions</h2>
+    <pre>
 DynamicResource ::= (
     GranularAllocation,
     ElasticScaling,
@@ -198,14 +575,12 @@ EnhancedMonitoring ::= (
     PredictiveAlerts,
     AutomaticDiagnosis,
     AdaptiveOptimization
-)
-                </pre>
-            </div>
-        </section>
-    </main>
+)</pre>
 
-    <footer class="mt-8 pt-8 border-t border-gray-200">
-        <p class="text-sm text-gray-600">© 2025 - The Next 700 ML Model Serving Systems</p>
-    </footer>
+    <h2>8. Conclusion</h2>
+    <p>
+        Our theoretical framework provides a way to understand and compare ML serving systems. While current platforms have significant differences, many reflect platform-specific constraints rather than fundamental requirements of the domain. Future systems can benefit from this analysis to provide more consistent and powerful abstractions for ML deployment.
+    </p>
+
 </body>
 </html>
