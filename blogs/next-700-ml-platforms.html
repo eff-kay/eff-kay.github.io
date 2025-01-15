@@ -58,17 +58,9 @@
         TLDR: A theoretical framework for understanding and comparing machine learning model serving systems in cloud environments, focusing on SageMaker, Vertex AI, and Azure ML. Just as previous "Next 700" papers sought to distill the essence of programming languages, we extract core concepts underlying ML model deployment systems.
     </div>
 
-    <h2>1. Abstract</h2>
+    <h2>1. Introduction</h2>
     <p>
-        We present a theoretical framework for understanding and comparing machine learning model serving systems in cloud environments. Just as previous "Next 700" papers sought to distill the essence of programming languages and data description languages, we aim to extract the core concepts underlying ML model deployment systems. Our analysis focuses on three major platforms - Amazon SageMaker, Google Cloud Vertex AI, and Azure ML - demonstrating how their serving mechanisms can be understood through a common lens.
-    </p>
-
-    <h2>2. Introduction</h2>
-    <p>
-        The deployment of machine learning models has become a critical challenge in modern software systems. While substantial work has focused on model development and training, the serving of these models in production environments presents its own complex set of challenges. Today's ML engineers must choose between various serving systems, each with their own abstractions, terminology, and trade-offs.
-    </p>
-    <p>
-        The major cloud providers have developed sophisticated platforms for ML model serving. However, these platforms differ in their approaches to fundamental concepts like:
+        Today's ML engineers must choose between various serving systems, each with their own abstractions, terminology, and trade-offs. These platforms differ in their approaches to fundamental concepts like:
     </p>
     <ul>
         <li>Model containerization and packaging</li>
@@ -78,7 +70,7 @@
         <li>Resource optimization and cost management</li>
     </ul>
 
-    <h2>3. A Calculus for ML Model Serving</h2>
+    <h2>2. A Calculus for ML Model Serving</h2>
     <h3>Core Concepts</h3>
     <pre>
 ModelArtifact ::= (code, weights, metadata)
@@ -93,9 +85,9 @@ deploy : Container → Endpoint
 scale : Endpoint × Config → Endpoint
 route : Version × Version × Weight → Version</pre>
 
-    <h2>4. Platform Analysis</h2>
+    <h2>3. Platform Analysis</h2>
     
-    <h3>4.1 Amazon SageMaker</h3>
+    <h3>3.1 Amazon SageMaker</h3>
     <p>SageMaker's approach closely mirrors our theoretical model, with explicit container building and endpoint management. Key mappings include:</p>
     <ul>
         <li>Model artifacts are packaged into ECR containers</li>
@@ -189,7 +181,7 @@ predictor = HuggingFacePredictor(
 response = predictor.predict(input)
 </pre>
 
-    <h3>4.2 Azure ML SDK</h3>
+    <h3>3.2 Azure ML SDK</h3>
     <p>Azure ML implements a workspace-centric approach with managed online endpoints, emphasizing environment management and model registry integration.</p>
     <ul>
         <li>Managed deployments handle container creation implicitly</li>
@@ -329,7 +321,7 @@ ml_client.begin_create_or_update(endpoint).result()
 
 </pre>
 
-    <h3>4.3 Google Cloud Vertex AI</h3>
+    <h3>3.3 Google Cloud Vertex AI</h3>
     <p>Vertex AI takes a streamlined approach to model deployment, with strong integration with Google Cloud's container infrastructure and emphasis on GPU acceleration.
     </p>
     <p>Theoretical Representation:</p>
@@ -451,9 +443,9 @@ def create_completion(
     return response
 </pre>
 
-    <h2>5. Hypothetical Frameworks</h2>
+    <h2>4. Hypothetical Frameworks</h2>
     
-    <h3>5.1 ServerlessML</h3>
+    <h3>4.1 ServerlessML</h3>
     <p>ServerlessML takes a radical approach by completely eliminating the concept of endpoints and containers, instead treating models as pure functions:</p>
     
     <p>Theoretical Representation:</p>
@@ -499,7 +491,7 @@ function_url = model.deploy()</pre>
         <li>May be more expensive for constant high-throughput workloads</li>
     </ul>
 
-    <h3>5.2 StatefulML</h3>
+    <h3>4.2 StatefulML</h3>
     <p>StatefulML introduces a novel approach by making model state and caching first-class concepts:</p>
 
     <p>Theoretical Representation:</p>
@@ -557,7 +549,7 @@ endpoint = model.deploy()</pre>
         <li>Potential consistency issues with distributed state</li>
     </ul>
 
-    <h2>7. Future Directions</h2>
+    <h2>5. Future Directions</h2>
     <pre>
 DynamicResource ::= (
     GranularAllocation,
@@ -577,9 +569,9 @@ EnhancedMonitoring ::= (
     AdaptiveOptimization
 )</pre>
 
-    <h2>8. Conclusion</h2>
+    <h2>6. Conclusion</h2>
     <p>
-        Our theoretical framework provides a way to understand and compare ML serving systems. While current platforms have significant differences, many reflect platform-specific constraints rather than fundamental requirements of the domain. Future systems can benefit from this analysis to provide more consistent and powerful abstractions for ML deployment.
+        This framework provides a way to understand and compare ML serving systems. While current platforms have significant differences, many reflect platform-specific constraints rather than fundamental requirements of the domain. Future systems can benefit from this analysis to provide more consistent and powerful abstractions for ML deployment.
     </p>
 
 </body>
