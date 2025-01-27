@@ -65,8 +65,22 @@ window.addEventListener('load', () => {
         insertCss(scrollCSS);
     }
 
+    console.log('inside')
+
+    // fetch the url in the browser window
+    let url = window.location.href;
+    let urlSplit = url.split("/")[3].split(".")[0];
+    console.log('urlSplit:', urlSplit, window.location.href); 
+
     let coll = document.getElementsByClassName("collapsible");
     for (let i = 0; i < coll.length; i++) {
+
+        if (urlSplit == coll[i].id) {
+            console.log('coll i', coll[i])
+            coll[i].classList.toggle("active"); 
+        }
+        console.log('coll', coll[i])
+
         coll[i].addEventListener("click", function () {
             let contentList = document.getElementsByClassName("collapsible-content");
             let clicked = contentList[i];
