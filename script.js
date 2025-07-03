@@ -9,6 +9,7 @@ function toggles() {
     document.getElementById("overlay").classList.toggle('transp');
 }
 
+
 function toggleout() {
     timedscrolltoggle();
     toggles();
