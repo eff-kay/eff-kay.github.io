@@ -71,6 +71,25 @@ a i:hover {
   transition-duration: 300ms;
 }
 
+.pen-strike {
+  position: relative;
+  display: inline-block;
+}
+
+.pen-strike::after {
+  content: "";
+  position: absolute;
+  left: -0.08em;
+  right: -0.08em;
+  top: 52%;
+  height: 0.12em;
+  background: currentColor;
+  opacity: 0.75;
+  transform: rotate(-5deg);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
 h2 {
   width: fit-content;
   max-width: 80vw;
