@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Email for $0/Month: The Cloudflare Trick Nobody Talks About</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #2d3436;
+        }
+        h1 {
+            color: #2d3436;
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+        .meta {
+            color: #636e72;
+            font-size: 0.95em;
+            margin-bottom: 24px;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #dfe6e9;
+            margin: 24px 0;
+        }
+        h2 {
+            margin-top: 32px;
+            margin-bottom: 12px;
+            color: #2d3436;
+        }
+        h3 {
+            margin-top: 24px;
+            margin-bottom: 8px;
+            color: #2d3436;
+        }
+        p {
+            margin: 12px 0;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        a {
+            color: #0984e3;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        code {
+            background: #f1f2f6;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+        }
+        th, td {
+            border: 1px solid #dfe6e9;
+            padding: 10px 14px;
+            text-align: left;
+        }
+        th {
+            background: #f1f2f6;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <h1>Professional Email for $0/Month using Cloudflare</h1>
+    <div class="meta">March 8, 2026 · Faizan Khan · 8 min read · Tutorial</div>
+
+    <p><strong>Most people pay $6–12/month for Google Workspace or Microsoft 365 just to get an email like hello@theirdomain.com.</strong> That is a perfectly fine solution. But it is not the only solution. You can get a custom email address that forwards to your Gmail inbox for free using Cloudflare's Email Routing feature. You can even send from that custom address using Gmail's "Send mail as" feature. The whole thing costs you nothing except the domain itself.</p>
+
+    <p>Here is the full walkthrough.</p>
+
+    <hr>
+
+    <h2>What You Need</h2>
+
+    <p>Three things. You probably already have two of them.</p>
+
+    <ol>
+        <li><strong>A domain name:</strong> $10–15/year from Namecheap, Porkbun, or any registrar. Budget options like <code>.xyz</code>, <code>.site</code>, or <code>.online</code> run $2–5/year.</li>
+        <li><strong>A Gmail account:</strong> free.</li>
+        <li><strong>A Cloudflare account:</strong> free.</li>
+    </ol>
+
+    <hr>
+
+    <h2>Step 1: Get a Domain</h2>
+
+    <p>If you don't have one already, go buy a domain. Namecheap, Porkbun, whatever. Pick something short, memorable, and on-brand for you.</p>
+
+    <p>If you already own a domain, skip ahead.</p>
+
+    <hr>
+
+    <h2>Step 2: Add Your Domain to Cloudflare</h2>
+
+    <ol>
+        <li>Sign up at <a href="https://cloudflare.com">cloudflare.com</a>. The free plan is all you need.</li>
+        <li>Click <strong>"Add a site"</strong> and type in your domain.</li>
+        <li>Cloudflare will scan your existing DNS records automatically.</li>
+        <li>It will give you two nameservers. Copy them.</li>
+        <li>Go back to your domain registrar (Namecheap, Porkbun, wherever you bought the domain) and replace the default nameservers with the two Cloudflare gave you.</li>
+        <li>Wait about 5–10 minutes for DNS propagation.</li>
+    </ol>
+
+    <p>That's it. Your domain is now on Cloudflare. Everything else happens inside their dashboard.</p>
+
+    <hr>
+
+    <h2>Step 3: Enable Email Routing</h2>
+
+    <p>This is where the magic happens.</p>
+
+    <ol>
+        <li>In your Cloudflare dashboard, navigate to <strong>Email → Email Routing</strong>.</li>
+        <li>Click <strong>"Get Started"</strong> to enable the feature.</li>
+        <li>Enter your Gmail address as the destination.</li>
+        <li>Cloudflare will send a confirmation email to that Gmail address.</li>
+        <li>Open Gmail, find the email, click the verification link.</li>
+    </ol>
+
+    <p>Done. Cloudflare now knows where to forward your mail.</p>
+
+    <hr>
+
+    <h2>Step 4: Create Your Custom Email Addresses</h2>
+
+    <p>Now you get to pick whatever addresses you want.</p>
+
+    <ol>
+        <li>In the Email Routing section, click <strong>"Create address."</strong></li>
+        <li>Type the local part you want — <code>hello@</code>, <code>contact@</code>, <code>hi@</code>, <code>support@</code>, <code>sales@</code>, whatever.</li>
+        <li>Select your Gmail as the destination.</li>
+        <li>Click Save.</li>
+    </ol>
+
+    <p>Repeat this for as many addresses as you want. They are all free. Unlimited. Each one can point to the same Gmail or to different inboxes if you have multiple Google accounts.</p>
+
+    <p>At this point, emails sent to <code>hello@yourdomain.com</code> land in your regular Gmail inbox. That alone is useful. But we can do better.</p>
+
+    <hr>
+
+    <h2>Step 5: Send FROM Your Custom Email</h2>
+
+    <p>This is the part that makes it feel real. Right now you can <em>receive</em> emails at your custom address, but when you reply, Gmail sends from your <code>@gmail.com</code> address. That's ugly. Let's fix it.</p>
+
+    <ol>
+        <li>Open Gmail → <strong>Settings</strong> → <strong>See all settings</strong>.</li>
+        <li>Go to the <strong>"Accounts and Import"</strong> tab.</li>
+        <li>Under <strong>"Send mail as"</strong>, click <strong>"Add another email address."</strong></li>
+        <li>Enter your name and your custom email (e.g., <code>hello@yourdomain.com</code>).</li>
+        <li>On the next screen, Gmail asks for SMTP server details. <strong>This is the part people mess up.</strong></li>
+    </ol>
+
+    <p>Here is what to enter:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>SMTP Server</strong></td>
+                <td><code>smtp.gmail.com</code></td>
+            </tr>
+            <tr>
+                <td><strong>Port</strong></td>
+                <td><code>587</code></td>
+            </tr>
+            <tr>
+                <td><strong>Username</strong></td>
+                <td>Your full Gmail address (e.g., <code>you@gmail.com</code>)</td>
+            </tr>
+            <tr>
+                <td><strong>Password</strong></td>
+                <td>A Google App Password (see below)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>Important:</strong> Gmail will pre-populate the SMTP server field with something from Cloudflare's MX records. Delete that. Replace it with <code>smtp.gmail.com</code>. If you skip this, it will not work.</p>
+
+    <h3>Getting a Google App Password</h3>
+
+    <p>You need this because Gmail won't let you use your regular password for SMTP.</p>
+
+    <ol>
+        <li>Go to Google Account → Security</li>
+        <li>Make sure <strong>2-Step Verification</strong> is enabled. (If not, enable it first.)</li>
+        <li>Search for or navigate to <strong>App passwords</strong>.</li>
+        <li>Generate a new app password for "Mail."</li>
+        <li>Copy the 16-character password Google gives you.</li>
+        <li>Paste it into the Gmail SMTP setup from above.</li>
+    </ol>
+
+    <h3>Finishing Up</h3>
+
+    <ol>
+        <li>Click <strong>"Add Account."</strong></li>
+        <li>Gmail sends a verification email to your custom address.</li>
+        <li>Cloudflare forwards it right back to your Gmail inbox. (See? The routing is already working.)</li>
+        <li>Enter the confirmation code or click the link.</li>
+    </ol>
+
+    <p>You can now compose emails in Gmail and choose your custom address in the "From" dropdown. Replies to emails received at your custom address will default to sending from that address too.</p>
+
+    <hr>
+
+    <h2>Step 6: Verify Your DNS Records</h2>
+
+    <p>Cloudflare automatically sets up SPF, DKIM, and DMARC records when you enable email routing. You don't need to touch anything manually. But if you want to double-check:</p>
+
+    <ol>
+        <li>Go to <strong>Cloudflare → DNS → Records</strong>.</li>
+        <li>You should see <strong>MX records</strong> pointing to Cloudflare's mail servers.</li>
+        <li>You should see <strong>TXT records</strong> for SPF and DKIM already in place.</li>
+    </ol>
+
+    <p>If something looks wrong, try disabling and re-enabling email routing. That usually resets everything correctly.</p>
+
+    <h3>A Note on DKIM and Deliverability</h3>
+
+    <p>Here is the one honest caveat. Unlike Google Workspace, regular Gmail does not sign outgoing emails with your custom domain's DKIM key. This means some recipients — especially stricter corporate mail servers — might flag your messages or land them in spam.</p>
+
+    <p>In practice, I have not had issues. But if you start noticing deliverability problems at scale, that is the point where paying for Google Workspace actually makes sense.</p>
+
+    <hr>
+
+    <h2>What You End Up With</h2>
+
+    <ul>
+        <li>Emails sent to <code>hello@yourdomain.com</code> arrive in your normal Gmail inbox.</li>
+        <li>You can reply from that custom address directly in Gmail.</li>
+        <li>You look professional.</li>
+        <li>You pay <strong>$0/month</strong> for email. Just the annual domain cost.</li>
+        <li>No separate storage limits. It is all using your free Gmail storage (15 GB).</li>
+    </ul>
+
+    <p>That is a professional email setup for roughly <strong>$10/year</strong> instead of $72+/year with Google Workspace.</p>
+
+    <hr>
+
+    <h2>Limitations</h2>
+
+    <p>This setup is not a full replacement for Google Workspace. Here is where it falls short:</p>
+
+    <ul>
+        <li><strong>Cloudflare only forwards.</strong> It does not store emails or give you a separate mailbox. If your Gmail goes down, you have no backup.</li>
+        <li><strong>Outgoing emails might hit spam initially</strong> until SPF reputation builds up for your domain.</li>
+        <li><strong>Gmail's sending limit is 500 emails/day</strong> from custom addresses. Fine for most people. Not fine if you are doing cold outreach at volume.</li>
+        <li><strong>No DKIM signing on your custom domain.</strong> Covered above — but worth repeating.</li>
+    </ul>
+
+    <h3>Who This Is Perfect For</h3>
+
+    <ul>
+        <li>Freelancers</li>
+        <li>Side projects</li>
+        <li>Personal brands</li>
+        <li>Small businesses</li>
+        <li>Portfolio sites</li>
+        <li>Students who want to look professional on $0</li>
+    </ul>
+
+    <hr>
+
+    <h2>That's It</h2>
+
+    <p>Six steps. Maybe 20 minutes of setup. Professional custom email for the cost of your domain and nothing else.</p>
+
+    <p>This is not sponsored by Cloudflare. I just happened to know this method and it felt like the kind of thing worth writing up. The sort of trick you stumble into once and then wonder why everyone doesn't do it. If you know other free or cheap hacks like this, I'd genuinely like to hear about them.</p>
+</body>
+</html>
