@@ -1,0 +1,74 @@
+---
+title: "Why Agent Bench Needs to Exist"
+date: "2026-05-01"
+author: "Faizan Khan"
+excerpt: "If AI agents are going to operate real software, we need an independent benchmark for software operability across docs, auth, CLI, APIs, and recovery."
+category: "AI"
+readTime: 9
+---
+
+The argument for better AI agents is now familiar. Better models, better scaffolds, better tools, better data. What is less discussed is that agents do not meet the world directly. They meet software interfaces, and those interfaces are often much worse than we admit.
+
+An agent can fail because the model is weak. It can also fail because the documentation is incomplete, the authentication flow is brittle, the CLI is inconsistent, the API surface is awkward, the system hides state that matters, or the product provides no clean way to verify success after side effects. Humans routinely work around these problems with patience and guesswork. Agents usually cannot. That difference matters because it means a large fraction of agent failure is not just about reasoning. It is about operability.
+
+This is why an agent benchmark needs to exist. More precisely, we need a benchmark for how well agents can use real software under realistic conditions.
+
+## The Evaluation Gap
+
+Most evaluation still focuses on one of three things. Benchmarks measure whether a model can solve a predefined task. Demos show that a happy path can be made to work. Product scorecards isolate one part of the stack and grade it in place. Each of these is useful, but none answers the full operational question.
+
+There is already meaningful work on pieces of the problem. [DocsAgent Score](https://docsalot.dev/tools/docsagent-score), [Fern Agent Score](https://buildwithfern.com/agent-score), and the [Agent-Friendly Documentation Spec](https://afdocs.dev/) all make the same point from different angles: if the documentation layer is malformed, unstable, or opaque to machines, the agent begins half-blind. On another axis, [Sapient's CLI leaderboard](https://www.usesapient.com/leaderboard/claudecode/cli) is important because it treats tool use as something that can be tested in live environments rather than described abstractly.
+
+The problem is that software does not fail one layer at a time. Agents succeed or fail across a chain: discover the right interface, understand the docs, configure the environment, authenticate correctly, use the right surface, verify the result, and recover when something breaks. Measuring one link in isolation tells you something, but not enough. The real technical question is whether the system as a whole is operable by an agent.
+
+## Why Start With the Terminal
+
+The recent [Terminal-Bench paper](https://arxiv.org/abs/2601.11868) is the clearest evidence I have seen that this problem is real and still undermeasured. Its importance is not that it is about shell commands. Its importance is that terminal work strips away a lot of benchmark theater and forces the agent to interact with a real environment. It has to inspect state, make decisions under uncertainty, respond to failures, and validate outcomes instead of merely narrating them.
+
+Several lessons from that paper should shape any serious benchmark. Realistic long-horizon tasks are still difficult even for strong systems. Verification quality is central rather than optional. Many failures are operational: missing dependencies, bad paths, weak recovery, poor environment understanding. Token count and turn count are poor proxies for competence. An agent that wanders for 400 steps before stumbling into an answer is doing something categorically different from an agent that understands the environment, uses the right interface, and exits with a verified result.
+
+That is why the terminal is a good starting layer. It exposes operational intelligence cleanly. But it should remain a starting layer. The larger question is not whether an agent can survive inside a shell. It is whether it can operate software across the interfaces modern systems actually expose.
+
+## What Agent Bench Should Measure
+
+A useful agent benchmark should treat operability as layered.
+
+**Discovery.** Can the agent find the right entry point, whether that is a doc page, a command, an endpoint, or a machine-facing tool surface?
+
+**Setup and authentication.** Can it configure the environment correctly, understand the access model, and supply credentials in a way the system can actually use?
+
+**Interface use.** Can it operate the available surface correctly, whether that surface is a CLI, an API, or an MCP-style interface? The question is not whether the interface exists. It is whether correct use is legible to a machine.
+
+**Verification.** Can the agent determine that the action really succeeded? This is where many products appear usable in demos and then fall apart in practice.
+
+**Recovery.** Can the agent detect partial failure, retry safely, and avoid hallucinating completion?
+
+Once you frame the problem this way, the benchmark starts doing more than producing a score. It helps separate three things that are currently entangled in most discussions of agents: model capability, scaffold quality, and software quality. That separation is necessary if we want to know what actually needs to improve.
+
+## Why It Must Be Independent
+
+The strongest reason to build this benchmark outside the frontier labs is not politics. It is measurement integrity.
+
+If the dominant benchmark for software operability is controlled by the same organizations building the frontier models, the benchmark will be subjected to intense optimization pressure from the people with the most resources and the strongest incentives to win. That does not require anyone to cheat. It is enough that the benchmark becomes part of the development loop. Over time, a benchmark under that kind of pressure tends to become a coordination artifact for a handful of large actors rather than a durable public instrument.
+
+Independence also matters because a lab-controlled benchmark will naturally reflect the assumptions of the labs closest to it: their harnesses, their preferred abstractions, their toolchains, their definition of what counts as agent progress. That narrows the scope of what gets measured. A genuinely independent benchmark can ask broader questions about interface design, verification burden, recovery quality, documentation structure, and software-side friction.
+
+More importantly, independence is what makes the benchmark useful to the rest of the ecosystem. Product teams, infrastructure companies, open-source projects, and researchers need a measurement system they can treat as public infrastructure rather than as an extension of one model vendor's go-to-market strategy. If the benchmark is going to tell uncomfortable truths about where software breaks agents, it has to be able to publish those truths without being subordinated to any one lab's incentives.
+
+There is also a deeper reason. The long-run value of this benchmark is not only that it ranks agents. It is that it creates a body of evidence about how software itself needs to change. If agents repeatedly fail on the same kinds of interfaces, auth patterns, setup flows, and verification gaps, that is not just model feedback. It is design feedback for the software layer of the AI era. That feedback loop is too important to leave entirely inside the labs.
+
+## Why This Matters
+
+Software now has two users: the human operating the system and the machine acting on the human's behalf. That shift changes the meaning of usability. We are no longer asking only whether a person can understand a product. We also need to ask whether the product exposes enough structure for an agent to discover it, configure it, act through it, verify results, and recover safely.
+
+If we fail to measure that well, two things happen. We overstate model capability because demos hide the cost of brittle setup and weak recovery. And we deprive software teams of a serious feedback loop for building systems that agents can actually use.
+
+A good benchmark would do the opposite. It would make failures legible, separate model limitations from interface limitations, and provide a shared technical standard for what agent-operable software looks like. That is why Agent Bench matters. Not as a marketing badge, and not as a narrow contest between frontier labs, but as public infrastructure for a world in which software increasingly has machine users.
+
+## References
+
+- [DocsAgent Score](https://docsalot.dev/tools/docsagent-score)
+- [Fern Agent Score](https://buildwithfern.com/agent-score)
+- [Agent-Friendly Documentation Spec (AFDocs)](https://afdocs.dev/)
+- [Sapient CLI Leaderboard / DevToolArena CLI benchmark](https://www.usesapient.com/leaderboard/claudecode/cli)
+- [Terminal-Bench: Benchmarking Agents on Hard, Realistic Tasks in Command Line Interfaces](https://arxiv.org/abs/2601.11868)
