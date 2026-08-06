@@ -9,14 +9,16 @@ function toggles() {
     document.getElementById("overlay").classList.toggle('transp');
 }
 
-
-
-
 function toggleout() {
     timedscrolltoggle();
     toggles();
     document.getElementById("overlay").classList.remove('earlytransition');
 }
+
+
+
+
+
 
 function togglein() {
     document.body.classList.toggle('noscroll');
