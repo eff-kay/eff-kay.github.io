@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Talks — Faizan Khan</title>
+  <meta name="description" content="Technical talks and visual guides by Faizan Khan: building MCP servers, governance, observability, async work, and ecosystem distribution.">
+  <link rel="canonical" href="https://eff-kay.github.io/talks.html">
+  <link rel="shortcut icon" href="favicon.png">
+  <link rel="stylesheet" href="icons/css/line-awesome.min.css">
+  <link rel="stylesheet" href="fonts/Sans/cmun-sans.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {font-family:"Computer Modern Sans",sans-serif;font-size:16px;line-height:1.6;background:#f9f9f9;color:#222}
+    .talk-intro {margin:25px 0 34px}.talk-intro h1 {font-size:30px;line-height:1.2;font-weight:500;margin:0 0 12px}
+    .talk-entry {border-top:1px solid #d5d5d5;padding:27px 0 32px}.talk-entry h2 {display:block;font-size:25px;line-height:1.25;font-weight:500;max-width:none;margin:7px 0 12px}
+    .talk-meta {font-size:13px;color:#666;letter-spacing:.03em}.talk-entry p {margin:12px 0}
+    .talk-links {display:flex;flex-wrap:wrap;gap:10px 22px;margin:20px 0}.talk-links .open {font-weight:600}
+    .talk-preview {display:block;border:1px solid #d9e0e8;border-radius:3px;overflow:hidden;margin-top:21px}.talk-preview img {display:block;width:100%;height:auto}
+    .help {font-size:14px;color:#666;margin:16px 0 45px}.talk-footer {border-top:1px solid #ddd;padding:20px 0 40px;color:#666;font-size:13px}
+    a:focus-visible {outline:2px solid #aa0000;outline-offset:4px}.talk-entry a.open {text-decoration:underline;text-underline-offset:4px}
+    @media(max-width:600px){.main {max-width:90vw}.nav-tab{padding:8px 10px}.talk-intro h1{font-size:27px}.talk-entry h2{font-size:23px}}
+  </style>
+</head>
+<body><main id="content" class="main">
+        <div id="header">
+            <h2> Faizan Khan
+                <!-- <span style="font-size: smaller;"> <i class="las la-leaf"></i></span> -->
+            </h2>
+            <div style="display: inline-block;">
+
+
+                <a href="mailto:faiizan14@gmail.com" disp-title="Email Me"><i
+                    class="lar la-fw la-envelope "></i></a>
+                <!-- linkedin -->
+                <a href="https://www.linkedin.com/in/eff-kay/" disp-title="LinkedIn"><i
+                    class="lab la-fw la-linkedin"></i></a>
+
+                <!-- github -->
+                <a href="https://github.com/eff-kay" disp-title="GitHub"><i
+                    class="lab la-fw la-github"></i></a>
+
+                <!-- google scholar -->
+                <a href="https://scholar.google.com/citations?user=mI2i5S4AAAAJ&hl=en"
+                    disp-title="Google Scholar"><i class="las la-fw la-graduation-cap"></i></i></a>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+            <a href="index.html" class="nav-tab">Home</a>
+            <a href="blog.html" class="nav-tab">Blog</a>
+            <a href="cool-things.html" class="nav-tab">Cool Things</a>
+            <a href="books.html" class="nav-tab">Books</a>
+            <a href="talks.html" class="nav-tab active" aria-current="page">Talks</a>
+        </nav>
+  <section class="talk-intro">
+    <h1>Talks</h1>
+    <p>Technical talks, visual explanations, and the notes behind them.</p>
+  </section>
+  <article class="talk-entry">
+    <div class="talk-meta">MCP · WALKTHROUGH · 49 SLIDES · WORKING DRAFT</div>
+    <h2>One MCP server, from demo to distribution</h2>
+    <p>Follow Atlas Docs, a hypothetical product, from one hard-coded local tool to a hosted service with private access, safe publishing, observability, durable jobs, and distribution in ChatGPT and Claude.</p>
+    <p>Each new capability solves a problem encountered by the same developer. A persistent progression ribbon connects the architecture as it grows.</p>
+    <div class="talk-links">
+      <a class="open" href="talks/mcp/">Open the slides →</a>
+      <a href="talks/mcp/atlas-notes.md">Speaker notes</a>
+      <a href="talks/mcp/index.html" download="atlas-mcp-talk.html">Download HTML</a>
+    </div>
+    <a class="talk-preview" href="talks/mcp/" aria-label="Open the Atlas Docs slide deck"><img src="talks/mcp/atlas-preview.jpg" alt="Preview of the Atlas Docs walkthrough: local server, retrieval, access, publishing, jobs, and distribution" width="1440" height="1080" loading="lazy"></a>
+  </article>
+  <article class="talk-entry">
+    <div class="talk-meta">MCP · VISUAL FIELD GUIDE · 68 SLIDES · WORKING DRAFT</div>
+    <h2>Your MCP server works. Now ship it.</h2>
+    <p>The broader technical guide to tool contracts, authorization, governance, observability, async execution, and ecosystem submission. This earlier version is preserved alongside the walkthrough.</p>
+    <div class="talk-links">
+      <a class="open" href="talks/mcp/field-guide.html">Open the field guide →</a>
+      <a href="talks/mcp/field-guide-notes.md">Speaker notes</a>
+      <a href="talks/mcp/field-guide.html" download="mcp-field-guide.html">Download HTML</a>
+    </div>
+    <a class="talk-preview" href="talks/mcp/field-guide.html" aria-label="Open the MCP visual field guide"><img src="talks/mcp/field-guide-preview.jpg" alt="Preview of MCP architecture diagrams, policy boundaries, failure handling, and release workflows" width="1440" height="1080" loading="lazy"></a>
+  </article>
+  <p class="help">In either deck: arrow keys navigate, N opens notes, O opens the overview, and F enters fullscreen. Each HTML download includes its visuals and notes and works offline.</p>
+  <footer class="talk-footer">Prepared November 2, 2026. These drafts include hypothetical examples; platform requirements can change. References are linked from the slides and notes.</footer>
+</main></body></html>
