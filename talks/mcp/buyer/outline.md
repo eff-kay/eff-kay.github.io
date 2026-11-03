@@ -7,7 +7,7 @@
 | 3 | 2 | Motivate | One store. Several connected services. |
 | 4 | 3 | Motivate | Three AI apps. Four services. Twelve custom connections. |
 | 5 | 4 | Connect | One common language. Many applications. Many tools. |
-| 6 | 5 | Connect | Discover the store’s tools. Then make a specific request. |
+| 6 | 5 | Connect | MCP carries more than tools. |
 | 7 | 6 | Connect | The store exposes the tools. The host coordinates the requests. |
 | 8 | 7 | Shop | Find the item. Resolve the address. Quote delivery. |
 | 9 | 8 | Shop | “I’ll take it.” Review, confirm, place the order. |
@@ -18,6 +18,7 @@
 | 14 | 13 | Conclude | A working server is useful. Make it easy to discover. |
 | 15 | 14 | Conclude | What blocks submission or gets rejected in review. |
 | 16 | 15 | Conclude | Submit a complete experience. Keep the promise after launch. |
-| 17 | — | PACKAGE CONTENTS | What goes in the package? |
-| 18 | — | ECOSYSTEM MAP | One store. A wider ecosystem. |
-| 19 | — | Q&A | What should your store let an assistant do? |
+| 17 | — | STORE TOOL MENU | Discover the store’s tools. Then make a specific request. |
+| 18 | — | PACKAGE CONTENTS | What goes in the package? |
+| 19 | — | ECOSYSTEM MAP | One store. A wider ecosystem. |
+| 20 | — | Q&A | What should your store let an assistant do? |

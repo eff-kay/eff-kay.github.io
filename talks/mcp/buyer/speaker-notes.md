@@ -32,11 +32,11 @@ I now want to offer the same shopping journey in three places: ChatGPT, Claude a
 
 That common language is the Model Context Protocol, or MCP. Instead of inventing a new AI-facing interface for every application and every service, I expose capabilities through MCP, and compatible applications know how to discover and call them. The center of this picture represents an agreement, not a central service that all data must pass through. In a real system, an application has an MCP client and connects to one or more MCP servers. A service can publish its own server, or our store can expose a server that coordinates its existing services. That is what our example does. MCP does not replace the catalog API, solve authorization automatically or remove the underlying adapters. It standardizes the connection at the AI boundary. Now let me show what the store actually exposes.
 
-## Slide 6. Discover the store’s tools. Then make a specific request.
+## Slide 6. MCP carries more than tools.
 
 **Minute 5 of 15.**
 
-My application first asks the store’s MCP server what it can do. The menu includes finding products, quoting delivery, placing an order and cancelling an order. Each tool has a name, a purpose and defined inputs. That helps the host present the right capabilities to the model. I keep the read operations separate from the actions that change an order or a payment. Discovering a purchase tool doesn’t authorize a purchase, and seeing a cancel tool doesn’t let me cancel somebody else’s order. The server still enforces those boundaries. I’m exposing clear store operations, not a universal tool that lets the model make arbitrary requests against every backend API.
+Before I use the word tool again, let me unpack it. A tool is a function that the AI application can ask the server to run. It has a name, a description, defined inputs and a result. Search products is a tool even though it only reads information; place order is another tool that changes something. Calling a tool does not mean the model itself runs our backend code: the host sends the request and the server executes it under its authorization rules. MCP also lets a server offer resources: named, readable pieces of context, such as our return policy or backpack size guide. The application decides what to load into the conversation. And prompts are reusable message templates the user can select, such as help me choose a backpack. In this example Maya selects that starting request, the application loads the relevant guide, and the model proposes searching or quoting through tools. These are complementary capabilities, not a mandatory three-step pipeline. A server can offer just tools, and host support for resources and prompts varies. Purchasing still needs the host’s confirmation experience and server-side authorization. The detailed store tool menu is in the supporting slides.
 
 ## Slide 7. The store exposes the tools. The host coordinates the requests.
 
@@ -98,19 +98,25 @@ The gotchas fall into six buckets. First, reviewers can’t connect or sign in: 
 
 My final takeaway is that I’m submitting an experience, not just an MCP endpoint. Before submission, I test the same account and customer journey the reviewer will use, including denied and failed requests. During review, I reproduce each finding, correct the right artifact and check it again: a package change and a hosted-tool change are not always the same release. After approval, I deliberately publish, verify the listing and connection flow, and keep the service healthy. I preserve compatible tools and safe purchase and cancellation outcomes. That brings our talk together: connect the store’s capabilities, make the shopping journey work, and publish it responsibly. The submission checklist is also a useful product-readiness checklist, whether or not I choose a public directory.
 
-## Slide 17. What goes in the package?
+## Slide 17. Discover the store’s tools. Then make a specific request.
+
+**Presenter / supporting notes.**
+
+My application first asks the store’s MCP server what it can do. The menu includes finding products, quoting delivery, placing an order and cancelling an order. Each tool has a name, a purpose and defined inputs. That helps the host present the right capabilities to the model. I keep the read operations separate from the actions that change an order or a payment. Discovering a purchase tool doesn’t authorize a purchase, and seeing a cancel tool doesn’t let me cancel somebody else’s order. The server still enforces those boundaries. I’m exposing clear store operations, not a universal tool that lets the model make arbitrary requests against every backend API.
+
+## Slide 18. What goes in the package?
 
 **Presenter / supporting notes.**
 
 Here’s the concrete folder behind the word plugin. The portable starting point has a manifest, an MCP connection file, optional skills, assets and documentation. I’ve built sample ZIPs for the same store and included native layouts for ChatGPT, Claude, Cursor and Factory. They’re labeled examples because the endpoint and listing URLs are fictional. For a real release I replace those values, implement production authorization, test the actual host and complete review. Claude and Cursor take repository submissions; Muse has its own connector intake. The same ZIP isn’t a universal submission. I also linked Anthropic’s real productivity plugin as a working reference. Keep credentials, databases and local dependencies out of the archive.
 
-## Slide 18. One store. A wider ecosystem.
+## Slide 19. One store. A wider ecosystem.
 
 **Presenter / supporting notes.**
 
 These are places I’d investigate for distributing or connecting the same store, not eighteen identical marketplaces. ChatGPT, Claude, Meta Muse, Cursor and Hermes have documented public review routes. Factory supports Git plugin marketplaces, with official curation separate. The MCP Registry, Smithery, Glama, Docker and Cline provide other discovery paths. Gemini, VS Code, Zed and Continue have their own extension or MCP configuration ecosystems. I’ve included Instinct because it is relevant to this conversation, but I haven’t verified a public MCP submission route at instinct.com. I check each route before promising availability. The companion table records the format and link for every logo; this isn’t a complete census or a claim that all accept ZIPs.
 
-## Slide 19. What should your store let an assistant do?
+## Slide 20. What should your store let an assistant do?
 
 **Presenter / supporting notes.**
 
