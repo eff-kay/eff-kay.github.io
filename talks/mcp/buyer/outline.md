@@ -15,7 +15,7 @@
 | 11 | 10 | Publish | Your store’s assistant works. Let customers find it. |
 | 12 | 11 | Publish | ChatGPT: submit the package. Prove the connected experience. |
 | 13 | 12 | Publish | Claude: choose connector or plugin bundle. |
-| 14 | 13 | Conclude | One store. Three lessons. |
-| 15 | 14 | Conclude | After publication, you still own the service. |
-| 16 | 15 | Conclude | Start with one real question. Ship one useful connection. |
+| 14 | 13 | Conclude | A working server is useful. Make it easy to discover. |
+| 15 | 14 | Conclude | What blocks submission or gets rejected in review. |
+| 16 | 15 | Conclude | Submit a complete experience. Keep the promise after launch. |
 | 17 | — | Q&A | What should your store let an assistant do? |

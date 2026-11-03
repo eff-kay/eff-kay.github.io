@@ -80,23 +80,23 @@ For ChatGPT, I use the Plugins portal with the correct organization permissions 
 
 For Claude, I can submit our remote server as an MCP connector through the directory portal. I test it in Claude and provide the endpoint, authentication, listing details and reviewer access. The tools need accurate titles and the appropriate read or write hints, especially for placing and cancelling orders. The current portal supports paid plans with relevant account permissions. If I also distribute reusable workflow instructions, I can submit a GitHub plugin bundle; our remote server still needs its connector submission. I address the findings and publish after approval. Approval doesn’t transfer from ChatGPT, and I don’t assume every host permits the same commerce experience. I verify the supported flow in each one.
 
-## Slide 14. One store. Three lessons.
+## Slide 14. A working server is useful. Make it easy to discover.
 
 **Minute 13 of 15.**
 
-Let me bring the journey together. First, we exposed our store through a common capability interface while keeping the underlying APIs. Second, we used our catalog, an address service and a delivery provider to answer Maya’s request, then followed her through a confirmed purchase and an eligible cancellation. Third, we made the reason for publishing explicit: shoppers already use ChatGPT and Claude, and we want them to discover and connect our store there. Those are three different responsibilities. MCP is the connection layer. The ecommerce workflow is our product. The directory is a distribution channel. The protocol makes reuse easier, but our implementation still owns permission checks and truthful outcomes.
+Let me close with why I’d submit at all. MCP compatibility lets an application connect, but it doesn’t make our store discoverable. A directory listing gives customers another way to find us where they already ask for help. The connection flow then needs to make account access and our capabilities understandable. Finally, the workflow has to deliver what the listing promises: find the item, complete a permitted order, or cancel an eligible one. I can still use private connections without a public listing. Publication is a distribution choice, not a requirement of the protocol, and it doesn’t guarantee traffic or certify the whole service. The point is to turn a useful connection into an experience new customers can actually adopt.
 
-## Slide 15. After publication, you still own the service.
+## Slide 15. What blocks submission or gets rejected in review.
 
 **Minute 14 of 15.**
 
-After publication, I still operate the store’s MCP server. If the address service fails, delivery estimates stop working, or checkout loses a response, I need to detect that and help the customer recover. For purchases and cancellations, I also need to preserve the actual outcome so retries don’t create duplicate orders or misleading status messages. I want useful observability without unnecessarily collecting addresses or payment data. And I keep published tools compatible while changes roll out. A tool described as a lookup must not quietly start placing an order. Platform review and update checks help, but they don’t replace our release discipline. We own the experience after the customer connects.
+The gotchas fall into six buckets. First, reviewers can’t connect or sign in: I verify the real endpoint and a populated test account. Second, the tools are misleading or incomplete: I separate read and write operations and supply accurate metadata. Third, privacy or API ownership is unclear. Fourth, the tool instructions or actions violate platform policy. Fifth, the listing and evidence don’t let someone reproduce the promised workflow. Sixth, I’ve used the wrong packaging, screenshot rules or checkout route for that host. Some of these block submission automatically; others lead to review rejection. Claude explicitly rejects mixed read/write catch-all tools and unrelated behavioral instructions. OpenAI checks its domain challenge, current scan and required tool annotations. I follow the reported finding, not a guessed workaround. Passing validation is not approval.
 
-## Slide 16. Start with one real question. Ship one useful connection.
+## Slide 16. Submit a complete experience. Keep the promise after launch.
 
 **Minute 15 of 15.**
 
-If I were starting tomorrow, I’d begin with the customer’s request, not with a giant menu of tools. Which system knows our products? Which service resolves the address and route? Which provider can quote delivery? I’d connect those capabilities into one useful answer, then add explicit, well-controlled actions for buying and cancelling when the product needs them. I’d test the whole customer journey before publishing it where customers already work. That’s the approach I wanted to share: keep the APIs that do the work, expose a clear MCP interface, verify the real outcomes, and distribute it deliberately. Start with one journey someone actually needs and make the next capability earn its place.
+My final takeaway is that I’m submitting an experience, not just an MCP endpoint. Before submission, I test the same account and customer journey the reviewer will use, including denied and failed requests. During review, I reproduce each finding, correct the right artifact and check it again: a package change and a hosted-tool change are not always the same release. After approval, I deliberately publish, verify the listing and connection flow, and keep the service healthy. I preserve compatible tools and safe purchase and cancellation outcomes. That brings our talk together: connect the store’s capabilities, make the shopping journey work, and publish it responsibly. The submission checklist is also a useful product-readiness checklist, whether or not I choose a public directory.
 
 ## Slide 17. What should your store let an assistant do?
 
