@@ -1,0 +1,47 @@
+# From APIs to MCP to distribution — combined preview
+
+**32 slides**, combining the latest API-first experiment with the remaining version-1 material. This expanded review draft does not assert a 15-minute runtime. Both source decks remain separate.
+
+Local: http://127.0.0.1:8766/combined-preview/MCP-API-to-marketplace.html
+
+Public: https://eff-kay.github.io/talks/mcp/combined/
+
+## Sequence
+
+| Slides | Section | What happens |
+|---|---|---|
+| 1 | Introduction | Faizan / Docsalot |
+| 2–7 | Explain capabilities | Maya’s task, APIs, function descriptions and execution |
+| 8–13 | Extend and change | Identity, confirmation, cancellation, new functionality and model/host changes |
+| 14–18 | Derive the protocol | Discovery, calls, host/client/server, resources/prompts, compact results |
+| 19–23 | Use the store | Version-1 tool menu and architecture, then search/quote, purchase and cancellation |
+| 24–28 | Distribute | Distribution motivation, ChatGPT, Claude, packages and ecosystem logos |
+| 29–31 | Launch and learn | Why distribute, review gotchas, before/during/after checklist |
+| 32 | Questions | Apply the model to another store |
+
+The imported slides are version-1 slides 7–20. Its supporting tool menu is moved before execution, and packages/ecosystem examples sit beside distribution. The opening and transition notes are adapted for the combined narrative. `source-map.json` records the original source of every slide and hashes the source decks. The six-section bottom ribbon counts content steps rather than minutes.
+
+## Review controls
+
+- Arrow keys navigate; Home/End jump to the first/last slide.
+- **N** opens first-person speaking notes.
+- **O** opens the 32-slide overview.
+- **F** enters fullscreen; Escape dismisses panels.
+- The large JSON response on slide 18 can be scrolled.
+
+`MCP-API-to-marketplace.html` and `index.html` are identical, self-contained copies. Fonts, logo, portrait, diagrams, ecosystem marks and notes are embedded, with font/icon licenses. Plus Jakarta Sans is used for the brand/body; JetBrains Mono is used for code.
+
+Edit `content.json` / `spoken-notes.json`, then run `python3 build.py`. `outline.md` and `speaker-notes.md` are generated alongside the HTML.
+
+## Companions
+
+- [Submission checklist](submission-playbook.md)
+- [Ecosystem routes](ecosystem-routes.md)
+- [Package downloads and profile guide](https://eff-kay.github.io/talks/mcp/buyer/packages/)
+- [Run the store inside Codex](https://github.com/eff-kay/atlas-mcp-python-tutorials/tree/main/store/codex-demo)
+- [API-first source notes](research-api-first.md)
+- [Version-1 source notes](research-version-1.md)
+- [Original 20-slide API experiment](https://eff-kay.github.io/talks/mcp/api-first/)
+- [Frozen final version 1](https://eff-kay.github.io/talks/mcp/final-version-1/)
+
+All store data, transactions and example package endpoints are fictional. Marketplace material is reused from version 1’s sourced research; this preview does not perform or claim submission/approval. Instinct’s public route remains unverified, as indicated on the ecosystem slide.

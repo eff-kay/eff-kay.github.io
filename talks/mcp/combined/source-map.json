@@ -1,0 +1,209 @@
+{
+  "description": "Combined review preview; source decks are preserved. Imported slides reordered only for continuity; transition and introduction notes adapted.",
+  "source_hashes": {
+    "first-principles-experiment": {
+      "content.json": "5443b9ab4b29c4941d7aea27b7281d531deb95e0a509c13d7504e219cdce7987",
+      "spoken-notes.json": "692e759cb68253f0dd046f463d886d53cb01ad0fdfe00b17299bf1cd30dcfb3a",
+      "index.html": "d98367def5664789dda8aa44b21cd3b676c5f4f74663f31b26eca88b2be870fd"
+    },
+    "final-version-1": {
+      "content.json": "34836f708bf6499e5275eeaee5a365e55bbbe3806b8b91be718ab3b610850bde",
+      "spoken-notes.json": "17900d1601570b8df1d32e743c50e24af2ee6bcf923872b6d2567839a2e464d0",
+      "index.html": "dbb194cf5cd40e780b20400fee4c5ddd631d67da62e55c5669f9b9c19947cffe"
+    }
+  },
+  "slides": [
+    {
+      "slide": 1,
+      "title": "Faizan Khan",
+      "edition": "first-principles-experiment",
+      "original_slide": 1
+    },
+    {
+      "slide": 2,
+      "title": "Maya wants her AI to do the shopping.",
+      "edition": "first-principles-experiment",
+      "original_slide": 2
+    },
+    {
+      "slide": 3,
+      "title": "Each service knows one part of Maya\u2019s request.",
+      "edition": "first-principles-experiment",
+      "original_slide": 3
+    },
+    {
+      "slide": 4,
+      "title": "With a fixed application, we can write the flow ourselves.",
+      "edition": "first-principles-experiment",
+      "original_slide": 4
+    },
+    {
+      "slide": 5,
+      "title": "Turn Maya\u2019s request into a real API call.",
+      "edition": "first-principles-experiment",
+      "original_slide": 5
+    },
+    {
+      "slide": 6,
+      "title": "Teach the AI what each function is for.",
+      "edition": "first-principles-experiment",
+      "original_slide": 6
+    },
+    {
+      "slide": 7,
+      "title": "The model proposes. Our adapter does the work.",
+      "edition": "first-principles-experiment",
+      "original_slide": 7
+    },
+    {
+      "slide": 8,
+      "title": "Maya\u2019s identity cannot be a prompt parameter.",
+      "edition": "first-principles-experiment",
+      "original_slide": 8
+    },
+    {
+      "slide": 9,
+      "title": "A quote is information. A purchase is a commitment.",
+      "edition": "first-principles-experiment",
+      "original_slide": 9
+    },
+    {
+      "slide": 10,
+      "title": "Then Maya says: \u201cActually, cancel it.\u201d",
+      "edition": "first-principles-experiment",
+      "original_slide": 10
+    },
+    {
+      "slide": 11,
+      "title": "Tomorrow Maya asks: \u201cWhere is my parcel now?\u201d",
+      "edition": "first-principles-experiment",
+      "original_slide": 11
+    },
+    {
+      "slide": 12,
+      "title": "What if Maya changes her model\u2014or her AI app?",
+      "edition": "first-principles-experiment",
+      "original_slide": 12
+    },
+    {
+      "slide": 13,
+      "title": "These are the three things we want to make reusable.",
+      "edition": "first-principles-experiment",
+      "original_slide": 13
+    },
+    {
+      "slide": 14,
+      "title": "Let the server describe its current capabilities.",
+      "edition": "first-principles-experiment",
+      "original_slide": 14
+    },
+    {
+      "slide": 15,
+      "title": "Call a function through the shared interface.",
+      "edition": "first-principles-experiment",
+      "original_slide": 15
+    },
+    {
+      "slide": 16,
+      "title": "That reusable boundary is the MCP server.",
+      "edition": "first-principles-experiment",
+      "original_slide": 16
+    },
+    {
+      "slide": 17,
+      "title": "The same agreement can carry context and starting points.",
+      "edition": "first-principles-experiment",
+      "original_slide": 17
+    },
+    {
+      "slide": 18,
+      "title": "A lot of JSON. Only a few useful facts.",
+      "edition": "first-principles-experiment",
+      "original_slide": 18
+    },
+    {
+      "slide": 19,
+      "title": "Discover the store\u2019s tools. Then make a specific request.",
+      "edition": "final-version-1",
+      "original_slide": 17
+    },
+    {
+      "slide": 20,
+      "title": "The store exposes the tools. The host coordinates the requests.",
+      "edition": "final-version-1",
+      "original_slide": 7
+    },
+    {
+      "slide": 21,
+      "title": "Find the item. Resolve the address. Quote delivery.",
+      "edition": "final-version-1",
+      "original_slide": 8
+    },
+    {
+      "slide": 22,
+      "title": "\u201cI\u2019ll take it.\u201d Review, confirm, place the order.",
+      "edition": "final-version-1",
+      "original_slide": 9
+    },
+    {
+      "slide": 23,
+      "title": "\u201cActually, cancel my order.\u201d Check the state before acting.",
+      "edition": "final-version-1",
+      "original_slide": 10
+    },
+    {
+      "slide": 24,
+      "title": "Your store\u2019s assistant works. Let customers find it.",
+      "edition": "final-version-1",
+      "original_slide": 11
+    },
+    {
+      "slide": 25,
+      "title": "ChatGPT: submit the package. Prove the connected experience.",
+      "edition": "final-version-1",
+      "original_slide": 12
+    },
+    {
+      "slide": 26,
+      "title": "Claude: choose connector or plugin bundle.",
+      "edition": "final-version-1",
+      "original_slide": 13
+    },
+    {
+      "slide": 27,
+      "title": "What goes in the package?",
+      "edition": "final-version-1",
+      "original_slide": 18
+    },
+    {
+      "slide": 28,
+      "title": "One store. A wider ecosystem.",
+      "edition": "final-version-1",
+      "original_slide": 19
+    },
+    {
+      "slide": 29,
+      "title": "A working server is useful. Make it easy to discover.",
+      "edition": "final-version-1",
+      "original_slide": 14
+    },
+    {
+      "slide": 30,
+      "title": "What blocks submission or gets rejected in review.",
+      "edition": "final-version-1",
+      "original_slide": 15
+    },
+    {
+      "slide": 31,
+      "title": "Submit a complete experience. Keep the promise after launch.",
+      "edition": "final-version-1",
+      "original_slide": 16
+    },
+    {
+      "slide": 32,
+      "title": "What should your store let an assistant do?",
+      "edition": "final-version-1",
+      "original_slide": 20
+    }
+  ]
+}

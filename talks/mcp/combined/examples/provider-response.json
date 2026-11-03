@@ -1,0 +1,38 @@
+{
+  "quote_id": "Q-42",
+  "item_cents": 7900,
+  "delivery": {
+    "shipping_cents": 1200,
+    "currency": "USD",
+    "eta": "Friday (estimate)"
+  },
+  "expires_in_seconds": 120,
+  "tax_included": true,
+  "route": {
+    "route_id": "route-demo-204",
+    "distance_km": 12,
+    "destination_zone": "demo-zone",
+    "warehouse": "demo-warehouse-01",
+    "provider_version": "fixture-3"
+  },
+  "diagnostics": {
+    "trace_id": "req-8fd2-example",
+    "attempt": 1,
+    "service_flags": [
+      "STANDARD",
+      "ROUTE_VERIFIED"
+    ],
+    "timings_ms": {
+      "address": 42,
+      "delivery": 61
+    },
+    "cache": {
+      "region": "demo-zone",
+      "hit": false
+    },
+    "internal_tags": [
+      "fixture",
+      "workshop"
+    ]
+  }
+}
