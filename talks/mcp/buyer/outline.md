@@ -18,4 +18,6 @@
 | 14 | 13 | Conclude | A working server is useful. Make it easy to discover. |
 | 15 | 14 | Conclude | What blocks submission or gets rejected in review. |
 | 16 | 15 | Conclude | Submit a complete experience. Keep the promise after launch. |
-| 17 | — | Q&A | What should your store let an assistant do? |
+| 17 | — | PACKAGE CONTENTS | What goes in the package? |
+| 18 | — | ECOSYSTEM MAP | One store. A wider ecosystem. |
+| 19 | — | Q&A | What should your store let an assistant do? |

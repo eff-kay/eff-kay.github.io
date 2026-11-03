@@ -1,12 +1,12 @@
 # MCP from first principles — 15-minute speaking draft
 
-17 slides: biography + 15 one-minute content slides + Q&A. Notes are a pacing draft, not a guarantee of delivery speed.
+19 slides: biography + 15 one-minute content slides + two supporting slides + Q&A. Notes are a pacing draft, not a guarantee of delivery speed.
 
 ## Slide 1. Faizan Khan
 
-**Outside the 15-minute plan.**
+**Presenter / supporting notes.**
 
-I’m Faizan, and at Docsalot we create and host MCP servers. We’ve built read-only access to more than 300 documentation sites. That’s the experience behind my interest in this topic. But today I want to start with something familiar: buying a backpack. I’ll use that one question to explain why MCP exists, how a request works, and how we can publish an integration in ChatGPT and Claude. The main talk is fifteen minutes; this introduction and our questions sit outside that.
+I’m Faizan, and at Docsalot we create and host MCP servers. We’ve built read-only access to more than 300 documentation sites. That’s the experience behind my interest in this topic. But today I want to start with something familiar: buying a backpack. I’ll use that one question to explain why MCP exists, how a request works, and how we can publish an integration in ChatGPT and Claude. The main walkthrough is fifteen minutes, and I have working Python examples we can explore afterward.
 
 ## Slide 2. Give your AI a way to reach the work.
 
@@ -98,8 +98,20 @@ The gotchas fall into six buckets. First, reviewers can’t connect or sign in: 
 
 My final takeaway is that I’m submitting an experience, not just an MCP endpoint. Before submission, I test the same account and customer journey the reviewer will use, including denied and failed requests. During review, I reproduce each finding, correct the right artifact and check it again: a package change and a hosted-tool change are not always the same release. After approval, I deliberately publish, verify the listing and connection flow, and keep the service healthy. I preserve compatible tools and safe purchase and cancellation outcomes. That brings our talk together: connect the store’s capabilities, make the shopping journey work, and publish it responsibly. The submission checklist is also a useful product-readiness checklist, whether or not I choose a public directory.
 
-## Slide 17. What should your store let an assistant do?
+## Slide 17. What goes in the package?
 
-**Outside the 15-minute plan.**
+**Presenter / supporting notes.**
 
-I’m happy to take questions. If you have an example, let’s start with the customer’s request, the services needed to fulfil it, and the actions the store is willing to expose. We can trace it through the same picture: host, store MCP server and underlying systems. We can also talk about hosting, permissions or the publication paths. This discussion sits outside the fifteen-minute content plan.
+Here’s the concrete folder behind the word plugin. The portable starting point has a manifest, an MCP connection file, optional skills, assets and documentation. I’ve built sample ZIPs for the same store and included native layouts for ChatGPT, Claude, Cursor and Factory. They’re labeled examples because the endpoint and listing URLs are fictional. For a real release I replace those values, implement production authorization, test the actual host and complete review. Claude and Cursor take repository submissions; Muse has its own connector intake. The same ZIP isn’t a universal submission. I also linked Anthropic’s real productivity plugin as a working reference. Keep credentials, databases and local dependencies out of the archive.
+
+## Slide 18. One store. A wider ecosystem.
+
+**Presenter / supporting notes.**
+
+These are places I’d investigate for distributing or connecting the same store, not eighteen identical marketplaces. ChatGPT, Claude, Meta Muse, Cursor and Hermes have documented public review routes. Factory supports Git plugin marketplaces, with official curation separate. The MCP Registry, Smithery, Glama, Docker and Cline provide other discovery paths. Gemini, VS Code, Zed and Continue have their own extension or MCP configuration ecosystems. I’ve included Instinct because it is relevant to this conversation, but I haven’t verified a public MCP submission route at instinct.com. I check each route before promising availability. The companion table records the format and link for every logo; this isn’t a complete census or a claim that all accept ZIPs.
+
+## Slide 19. What should your store let an assistant do?
+
+**Presenter / supporting notes.**
+
+I’m happy to take questions. If you have an example, let’s start with the customer’s request, the services needed to fulfil it, and the actions the store is willing to expose. We can trace it through the same picture: host, store MCP server and underlying systems. We can also talk about hosting, permissions or the publication paths. 
