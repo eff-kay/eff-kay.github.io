@@ -19,6 +19,6 @@
 | 15 | Extract the protocol | Call a function through the shared interface. |
 | 16 | Extract the protocol | That reusable boundary is the MCP server. |
 | 17 | Extract the protocol | The same agreement can carry context and starting points. |
-| 18 | Extract the protocol | Replay Maya’s purchase. Only the connection has changed. |
+| 18 | Extract the protocol | A lot of JSON. Only a few useful facts. |
 | 19 | Extract the protocol | We did not replace the APIs. We extracted a shared interface. |
 | 20 | RECAP · QUESTIONS | MCP gives AI apps one way to use our store. |

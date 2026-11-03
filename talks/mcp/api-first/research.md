@@ -35,3 +35,7 @@ The earlier edition reviewed the full auto-generated transcript and recorded the
 ## Capability-focused revision
 
 Rechecked the official [server concepts](https://modelcontextprotocol.io/docs/learn/server-concepts) and [architecture](https://modelcontextprotocol.io/docs/learn/architecture) pages for descriptions/schemas, discovery and host/model boundaries. The added tracking example is a proposed extension. Catalog refresh is host-dependent; a model swap within one host is explicitly different from a host/provider change.
+
+## Focused-output visual revision
+
+Revisited the saved video frame `02-focused-response.png` (4:25) for its relevant-result emphasis and highlighted facts. The deck uses original code panels and an actual scrollable 38-line illustrative JSON response, not a copied frame. Compact output is adapter implementation behavior; no automatic JSON summarization or measured model-quality/token-saving claim is attributed to MCP.
