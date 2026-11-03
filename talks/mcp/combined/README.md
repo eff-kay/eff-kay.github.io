@@ -29,7 +29,7 @@ The imported slides are version-1 slides 7–20. Its supporting tool menu is mov
 - **F** enters fullscreen; Escape dismisses panels.
 - The large JSON response on slide 18 can be scrolled.
 
-`MCP-API-to-marketplace.html` and `index.html` are identical, self-contained copies. Fonts, logo, portrait, diagrams, ecosystem marks and notes are embedded, with font/icon licenses. Plus Jakarta Sans is used for the brand/body; JetBrains Mono is used for code.
+`MCP-API-to-marketplace.html` and `index.html` are identical, self-contained copies. Fonts, logo, portrait, diagrams, ecosystem marks and notes are embedded, with font/icon licenses. Plus Jakarta Sans matches the selected Docsalot wordmark in the branding archive. Headings use a lighter 600 weight and looser spacing on a pure-white canvas; JetBrains Mono is used for code. `theme.css` holds the white-background and heading overrides and is embedded during the build.
 
 Edit `content.json` / `spoken-notes.json`, then run `python3 build.py`. `outline.md` and `speaker-notes.md` are generated alongside the HTML.
 
