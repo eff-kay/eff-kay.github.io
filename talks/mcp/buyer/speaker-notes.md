@@ -12,94 +12,94 @@ I’m Faizan, and at Docsalot we create and host MCP servers. We’ve built read
 
 **Minute 1 of 15.**
 
-I want to start with a question someone might actually ask: find me a blue carry-on backpack under a hundred dollars that arrives by Friday. A model can understand that sentence. But understanding it doesn’t tell us which shops have stock, what delivery costs, or when a parcel is expected to arrive. Those facts live outside the model. So before I think about a protocol, I need a way to reach the systems that know the answer. I’m going to use fictional shops and sample prices, so we can follow the whole journey without getting distracted by a particular retailer. Keep those three constraints in mind: the product, the total budget, and the deadline.
+I want to start with a question someone might actually ask our ecommerce store: find me a blue carry-on backpack under a hundred dollars that arrives by Friday. A model can understand that sentence. But it doesn’t know our stock, where the shopper needs it delivered, or what shipping will cost. Those facts live in our catalog and connected services. So before I think about a protocol, I need a way to reach the systems that know the answer. We’ll use a fictional store and sample values, then follow Maya when she buys the backpack and later asks to cancel. Keep the product, the budget and the delivery deadline in mind.
 
-## Slide 3. One answer depends on three different providers.
+## Slide 3. One store. Several connected services.
 
 **Minute 2 of 15.**
 
-Let’s say TrailShop and CityBags both sell suitable backpacks. They are separate businesses, with separate catalogs and APIs. ParcelQuote is a third provider that gives us delivery estimates. Neither shop’s product list, on its own, answers Maya’s full question. I need to search both catalogs, carry the product and shipping details into the delivery lookup, and combine the results. If a provider doesn’t return enough information, I need to say what’s missing. The important point is that the user asked one question, but the application needs several capabilities from several providers. That’s why I want to explain MCP through a buyer assistant rather than through one isolated function.
+This is our ecommerce store exposing its own capabilities. Our catalog knows the products and prices. An independent address service, GeoRoute, resolves the destination and calculates a route distance from our warehouse. ParcelQuote uses the relevant route and parcel information to estimate shipping. Our order system handles the purchase and cancellation. These services have different jobs, so I need to coordinate them to answer one shopper. I’m assuming Maya supplies a destination or authorizes use of her saved address. We’re using fictional providers here, not her real location. The distance alone doesn’t guarantee arrival; the delivery provider still needs to check its service and estimate.
 
-## Slide 4. Now connect every app to every provider.
+## Slide 4. Now repeat those connections for every AI application.
 
 **Minute 3 of 15.**
 
-I can absolutely build this with the providers’ APIs. The mess starts when I repeat the descriptions, input handling, authentication and response handling inside several applications. Shared libraries already help, so I’m not claiming every model change forces a full rewrite. But I’d still like a common way for an AI application to ask what capabilities exist and request them. Imagine adding another assistant, or another shopping provider. I want to reuse the interface instead of rebuilding that part each time. That’s the question that leads us to MCP: wouldn’t it be useful if supporting applications and servers agreed on how to describe and use capabilities?
+I can build all of this with the underlying APIs, and the store probably already uses some of them. The mess is the repeated AI-facing integration: describing operations, handling inputs, interpreting results and connecting the same workflow to different assistants. Shared code can reduce that work, so I’m not saying APIs are broken or that every model needs a complete rewrite. But I don’t want one bespoke tool interface for my store chatbot, another for ChatGPT and another for Claude. Wouldn’t it help if supporting applications agreed on how to discover and request our store’s capabilities? That’s the problem MCP addresses. The backend APIs stay; the capability interface becomes reusable.
 
 ## Slide 5. MCP is a common language. Your APIs stay.
 
 **Minute 4 of 15.**
 
-MCP stands for Model Context Protocol. I think of it as a common language between an AI application and a server exposing useful capabilities. The short version is: MCP is not a replacement for APIs. The shops still have their own APIs. Somebody still implements the adapters that call them. What changes is the interface I offer to supporting AI applications: they can discover the tools and request them through the same protocol. MCP doesn’t create stock, unlock permissions, or make a delivery estimate more certain. It standardizes the capability exchange. In our example, I’m choosing to put the three provider adapters behind one buyer server. That’s our design, not a requirement that every MCP system has one central gateway.
+MCP stands for Model Context Protocol. I think of it as a common language between an AI application and the server exposing our store’s capabilities. MCP is not a replacement for APIs. Our catalog, address, delivery and order APIs still do the underlying work. We still implement those adapters and the business rules. What changes is the interface we offer to supporting AI applications: they can discover tools and request them through the same protocol. MCP doesn’t grant purchasing permission or calculate shipping by itself. In this example, the ecommerce store owns the MCP server. It offers useful shopping operations rather than making each application assemble raw calls to all our services.
 
-## Slide 6. First discover the tools. Then make a specific request.
+## Slide 6. Discover the store’s tools. Then make a specific request.
 
 **Minute 5 of 15.**
 
-Before I ask the buyer server to do anything, my application can ask which tools it offers. Here it learns about product search and delivery quotes, along with the inputs those tools need. That’s discovery. I don’t have to invent a tool definition inside each application. I still decide which tools the host makes available, and the server still validates every request. Discovering a tool is not permission to use it. I also want a focused menu: search products and quote delivery are easier to understand than a universal tool that accepts any arbitrary API request. The protocol gives us the mechanism; clear tool design makes that mechanism useful.
+My application first asks the store’s MCP server what it can do. The menu includes finding products, quoting delivery, placing an order and cancelling an order. Each tool has a name, a purpose and defined inputs. That helps the host present the right capabilities to the model. I keep the read operations separate from the actions that change an order or a payment. Discovering a purchase tool doesn’t authorize a purchase, and seeing a cancel tool doesn’t let me cancel somebody else’s order. The server still enforces those boundaries. I’m exposing clear store operations, not a universal tool that lets the model make arbitrary requests against every backend API.
 
-## Slide 7. The host coordinates. The server connects to providers.
+## Slide 7. The store exposes the tools. The host coordinates the requests.
 
 **Minute 6 of 15.**
 
-Let me name the parts. The host is the buyer application. Inside it, an MCP client handles the connection to our server. The model can propose a tool call, but the host coordinates that call. The server validates it, applies its policies, and talks to the providers. On the right, we still have three independent systems. The model isn’t opening its own connection to every shop. And the server isn’t the model. This is one possible aggregation design; I could also use separate MCP servers and clients for separate providers. What stays common is the protocol between the application and each server. That’s the first major point: a reusable interface with clear responsibilities.
+Here’s the ownership picture. The host is the application Maya is using. Its model can propose a step, and its MCP client handles the connection to our store’s server. The server validates the request, enforces our policy and talks to the underlying services. On the right are our catalog and orders, plus the external address and delivery providers. The customer-facing tool can coordinate a workflow across them; it doesn’t have to expose every raw provider operation. We can reuse that interface in our own chatbot and in other supporting applications. The server is our ecommerce store’s integration surface. It’s not the model, and the protocol doesn’t replace our business logic.
 
-## Slide 8. Search both shops. Keep the user’s constraints.
+## Slide 8. Find the item. Resolve the address. Quote delivery.
 
 **Minute 7 of 15.**
 
-Now let’s run Maya’s question through that design. The host can propose searches of TrailShop and CityBags for blue carry-on backpacks. In a real product, I’d also need a clear interpretation of carry-on size and the relevant destination. I shouldn’t silently guess missing requirements. For this example, assume we already have those details. Both searches can be independent, so our application can run them together if its implementation supports that. TrailShop returns one candidate and CityBags returns two. We keep the shop, item identifier, price and stock information attached to each result. MCP carries the calls, but our application still owns planning the workflow and deciding what to do with the results.
+Let’s run Maya’s question. Our catalog returns a suitable blue carry-on for 79 dollars. With her authorized destination, GeoRoute resolves the address and gives us a 12-kilometre route from the warehouse. Then ParcelQuote uses the route and parcel details to return a 12-dollar delivery quote with a Friday estimate. That gives us a 91-dollar total in this fixture, including tax and delivery. These are dependent steps: I don’t get a valid delivery quote just by knowing the product name. The application or server coordinates them. Now I can show Maya the item, total and estimate, and explain what the result is based on. Nothing has been ordered yet.
 
-## Slide 9. A cheap product can still be the wrong answer.
+## Slide 9. “I’ll take it.” Review, confirm, place the order.
 
 **Minute 8 of 15.**
 
-Next I ask the independent delivery provider for estimates for the three candidate offers. This is where the earlier results become inputs to another tool. The sample totals include delivery and taxes. TrailShop comes to 91 dollars with a Friday estimate. One CityBags option is 92 dollars but arrives Monday; another is 103 dollars and arrives Thursday. So only the first meets both constraints in our fixture. I want the final answer to explain that comparison and identify the shops behind it. Friday is still an estimate, not a guarantee. If a quote is unavailable or stale, I should say so rather than pretend I found a complete answer.
+Maya follows up: I’ll take it. Now we’re moving from getting information to changing something. I show her the exact product, the current total and the delivery destination, and obtain the required confirmation. The store rechecks price, stock, identity and the checkout conditions when it executes the order. Payment details belong in the appropriate secure checkout flow, not in a model prompt. Once the backend confirms the outcome, we return order 12345. If the connection drops, I need a way to recover that outcome without blindly creating a second order or charge. That reliability is our implementation responsibility. MCP carries the request; it doesn’t make a purchase automatically safe.
 
-## Slide 10. Recommend with evidence. Don’t quietly turn it into a purchase.
+## Slide 10. “Actually, cancel my order.” Check the state before acting.
 
 **Minute 9 of 15.**
 
-My answer to Maya can now be concrete: this blue carry-on from TrailShop is 91 dollars in total and is expected Friday. I can explain why the other options didn’t qualify and show the source offer. But I haven’t bought anything. That’s a deliberate boundary for this first version. Finding and comparing products doesn’t authorize a purchase or expose private customer records. If I later add checkout, it needs separate permissions, clear confirmation and reliable handling of the payment outcome. I also keep provider credentials out of model-visible content and validate results on the server. MCP connects the capabilities; my product still owns those controls and the accuracy of the final experience.
+Then Maya changes her mind: actually, cancel my order. The host can use the conversation to identify order 12345, but the server still verifies that it belongs to her and checks its fulfilment state. In our example it hasn’t been dispatched, so the backend accepts the cancellation and we report the confirmed result. If it has already shipped, we explain the permitted next step instead of pretending cancellation succeeded. Any payment reversal or refund has its own status; I don’t promise it completed just because the order was cancelled. We’ve now exposed a useful store journey through MCP. The next question is where shoppers should be able to use it.
 
-## Slide 11. Make the experience reviewable before submitting.
+## Slide 11. Your store’s assistant works. Let customers find it.
 
 **Minute 10 of 15.**
 
-Before I open a submission portal, I want this experience to work for somebody who isn’t me. I need a stable HTTPS service, correct authentication where needed, clear tool descriptions, and privacy and support information. I test in the target application, not only in my own client. For this buyer assistant I’d test a useful match, no matching offers, a missing delivery quote and a request outside our permissions. I prepare realistic sample data and reviewer access when sign-in is required. A listing is distribution, not hosting, and a private connection isn’t the same as public approval. That’s the foundation for publishing the same underlying service in two different ecosystems.
+This works in our store’s chatbot. But a shopper may already be asking ChatGPT or Claude to help them find something. I don’t want to make them start the whole conversation again on our website. Publishing helps them discover and connect our store’s capabilities inside the applications they already use, including buying and cancelling when those actions are supported and permitted. That’s why distribution matters. The directory doesn’t host our backend or transfer permissions automatically. I still prepare a stable HTTPS service, account access, accurate tool descriptions, privacy and support information, and realistic reviewer cases. I test in each host. Then I follow that platform’s separate submission and review process.
 
 ## Slide 12. ChatGPT: submit the package. Prove the connected experience.
 
 **Minute 11 of 15.**
 
-For ChatGPT, I use the Plugins portal with the right organization permissions and verified publisher identity. I upload the package with its remote MCP configuration, connect the endpoint, verify the domain and complete authentication and scans. I include five positive cases, three negative cases and an accessible walkthrough, with reviewer access when required. For our buyer tool, I show both a useful comparison and honest failure behavior. I resolve the findings, submit for review and publish after approval. Uploading successfully is not approval. I also keep private credentials out of the public package. The listing helps people discover the integration; I continue operating the buyer service behind it.
+For ChatGPT, I use the Plugins portal with the correct organization permissions and verified publisher identity. I upload the package with our remote MCP configuration, connect the endpoint, verify the domain and complete authentication and scans. I include five positive cases, three negative cases and a walkthrough, with reviewer access when required. For this store, I’d demonstrate finding an item, placing one confirmed order, and cancelling an eligible order. I’d also test another customer’s order and an ineligible cancellation. I resolve findings, submit for review and publish after approval. Uploading is not approval, and checkout has separate rules: the usual route completes payment on our own domain; embedded checkout needs the permitted setup. Listing approval doesn’t itself enable Instant Checkout. We continue operating the service behind the listing.
 
 ## Slide 13. Claude: choose connector or plugin bundle.
 
 **Minute 12 of 15.**
 
-For Claude, I can submit this remote server as an MCP connector through the directory portal. I test it in Claude, provide the HTTPS endpoint, authentication, listing information and reviewer access, and make sure the tools have titles and the appropriate hints. The current portal supports paid plans with the relevant account permissions. If I also want to distribute reusable workflow instructions, I can submit a plugin bundle from GitHub; my own remote server still needs its connector submission. I address validation and review findings, then publish after approval. I don’t assume ChatGPT approval transfers here. In either portal, broken access or misleading tools make the experience difficult to review.
+For Claude, I can submit our remote server as an MCP connector through the directory portal. I test it in Claude and provide the endpoint, authentication, listing details and reviewer access. The tools need accurate titles and the appropriate read or write hints, especially for placing and cancelling orders. The current portal supports paid plans with relevant account permissions. If I also distribute reusable workflow instructions, I can submit a GitHub plugin bundle; our remote server still needs its connector submission. I address the findings and publish after approval. Approval doesn’t transfer from ChatGPT, and I don’t assume every host permits the same commerce experience. I verify the supported flow in each one.
 
-## Slide 14. One question. Three lessons.
+## Slide 14. One store. Three lessons.
 
 **Minute 13 of 15.**
 
-Let me bring the three main points back to Maya’s question. First, we connected through a common capability interface instead of making every application learn a different tool protocol. Second, we used that interface to combine two shops and an independent delivery provider into a useful answer, while keeping the evidence and limits visible. Third, we prepared that experience for publication, with separate ChatGPT and Claude submissions. Those are related steps, but they solve different problems. MCP is the connection layer. The buyer assistant is the product. The platform directory is how people discover it. If you can distinguish those three, you can reason about most MCP projects without memorizing all the wire-level messages.
+Let me bring the journey together. First, we exposed our store through a common capability interface while keeping the underlying APIs. Second, we used our catalog, an address service and a delivery provider to answer Maya’s request, then followed her through a confirmed purchase and an eligible cancellation. Third, we made the reason for publishing explicit: shoppers already use ChatGPT and Claude, and we want them to discover and connect our store there. Those are three different responsibilities. MCP is the connection layer. The ecommerce workflow is our product. The directory is a distribution channel. The protocol makes reuse easier, but our implementation still owns permission checks and truthful outcomes.
 
 ## Slide 15. After publication, you still own the service.
 
 **Minute 14 of 15.**
 
-There’s one final responsibility I don’t want publication to hide. I still operate the service. If a shop changes its API, a sign-in flow breaks, or a delivery provider stops responding, I need to know and handle it. I want enough observability to understand failed operations without collecting unnecessary customer data. I also want published tools to remain compatible while updates roll out. A successful search must not suddenly become a purchase because I changed what a tool means. The directories have their own checks for changes, but they don’t replace our monitoring and release discipline. My responsibility is the experience people get after they click Connect, not just the moment the listing goes live.
+After publication, I still operate the store’s MCP server. If the address service fails, delivery estimates stop working, or checkout loses a response, I need to detect that and help the customer recover. For purchases and cancellations, I also need to preserve the actual outcome so retries don’t create duplicate orders or misleading status messages. I want useful observability without unnecessarily collecting addresses or payment data. And I keep published tools compatible while changes roll out. A tool described as a lookup must not quietly start placing an order. Platform review and update checks help, but they don’t replace our release discipline. We own the experience after the customer connects.
 
 ## Slide 16. Start with one real question. Ship one useful connection.
 
 **Minute 15 of 15.**
 
-If I were starting tomorrow, I’d begin with the user’s question, not with a giant list of tools. What result would actually help them? Which providers know the facts? What’s the smallest set of capabilities I can expose to get there? For our buyer, searching two shops and checking delivery was already useful. We didn’t need to add checkout to prove the idea. I’d make that one workflow clear, bounded and testable, and then prepare it for the places our users already work. That’s the approach I wanted to share: understand the need, connect the capabilities, verify the experience, and publish it deliberately. From there, the next capability should follow a real user need.
+If I were starting tomorrow, I’d begin with the customer’s request, not with a giant menu of tools. Which system knows our products? Which service resolves the address and route? Which provider can quote delivery? I’d connect those capabilities into one useful answer, then add explicit, well-controlled actions for buying and cancelling when the product needs them. I’d test the whole customer journey before publishing it where customers already work. That’s the approach I wanted to share: keep the APIs that do the work, expose a clear MCP interface, verify the real outcomes, and distribute it deliberately. Start with one journey someone actually needs and make the next capability earn its place.
 
-## Slide 17. What would your buyer need to connect to?
+## Slide 17. What should your store let an assistant do?
 
 **Outside the 15-minute plan.**
 
-I’m happy to take questions. If you have an example in mind, let’s start with the user’s request, the providers that know the answer, and what the assistant is allowed to do. We can trace it through the same picture: application, MCP server and underlying systems. We can also talk about hosting or the publication paths. This discussion is outside the fifteen-minute content plan.
+I’m happy to take questions. If you have an example, let’s start with the customer’s request, the services needed to fulfil it, and the actions the store is willing to expose. We can trace it through the same picture: host, store MCP server and underlying systems. We can also talk about hosting, permissions or the publication paths. This discussion sits outside the fifteen-minute content plan.
