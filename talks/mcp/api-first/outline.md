@@ -21,4 +21,4 @@
 | 17 | Extract the protocol | The same agreement can carry context and starting points. |
 | 18 | Extract the protocol | Replay Maya’s purchase. Only the connection has changed. |
 | 19 | Extract the protocol | We did not replace the APIs. We extracted a shared interface. |
-| 20 | QUESTIONS | Could you build the bridge now? |
+| 20 | RECAP · QUESTIONS | MCP gives AI apps one way to use our store. |
