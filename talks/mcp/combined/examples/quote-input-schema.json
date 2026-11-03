@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "properties": {
+    "product_id": {
+      "type": "string"
+    },
+    "address_ref": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "product_id",
+    "address_ref"
+  ],
+  "additionalProperties": false
+}

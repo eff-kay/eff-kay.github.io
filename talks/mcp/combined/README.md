@@ -19,7 +19,7 @@ Public: https://eff-kay.github.io/talks/mcp/combined/
 | 29–31 | Launch and learn | Why distribute, review gotchas, before/during/after checklist |
 | 32 | Questions | Apply the model to another store |
 
-The imported slides are version-1 slides 7–20. Its supporting tool menu is moved before execution, and packages/ecosystem examples sit beside distribution. The opening and transition notes are adapted for the combined narrative. `source-map.json` records the original source of every slide and hashes the source decks. The six-section bottom ribbon counts content steps rather than minutes.
+The imported slides are version-1 slides 7–20. Its supporting tool menu is moved before execution, and packages/ecosystem examples sit beside distribution. The opening, provider-API diagrams and transition notes are adapted for the combined narrative. `source-map.json` records the original source of every slide and hashes the source decks. The six-section bottom ribbon counts content steps rather than minutes.
 
 ## Review controls
 
@@ -45,3 +45,15 @@ Edit `content.json` / `spoken-notes.json`, then run `python3 build.py`. `outline
 - [Frozen final version 1](https://eff-kay.github.io/talks/mcp/final-version-1/)
 
 All store data, transactions and example package endpoints are fictional. Marketplace material is reused from version 1’s sourced research; this preview does not perform or claim submission/approval. Instinct’s public route remains unverified, as indicated on the ecosystem slide.
+
+## Browser chatbot and provider switch
+
+The current example is **our own browser chatbot**: browser → our backend → OpenAI API, with the backend executing store functions. Slide 12 switches that same backend to Claude’s API. Later, slide 24 starts a separate distribution phase in the ChatGPT/Claude consumer products. The earlier Custom GPT/Actions framing is superseded for this combined preview.
+
+- Slide 2: browser/backend/model-API boundaries.
+- Slides 6–7: OpenAI function definitions and the backend tool loop.
+- Slide 12: OpenAI Responses vs Claude Messages, including tool-schema wrappers and result envelopes.
+- Slides 16/20: model-provider adapter and MCP client inside our backend.
+- [Primary references](research-browser-api.md) and [backend call templates](examples/provider-api-excerpts.py).
+
+Model IDs, configured clients and provider-specific conversation objects are supplied by the application. The snippets were syntax checked, not executed against paid model APIs. A provider swap still needs adaptation/evaluation; MCP standardizes the store-facing connection.

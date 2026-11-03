@@ -1,5 +1,5 @@
 {
-  "description": "Combined review preview; source decks are preserved. Imported slides reordered only for continuity; transition and introduction notes adapted.",
+  "description": "Combined review preview with browser/OpenAI-to-Claude API framing revisions. Source decks are preserved; per-slide origins record the base content before adaptation.",
   "source_hashes": {
     "first-principles-experiment": {
       "content.json": "5443b9ab4b29c4941d7aea27b7281d531deb95e0a509c13d7504e219cdce7987",
@@ -21,7 +21,7 @@
     },
     {
       "slide": 2,
-      "title": "Maya wants her AI to do the shopping.",
+      "title": "Maya uses our chatbot in her browser.",
       "edition": "first-principles-experiment",
       "original_slide": 2
     },
@@ -51,7 +51,7 @@
     },
     {
       "slide": 7,
-      "title": "The model proposes. Our adapter does the work.",
+      "title": "Our backend runs the conversation-and-tool loop.",
       "edition": "first-principles-experiment",
       "original_slide": 7
     },
@@ -81,7 +81,7 @@
     },
     {
       "slide": 12,
-      "title": "What if Maya changes her model\u2014or her AI app?",
+      "title": "Now switch our chatbot from OpenAI\u2019s API to Claude\u2019s.",
       "edition": "first-principles-experiment",
       "original_slide": 12
     },
@@ -105,7 +105,7 @@
     },
     {
       "slide": 16,
-      "title": "That reusable boundary is the MCP server.",
+      "title": "Our chatbot keeps one store-facing interface.",
       "edition": "first-principles-experiment",
       "original_slide": 16
     },
@@ -205,5 +205,24 @@
       "edition": "final-version-1",
       "original_slide": 20
     }
-  ]
+  ],
+  "adaptations": {
+    "browser_api_framing": {
+      "slides": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        11,
+        12,
+        13,
+        16,
+        20,
+        24
+      ],
+      "description": "Clarify our browser chatbot/backend using OpenAI API then Claude API. Consumer-product distribution begins separately at slide 24. New provider snippets and role diagrams; source decks stay frozen."
+    }
+  }
 }

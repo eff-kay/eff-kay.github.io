@@ -1,3 +1,5 @@
+> Current combined-preview framing uses our own browser chatbot and model APIs. See [the current primary references](research-browser-api.md). The source-edition research below records the earlier teaching draft.
+
 # Research and technical scope
 
 Reviewed November 3, 2026. These links support the teaching distinctions, not approval of a real ecommerce integration.
