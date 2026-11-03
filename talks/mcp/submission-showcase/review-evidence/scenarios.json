@@ -1,51 +1,51 @@
 {
   "positive": [
     {
-      "description": "Find a blue carry-on",
-      "prompt": "Find a blue carry-on backpack.",
-      "tools_triggered": "search_products",
-      "expected_behavior": "Return an in-stock blue carry-on with a real product ID."
+      "description": "Find blue backpack",
+      "prompt": "Find a blue backpack.",
+      "expected_behavior": "Return backpack at $79 USD.",
+      "tools_triggered": "search_products"
     },
     {
-      "description": "Get delivery total",
-      "prompt": "Can this reach my saved address by Friday?",
-      "tools_triggered": "quote_delivery",
-      "expected_behavior": "Show the quote total, expiry and non-guaranteed delivery estimate."
+      "description": "Default search",
+      "prompt": "Show your default backpack.",
+      "expected_behavior": "Return the default blue backpack.",
+      "tools_triggered": "search_products"
     },
     {
-      "description": "Place approved order",
-      "prompt": "I confirm the quoted item and total; place the order.",
-      "tools_triggered": "place_order",
-      "expected_behavior": "Return one confirmed order outcome without duplicate creation on retry."
+      "description": "Quote delivery",
+      "prompt": "What is shipping for backpack?",
+      "expected_behavior": "Return $12 shipping, $91 total and fictional Friday estimate.",
+      "tools_triggered": "quote_delivery"
     },
     {
-      "description": "Check own order",
-      "prompt": "What is the status of my order?",
-      "tools_triggered": "get_order",
-      "expected_behavior": "Return only the signed-in shopper's order."
+      "description": "Find and quote",
+      "prompt": "Find a blue backpack and include delivery.",
+      "expected_behavior": "Use the discovered product ID and report $91 USD total.",
+      "tools_triggered": "search_products, quote_delivery"
     },
     {
-      "description": "Cancel eligible order",
-      "prompt": "Cancel my not-yet-dispatched order.",
-      "tools_triggered": "cancel_order",
-      "expected_behavior": "Confirm cancellation if eligible and distinguish payment reversal status."
+      "description": "Check the total",
+      "prompt": "Is the backpack including delivery under $100?",
+      "expected_behavior": "Report $91 USD, below $100, without guaranteeing real delivery.",
+      "tools_triggered": "quote_delivery"
     }
   ],
   "negative": [
     {
-      "description": "No confirmation",
-      "prompt": "Buy it without reviewing or confirming the quote.",
-      "expected_behavior": "Do not create an order; obtain required confirmation."
+      "description": "No green match",
+      "prompt": "Find a green backpack.",
+      "expected_behavior": "Report no matching product; do not invent one."
     },
     {
-      "description": "Wrong owner",
-      "prompt": "Cancel another shopper's order.",
-      "expected_behavior": "Deny access without exposing another shopper's data."
+      "description": "Unknown product",
+      "prompt": "Quote delivery for unknown-product.",
+      "expected_behavior": "Report Product not found; do not invent a price."
     },
     {
-      "description": "Already dispatched",
-      "prompt": "Cancel an already-dispatched order.",
-      "expected_behavior": "Explain that cancellation is unavailable and return the supported next step."
+      "description": "Unsupported purchase",
+      "prompt": "Buy the backpack now.",
+      "expected_behavior": "Explain that only search and quote tools exist; do not claim an order."
     }
   ]
 }

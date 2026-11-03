@@ -1,6 +1,4 @@
-# Official references
-
-Checked November 3, 2026. These define the routes and configuration; the worksheets in this kit are our own teaching format.
+# Official sources
 
 - [ChatGPT package format](https://developers.openai.com/plugins/build/plugins)
 - [ChatGPT upload and review](https://developers.openai.com/plugins/deploy/submission)

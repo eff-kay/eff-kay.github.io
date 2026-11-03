@@ -1,120 +1,126 @@
 [
   {
-    "name": "Find the blue carry-on",
+    "name": "Find blue backpack",
     "tool": "search_products",
     "arguments": {
       "color": "blue"
     },
-    "expected_error": false,
     "actual": {
       "products": [
         {
-          "id": "blue-carryon",
-          "price_cents": 7900,
-          "currency": "USD"
+          "id": "backpack",
+          "color": "blue",
+          "price_usd": 99
         }
       ]
-    }
+    },
+    "negative": false,
+    "scope": "tool-call"
   },
   {
-    "name": "Quote the delivery",
+    "name": "Default search",
+    "tool": "search_products",
+    "arguments": {},
+    "actual": {
+      "products": [
+        {
+          "id": "backpack",
+          "color": "blue",
+          "price_usd": 99
+        }
+      ]
+    },
+    "negative": false,
+    "scope": "tool-call"
+  },
+  {
+    "name": "Quote delivery",
     "tool": "quote_delivery",
     "arguments": {
-      "product_id": "blue-carryon",
-      "address_ref": "demo-home"
+      "product_id": "backpack"
     },
-    "expected_error": false,
     "actual": {
-      "quote_id": "q_07c2905f9dd04b11bf86b0c66025aef5",
-      "item_cents": 7900,
-      "shipping_cents": 1200,
-      "total_cents": 9100,
-      "currency": "USD",
-      "tax_included": true,
-      "distance_km": 12,
-      "eta": "Friday (fixture estimate)",
-      "expires_at": 1793743675
-    }
+      "shipping_usd": 12,
+      "total_usd": 91,
+      "arrival": "Friday (demo estimate)"
+    },
+    "negative": false,
+    "scope": "tool-call"
   },
   {
-    "name": "Place confirmed order",
-    "tool": "place_order",
+    "name": "Find and quote",
+    "tool": "search_products",
     "arguments": {
-      "quote_id": "q_07c2905f9dd04b11bf86b0c66025aef5",
-      "confirmed": true,
-      "idempotency_key": "review-1"
+      "color": "blue"
     },
-    "expected_error": false,
     "actual": {
-      "order_id": "order_e8e632e50bbd4c1286f6661cafc650a0",
-      "status": "placed",
-      "total_cents": 9100,
-      "payment": "simulated; no charge"
-    }
+      "search": {
+        "products": [
+          {
+            "id": "backpack",
+            "color": "blue",
+            "price_usd": 99
+          }
+        ]
+      },
+      "quote": {
+        "shipping_usd": 12,
+        "total_usd": 91,
+        "arrival": "Friday (demo estimate)"
+      }
+    },
+    "negative": false,
+    "scope": "tool-call"
   },
   {
-    "name": "Read owned order",
-    "tool": "get_order",
+    "name": "Check the total",
+    "tool": "quote_delivery",
     "arguments": {
-      "order_id": "order_e8e632e50bbd4c1286f6661cafc650a0"
+      "product_id": "backpack"
     },
-    "expected_error": false,
     "actual": {
-      "id": "order_e8e632e50bbd4c1286f6661cafc650a0",
-      "customer": "maya",
-      "status": "placed",
-      "total": 9100
-    }
+      "shipping_usd": 12,
+      "total_usd": 91,
+      "arrival": "Friday (demo estimate)"
+    },
+    "negative": false,
+    "scope": "tool-call"
   },
   {
-    "name": "Cancel eligible order",
-    "tool": "cancel_order",
+    "name": "No green match",
+    "tool": "search_products",
     "arguments": {
-      "order_id": "order_e8e632e50bbd4c1286f6661cafc650a0",
-      "confirmed": true
+      "color": "green"
     },
-    "expected_error": false,
     "actual": {
-      "order_id": "order_e8e632e50bbd4c1286f6661cafc650a0",
-      "status": "cancelled",
-      "payment_reversal": "not simulated; not confirmed"
-    }
+      "products": []
+    },
+    "negative": true,
+    "scope": "tool-call"
   },
   {
-    "name": "No checkout confirmation",
-    "tool": "place_order",
+    "name": "Unknown product",
+    "tool": "quote_delivery",
     "arguments": {
-      "quote_id": "q_07c2905f9dd04b11bf86b0c66025aef5",
-      "confirmed": false,
-      "idempotency_key": "denied"
+      "product_id": "unknown-product"
     },
-    "expected_error": true,
-    "actual": [
-      "Error executing tool place_order: CONFIRMATION_REQUIRED: review the quote before ordering"
-    ]
+    "actual": {
+      "error": "Product not found"
+    },
+    "negative": true,
+    "scope": "tool-call"
   },
   {
-    "name": "Another customer's order",
-    "tool": "cancel_order",
-    "arguments": {
-      "order_id": "demo-other",
-      "confirmed": true
+    "name": "Unsupported purchase",
+    "tool": "inventory check",
+    "actual": {
+      "tools": [
+        "search_products",
+        "quote_delivery"
+      ],
+      "purchase_tool_present": false
     },
-    "expected_error": true,
-    "actual": [
-      "Error executing tool cancel_order: No accessible order"
-    ]
-  },
-  {
-    "name": "Already dispatched",
-    "tool": "cancel_order",
-    "arguments": {
-      "order_id": "demo-shipped",
-      "confirmed": true
-    },
-    "expected_error": true,
-    "actual": [
-      "Error executing tool cancel_order: ALREADY_DISPATCHED: cancellation is unavailable; use the store's return process"
-    ]
+    "negative": true,
+    "scope": "inventory"
   }
 ]

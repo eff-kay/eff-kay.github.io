@@ -1,19 +1,9 @@
-# One store. Three submission routes.
+# The same two-function server, three submission routes
 
-Open index.html for a presentation-friendly comparison, or start with DIFFERENCES.md. All store URLs use the reserved .example domain. No server is deployed and no marketplace submission is made.
+Open index.html for the side-by-side viewer. chatgpt-upload/ is the exact ChatGPT ZIP content. claude-plugin-repo/ is the native GitHub plugin folder (including hidden manifests). claude-connector/ is a portal worksheet, not a plugin. review-evidence/ contains actual HTTP fixture outputs and preparation cases. See DIFFERENCES.md, PRESENTING.md and REPLACE-BEFORE-SUBMIT.md.
 
-| Folder/file | What to show |
-|---|---|
-| chatgpt-upload/ | Exact contents of the sample ChatGPT ZIP; manifests are at the ZIP root |
-| claude-plugin-repo/ | Claude plugin folder, including hidden .claude-plugin/ and .mcp.json |
-| claude-connector/ | Portal worksheet for the hosted server; not an import schema |
-| review-evidence/ | Five success cases, three denials, captured fixture outputs and recording outline |
-| DIFFERENCES.md | File, metadata, authentication, evidence and publication comparison |
-| PRESENTING.md | A short first-person walkthrough |
-| REPLACE-BEFORE-SUBMIT.md | Specific placeholders and external steps |
-| validation-report.json | What was checked locally and what remains unchecked |
+Live code: https://github.com/eff-kay/atlas-mcp-python-tutorials/tree/main/store/simple-demo
 
-The individual ChatGPT ZIP is the upload-shaped artifact. The Claude ZIP preserves its GitHub folder for inspection; the portal route is GitHub. The larger showcase ZIP is a presenter kit, not a universal marketplace upload. Enable hidden-file display when browsing the Claude folder.
+Run from that folder: uv run python server.py. Local endpoint: http://127.0.0.1:8770/mcp. For ngrok: ngrok http http://127.0.0.1:8770 --host-header=127.0.0.1:8770, then use the current HTTPS URL with /mcp. The packaged HTTPS .example URL is deliberately a placeholder; it will not connect until replaced.
 
-Code: https://github.com/eff-kay/atlas-mcp-python-tutorials/tree/main/store/codex-demo
-Offline kit: the file viewer embeds its fonts, logo and source examples. Individual ZIPs are included; the complete-kit download button links to the public site.
+Exactly two tools: search_products(color) and quote_delivery(product_id). No orders, cancellation, OAuth, database or external APIs. The packages reference the hosted server; they do not deploy it. The complete kit ZIP is a presenter artifact, not a universal marketplace upload.

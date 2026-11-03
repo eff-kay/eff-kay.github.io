@@ -1,7 +1,7 @@
 {
   "name": "trailshop-store-demo",
-  "version": "0.2.0",
-  "description": "Find products, quote delivery, and manage permitted store orders.",
+  "version": "0.3.0",
+  "description": "Search a demo backpack and quote delivery. No purchases or accounts.",
   "author": {
     "name": "Faizan Khan"
   },

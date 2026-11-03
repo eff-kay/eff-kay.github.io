@@ -1,13 +1,5 @@
-# TrailShop Store Demo
+# TrailShop: two-function demo
 
-**Teaching sample: reserved .example URLs. Replace and test before submission.**
+Teaching sample with reserved .example URLs. This plugin connects to the same simple server used in the live talk. search_products finds a fictional blue backpack priced at $79; quote_delivery returns $12 shipping and a $91 total, with a fictional Friday estimate. Both functions are synchronous and print logs in their server terminal.
 
-This plugin connects a fictional store workflow: search for a blue backpack, prepare delivery pricing, review and confirm an eligible order, retrieve its status, and cancel it when permitted. Its MCP service is hosted separately. The Python workshop simulates all orders and payments; these manifests do not deploy a service or implement OAuth.
-
-Distribution route: ChatGPT upload ZIP. The shared skill describes the shopping sequence; the server remains responsible for customer ownership and order-state checks. Installation does not grant permission to act on another customer's order. Review the actual host's commerce rules before enabling purchases.
-
-## Privacy and support
-
-The planned workflow uses product IDs, a destination reference and the connected shopper's order details. Real data practices, retention, providers, support and privacy/terms pages must be documented by the service owner before launch. The sample URLs are placeholders, not published policies.
-
-The bundled mark belongs to Docsalot and is used for this author's workshop. The MIT license covers example code, not trademark rights.
+The public fixture has no authentication, accounts, orders, checkout or payments. Unknown colors return no matches; unknown product IDs return an error object. The service runs separately from the plugin. Replace the placeholder endpoint, support, privacy, terms and recording URLs before a real submission. The service owner must publish accurate data-handling information. Docsalot branding belongs to its owner; the code license does not grant trademark rights.

@@ -1,3 +1,3 @@
-# Claude remote connector
+# Remote connector worksheet
 
-This folder is a presenter worksheet. It is not a Claude plugin and its JSON is not an official import format. The portal receives the HTTPS URL, listing, OAuth setup, data disclosures and reviewer instructions. For a remote server referenced by a plugin, create its connector submission as well. Default Community screening and exceptions follow the current official guide. This fixture has no live endpoint and has not been submitted.
+Enter the hosted HTTPS /mcp URL, listing and No authentication in the portal. This JSON is our worksheet, not an import format. A referenced remote server also needs a connector submission when distributing a Claude plugin.

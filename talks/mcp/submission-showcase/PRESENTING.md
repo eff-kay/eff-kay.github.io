@@ -1,21 +1,11 @@
-# A three-minute first-person walkthrough
+# First-person submission walkthrough
 
-## 0:00 — One server, different distribution
+“This is the exact example we just ran: search_products and quote_delivery. It finds a $79 blue backpack and returns a $91 total with shipping. There are no orders or user accounts.”
 
-“This is still Maya's store. I haven't rebuilt the store three times. I have the same hosted MCP interface, but each directory asks me to describe and deliver it differently. The .example address makes this an inspectable teaching sample.”
+“For ChatGPT, I show the upload ZIP. plugin.json contains identity, listing and five positive/three negative review cases. mcp.json references the hosted endpoint with auth type none. The actual recording and policy URLs must replace these placeholders.”
 
-## 0:30 — Open the ChatGPT ZIP
+“For Claude, I show .claude-plugin/plugin.json and .mcp.json. The shared skill is identical. I submit this native folder through GitHub. The remote connector route instead asks for the HTTPS endpoint, No authentication and listing details.”
 
-“I'll open plugin.json. Here is the identity, the listing, and the review evidence. Notice the five positive and three negative cases. Release notes are under publication. In mcp.json, I point to the hosted server and declare the OAuth setup. The client ID is public configuration; the secret is entered privately. Uploading this ZIP doesn't deploy the server.”
+“The captured evidence exercises the two tools over HTTP. Empty results and an unknown product are negative scenarios. The no-purchase scenario checks the inventory; I still need to show the actual app refusing an unsupported purchase in my recording.”
 
-## 1:20 — Switch to Claude
-
-“Now look at the hidden .claude-plugin/plugin.json and .mcp.json files. The skill is the same. I submit a GitHub repository and plugin path, rather than this ZIP. That ZIP is just an export for us to inspect. For the hosted server, the connector route asks for the URL, sign-in and listing details.”
-
-## 2:00 — Show the evidence
-
-“These are real outputs from our fictional local fixture: successful search, quote, order, status and cancellation; plus three requests that must not succeed. This proves the lesson ran. It doesn't prove that a marketplace or production OAuth accepted it. I'd rerun the cases in the target app with the review account and record that experience.”
-
-## 2:40 — Show what must change
-
-“I replace the placeholder endpoint, policies and recording, configure real authentication, verify the publisher and permitted commerce flow, and finish the portal's checks. The package is one artifact in submission. A reviewed, live customer experience requires the service and the evidence too.”
+“The .example URL is a teaching placeholder. My working ngrok URL is for the live connection; a stable hosted endpoint and completed review material are needed for a real directory submission.”

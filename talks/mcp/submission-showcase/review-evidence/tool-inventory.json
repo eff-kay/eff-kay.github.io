@@ -1,10 +1,7 @@
 [
   {
-    "name": "search_products",
-    "title": "Search store products",
-    "description": "Return one in-stock blue carry-on fixture, or an honest no-match.",
+    "description": "Find a carry-on backpack by color. Prices are in USD.",
     "inputSchema": {
-      "type": "object",
       "properties": {
         "color": {
           "default": "blue",
@@ -12,124 +9,26 @@
           "type": "string"
         }
       },
+      "type": "object",
       "title": "search_productsArguments"
     },
-    "annotations": {
-      "readOnlyHint": true,
-      "destructiveHint": false,
-      "openWorldHint": false
-    }
+    "name": "search_products"
   },
   {
-    "name": "quote_delivery",
-    "title": "Prepare a checkout quote",
-    "description": "Prepare a customer-bound, two-minute $91 fixture quote; no payment occurs.",
+    "description": "Get the delivery cost and total for the backpack. Does not place an order.",
     "inputSchema": {
-      "type": "object",
       "properties": {
         "product_id": {
           "title": "Product Id",
           "type": "string"
-        },
-        "address_ref": {
-          "title": "Address Ref",
-          "type": "string"
         }
       },
       "required": [
-        "product_id",
-        "address_ref"
+        "product_id"
       ],
+      "type": "object",
       "title": "quote_deliveryArguments"
     },
-    "annotations": {
-      "readOnlyHint": true,
-      "destructiveHint": false,
-      "openWorldHint": false
-    }
-  },
-  {
-    "name": "place_order",
-    "title": "Place a confirmed store order",
-    "description": "Create a simulated order only for this customer's quote and explicit confirmation. No real payment.",
-    "inputSchema": {
-      "type": "object",
-      "properties": {
-        "quote_id": {
-          "title": "Quote Id",
-          "type": "string"
-        },
-        "confirmed": {
-          "title": "Confirmed",
-          "type": "boolean"
-        },
-        "idempotency_key": {
-          "title": "Idempotency Key",
-          "type": "string"
-        }
-      },
-      "required": [
-        "quote_id",
-        "confirmed",
-        "idempotency_key"
-      ],
-      "title": "place_orderArguments"
-    },
-    "annotations": {
-      "readOnlyHint": false,
-      "destructiveHint": true,
-      "openWorldHint": false
-    }
-  },
-  {
-    "name": "get_order",
-    "title": "Read an owned store order",
-    "description": "Read only the authenticated/local-fixture customer's order.",
-    "inputSchema": {
-      "type": "object",
-      "properties": {
-        "order_id": {
-          "title": "Order Id",
-          "type": "string"
-        }
-      },
-      "required": [
-        "order_id"
-      ],
-      "title": "get_orderArguments"
-    },
-    "annotations": {
-      "readOnlyHint": true,
-      "destructiveHint": false,
-      "openWorldHint": false
-    }
-  },
-  {
-    "name": "cancel_order",
-    "title": "Cancel an eligible store order",
-    "description": "Cancel an owned, not-dispatched fixture order. Cancellation is not proof of a refund.",
-    "inputSchema": {
-      "type": "object",
-      "properties": {
-        "order_id": {
-          "title": "Order Id",
-          "type": "string"
-        },
-        "confirmed": {
-          "title": "Confirmed",
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "order_id",
-        "confirmed"
-      ],
-      "title": "cancel_orderArguments"
-    },
-    "annotations": {
-      "readOnlyHint": false,
-      "destructiveHint": true,
-      "openWorldHint": false
-    }
+    "name": "quote_delivery"
   }
 ]

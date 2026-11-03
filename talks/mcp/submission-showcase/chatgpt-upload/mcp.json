@@ -7,18 +7,7 @@
       "extensions": {
         "com.openai": {
           "auth": {
-            "type": "oauth",
-            "baseScopes": [
-              "store:read",
-              "store:write"
-            ],
-            "client": {
-              "mode": "provided",
-              "clientId": "trailshop-demo-client",
-              "tokenEndpointAuthMethod": "client_secret_basic"
-            },
-            "authorizationUrl": "https://store.example/oauth/authorize",
-            "tokenUrl": "https://store.example/oauth/token"
+            "type": "none"
           }
         }
       }

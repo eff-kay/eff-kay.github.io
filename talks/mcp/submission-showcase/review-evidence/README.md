@@ -1,5 +1,3 @@
-# What this evidence proves
+# Evidence scope
 
-The results were captured from store/06-review-evidence/demo.py using an isolated local SQLite fixture over stdio. Five success scenarios and three expected denials completed; origin.json records the capture and source hash. No real account, payment or production OAuth was exercised. This is not evidence of a ChatGPT or Claude conversation, an uploaded recording, portal scan, marketplace compatibility or approval.
-
-The tool inventory belongs to that specific lesson snapshot. Re-export the deployed server's inventory and rerun every case in the target app using the reviewer account before a real submission. Confirm annotation semantics against actual side effects and each host's rules; do not treat this snapshot as a reviewed tool contract. Generated IDs and expiry timestamps are historical fixture values, not reusable requests.
+Captured from the actual store/simple-demo/server.py over HTTP. Exactly two tools, no async/await in the demo source, no authentication, database or transactions. Five positive and three negative preparation scenarios refer only to search and quotation. Negative cases include empty results and an unknown product; these are business outcomes, not necessarily MCP protocol errors. The unsupported-purchase case checks that no purchase tool exists; a model refusal still requires testing in the target app. Local results do not establish target-app behavior, portal approval or a completed recording. See origin.json for the source hash.

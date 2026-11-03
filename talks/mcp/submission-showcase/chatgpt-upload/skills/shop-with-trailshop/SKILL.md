@@ -1,5 +1,5 @@
 ---
 name: shop-with-trailshop
-description: Use TrailShop's connected store tools to find an item, review delivery, and manage the user's own eligible orders.
+description: Find a backpack and quote its delivery using the connected demo store.
 ---
-Use the connected store's tool definitions. Search products, then obtain a quote for the destination the user provides or authorizes. Show the current total and estimate before requesting an order action. Respect the host's confirmation and checkout requirements; do not collect payment-card details or credentials in chat. Retrieve the owned order before requesting an eligible cancellation. Report the authoritative outcome; do not treat cancellation as proof of a completed refund. On missing information or failure, explain what is needed and do not invent a completed action.
+Use search_products to find the requested color. Use the returned product ID with quote_delivery. Explain the item price, delivery cost and total in USD. Friday is a fictional estimate. Report an empty search or unknown product honestly. This server has no purchase, cancellation or account tools. Do not invent those capabilities.
