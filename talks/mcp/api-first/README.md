@@ -25,4 +25,8 @@ Arrow keys navigate. **N** opens first-person notes. **O** opens the overview. *
 - `build.py`: renderer; run after content/note edits.
 - `make_content.py`: initial authoring source; running it replaces content and notes.
 
-Plus Jakarta Sans matches the selected Docsalot wordmark. Low-radius boxes, navy/blue/pale-paper colors, custom diagrams and large type continue the approved design. References stay in companion documents, not on projected slides.
+Plus Jakarta Sans matches the selected Docsalot wordmark. Slide 5 uses embedded JetBrains Mono for the JSON/Python excerpts from the combined local store demo. Low-radius boxes, navy/blue/pale-paper colors, custom diagrams and large type continue the approved design. References stay in companion documents, not on projected slides.
+
+## Run the same store inside Codex
+
+[Combined local plugin demo](https://github.com/eff-kay/atlas-mcp-python-tutorials/tree/main/store/codex-demo) — one persistent MCP endpoint, local routing/delivery APIs, five store tools, two resources and one prompt.

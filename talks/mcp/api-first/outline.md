@@ -6,7 +6,7 @@
 | 2 | Expose the APIs | Maya wants her AI to do the shopping. |
 | 3 | Expose the APIs | Expose four services. There is no storefront to click. |
 | 4 | Expose the APIs | With a fixed application, we can write the flow ourselves. |
-| 5 | Expose the APIs | Who turns Maya’s sentence into the right API request? |
+| 5 | Expose the APIs | Turn Maya’s request into a real API call. |
 | 6 | Expose the APIs | First, teach ChatGPT what the store can do. |
 | 7 | Expose the APIs | The model proposes. Our adapter does the work. |
 | 8 | Make the AI work | Maya’s identity cannot be a prompt parameter. |

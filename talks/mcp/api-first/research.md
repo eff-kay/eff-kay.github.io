@@ -27,3 +27,7 @@ The earlier edition reviewed the full auto-generated transcript and recorded the
 - Checkout policies and real commerce eligibility require independent verification. These slides demonstrate no real money movement.
 - A server can aggregate multiple provider APIs, but there is no required central MCP cloud hub.
 - Resources/prompts are complementary and host-dependent, not a mandatory sequence or guaranteed host feature.
+
+## Code typography
+
+[JetBrains Mono from Google Fonts](https://github.com/google/fonts/tree/main/ofl/jetbrainsmono), embedded with the accompanying SIL Open Font License. The Python excerpt on slide 5 matches the route call in the combined store/codex-demo server; the JSON call is deliberately a normalized explanatory fragment, not a complete ChatGPT or MCP wire message.
