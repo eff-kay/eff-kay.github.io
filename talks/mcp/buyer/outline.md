@@ -5,8 +5,8 @@
 | 1 | — | Intro | Faizan Khan |
 | 2 | 1 | Motivate | Give your AI a way to reach the work. |
 | 3 | 2 | Motivate | One store. Several connected services. |
-| 4 | 3 | Motivate | Now repeat those connections for every AI application. |
-| 5 | 4 | Connect | MCP is a common language. Your APIs stay. |
+| 4 | 3 | Motivate | Three AI apps. Four services. Twelve custom connections. |
+| 5 | 4 | Connect | One common language. Many applications. Many tools. |
 | 6 | 5 | Connect | Discover the store’s tools. Then make a specific request. |
 | 7 | 6 | Connect | The store exposes the tools. The host coordinates the requests. |
 | 8 | 7 | Shop | Find the item. Resolve the address. Quote delivery. |

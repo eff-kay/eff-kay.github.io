@@ -20,17 +20,17 @@ I want to start with a question someone might actually ask our ecommerce store: 
 
 This is our ecommerce store exposing its own capabilities. Our catalog knows the products and prices. An independent address service, GeoRoute, resolves the destination and calculates a route distance from our warehouse. ParcelQuote uses the relevant route and parcel information to estimate shipping. Our order system handles the purchase and cancellation. These services have different jobs, so I need to coordinate them to answer one shopper. I’m assuming Maya supplies a destination or authorizes use of her saved address. We’re using fictional providers here, not her real location. The distance alone doesn’t guarantee arrival; the delivery provider still needs to check its service and estimate.
 
-## Slide 4. Now repeat those connections for every AI application.
+## Slide 4. Three AI apps. Four services. Twelve custom connections.
 
 **Minute 3 of 15.**
 
-I can build all of this with the underlying APIs, and the store probably already uses some of them. The mess is the repeated AI-facing integration: describing operations, handling inputs, interpreting results and connecting the same workflow to different assistants. Shared code can reduce that work, so I’m not saying APIs are broken or that every model needs a complete rewrite. But I don’t want one bespoke tool interface for my store chatbot, another for ChatGPT and another for Claude. Wouldn’t it help if supporting applications agreed on how to discover and request our store’s capabilities? That’s the problem MCP addresses. The backend APIs stay; the capability interface becomes reusable.
+I now want to offer the same shopping journey in three places: ChatGPT, Claude and Gemini. Each application needs our catalog, address service, delivery quote and order system. Three times four gives me twelve custom integration paths. This is a simplified picture of the work, not a claim that every model requires twelve separate codebases: shared libraries can help. But somebody still has to adapt tool definitions, request formats, authentication and errors for each application. Add a fifth service or another application, and the maintenance keeps growing. That is the motivating problem. Wouldn’t it be useful if these applications and tools could agree on one way to describe capabilities, discover them and call them?
 
-## Slide 5. MCP is a common language. Your APIs stay.
+## Slide 5. One common language. Many applications. Many tools.
 
 **Minute 4 of 15.**
 
-MCP stands for Model Context Protocol. I think of it as a common language between an AI application and the server exposing our store’s capabilities. MCP is not a replacement for APIs. Our catalog, address, delivery and order APIs still do the underlying work. We still implement those adapters and the business rules. What changes is the interface we offer to supporting AI applications: they can discover tools and request them through the same protocol. MCP doesn’t grant purchasing permission or calculate shipping by itself. In this example, the ecommerce store owns the MCP server. It offers useful shopping operations rather than making each application assemble raw calls to all our services.
+That common language is the Model Context Protocol, or MCP. Instead of inventing a new AI-facing interface for every application and every service, I expose capabilities through MCP, and compatible applications know how to discover and call them. The center of this picture represents an agreement, not a central service that all data must pass through. In a real system, an application has an MCP client and connects to one or more MCP servers. A service can publish its own server, or our store can expose a server that coordinates its existing services. That is what our example does. MCP does not replace the catalog API, solve authorization automatically or remove the underlying adapters. It standardizes the connection at the AI boundary. Now let me show what the store actually exposes.
 
 ## Slide 6. Discover the store’s tools. Then make a specific request.
 
