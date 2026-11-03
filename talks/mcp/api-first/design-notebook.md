@@ -82,3 +82,9 @@ Use a maintained SDK for the actual protocol version, transport, discovery/capab
 - Does MCP remove any inventory or cancellation policy code?
 - If a host ignores resources or prompts, does the tool-only workflow still work?
 - What changes when a fourth AI host connects?
+
+## The three pressures behind the shared interface
+
+1. **Convey functionality:** describe what each service does, when it should be chosen, required inputs and meaningful results. The host must make these definitions available to the model; an endpoint URL alone is not enough. OpenAPI/function descriptions already solve much of this for a particular integration.
+2. **Extend functionality:** after adding a proposed carrier-tracking function, publish its description and schema and update the host-visible catalog. In direct integrations, update each relevant action/function mapping. In MCP, a compatible host can refresh the server catalog; caching and refresh behavior still vary. Preserve compatible definitions and evaluate new tool selection. The proposed extension is not implemented in the local demo.
+3. **Change the model or host:** a new model inside the same host may reuse the integration, but needs schema/behavior evaluation. A different provider or AI application may need its own tool-format mapping and execution integration. MCP preserves the shared server interface across compatible hosts; it does not normalize all model behavior.

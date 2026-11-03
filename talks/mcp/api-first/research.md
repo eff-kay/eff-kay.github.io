@@ -31,3 +31,7 @@ The earlier edition reviewed the full auto-generated transcript and recorded the
 ## Code typography
 
 [JetBrains Mono from Google Fonts](https://github.com/google/fonts/tree/main/ofl/jetbrainsmono), embedded with the accompanying SIL Open Font License. The Python excerpt on slide 5 matches the route call in the combined store/codex-demo server; the JSON call is deliberately a normalized explanatory fragment, not a complete ChatGPT or MCP wire message.
+
+## Capability-focused revision
+
+Rechecked the official [server concepts](https://modelcontextprotocol.io/docs/learn/server-concepts) and [architecture](https://modelcontextprotocol.io/docs/learn/architecture) pages for descriptions/schemas, discovery and host/model boundaries. The added tracking example is a proposed extension. Catalog refresh is host-dependent; a model swap within one host is explicitly different from a host/provider change.
