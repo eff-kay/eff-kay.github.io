@@ -1,5 +1,5 @@
 {
-  "description": "Combined review preview with browser/OpenAI-to-Claude API framing revisions. Source decks are preserved; per-slide origins record the base content before adaptation.",
+  "description": "Combined preview with browser/API framing and current, simplified publication routes. Source decks remain preserved.",
   "source_hashes": {
     "first-principles-experiment": {
       "content.json": "5443b9ab4b29c4941d7aea27b7281d531deb95e0a509c13d7504e219cdce7987",
@@ -27,7 +27,7 @@
     },
     {
       "slide": 3,
-      "title": "Each service knows one part of Maya\u2019s request.",
+      "title": "Each service knows one part of Maya’s request.",
       "edition": "first-principles-experiment",
       "original_slide": 3
     },
@@ -39,7 +39,7 @@
     },
     {
       "slide": 5,
-      "title": "Turn Maya\u2019s request into a real API call.",
+      "title": "Turn Maya’s request into a real API call.",
       "edition": "first-principles-experiment",
       "original_slide": 5
     },
@@ -57,7 +57,7 @@
     },
     {
       "slide": 8,
-      "title": "Maya\u2019s identity cannot be a prompt parameter.",
+      "title": "Maya’s identity cannot be a prompt parameter.",
       "edition": "first-principles-experiment",
       "original_slide": 8
     },
@@ -69,19 +69,19 @@
     },
     {
       "slide": 10,
-      "title": "Then Maya says: \u201cActually, cancel it.\u201d",
+      "title": "Then Maya says: “Actually, cancel it.”",
       "edition": "first-principles-experiment",
       "original_slide": 10
     },
     {
       "slide": 11,
-      "title": "Tomorrow Maya asks: \u201cWhere is my parcel now?\u201d",
+      "title": "Tomorrow Maya asks: “Where is my parcel now?”",
       "edition": "first-principles-experiment",
       "original_slide": 11
     },
     {
       "slide": 12,
-      "title": "Now switch our chatbot from OpenAI\u2019s API to Claude\u2019s.",
+      "title": "Now switch our chatbot from OpenAI’s API to Claude’s.",
       "edition": "first-principles-experiment",
       "original_slide": 12
     },
@@ -123,7 +123,7 @@
     },
     {
       "slide": 19,
-      "title": "Discover the store\u2019s tools. Then make a specific request.",
+      "title": "Discover the store’s tools. Then make a specific request.",
       "edition": "final-version-1",
       "original_slide": 17
     },
@@ -141,31 +141,31 @@
     },
     {
       "slide": 22,
-      "title": "\u201cI\u2019ll take it.\u201d Review, confirm, place the order.",
+      "title": "“I’ll take it.” Review, confirm, place the order.",
       "edition": "final-version-1",
       "original_slide": 9
     },
     {
       "slide": 23,
-      "title": "\u201cActually, cancel my order.\u201d Check the state before acting.",
+      "title": "“Actually, cancel my order.” Check the state before acting.",
       "edition": "final-version-1",
       "original_slide": 10
     },
     {
       "slide": 24,
-      "title": "Your store\u2019s assistant works. Let customers find it.",
+      "title": "Your store’s assistant works. Let customers find it.",
       "edition": "final-version-1",
       "original_slide": 11
     },
     {
       "slide": 25,
-      "title": "ChatGPT: submit the package. Prove the connected experience.",
+      "title": "ChatGPT: package, prove, then publish.",
       "edition": "final-version-1",
       "original_slide": 12
     },
     {
       "slide": 26,
-      "title": "Claude: choose connector or plugin bundle.",
+      "title": "Claude: choose the route that matches what you ship.",
       "edition": "final-version-1",
       "original_slide": 13
     },
@@ -189,13 +189,13 @@
     },
     {
       "slide": 30,
-      "title": "What blocks submission or gets rejected in review.",
+      "title": "Three things that block a good submission.",
       "edition": "final-version-1",
       "original_slide": 15
     },
     {
       "slide": 31,
-      "title": "Submit a complete experience. Keep the promise after launch.",
+      "title": "Leave room for review.",
       "edition": "final-version-1",
       "original_slide": 16
     },
@@ -223,6 +223,16 @@
         24
       ],
       "description": "Clarify our browser chatbot/backend using OpenAI API then Claude API. Consumer-product distribution begins separately at slide 24. New provider snippets and role diagrams; source decks stay frozen."
+    },
+    "publication_simplification": {
+      "slides": [
+        25,
+        26,
+        30,
+        31
+      ],
+      "checked": "2026-11-03",
+      "description": "Clickable official submission links; three-step ChatGPT flow; connector vs plugin Claude routes including automated Community listing; three gotcha groups and explicitly labeled planning buffers, not approval SLAs."
     }
   }
 }

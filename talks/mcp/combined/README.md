@@ -16,7 +16,7 @@ Public: https://eff-kay.github.io/talks/mcp/combined/
 | 14–18 | Derive the protocol | Discovery, calls, host/client/server, resources/prompts, compact results |
 | 19–23 | Use the store | Version-1 tool menu and architecture, then search/quote, purchase and cancellation |
 | 24–28 | Distribute | Distribution motivation, ChatGPT, Claude, packages and ecosystem logos |
-| 29–31 | Launch and learn | Why distribute, review gotchas, before/during/after checklist |
+| 29–31 | Launch and learn | Why distribute, three review blockers, rough approval timing |
 | 32 | Questions | Apply the model to another store |
 
 The imported slides are version-1 slides 7–20. Its supporting tool menu is moved before execution, and packages/ecosystem examples sit beside distribution. The opening, provider-API diagrams and transition notes are adapted for the combined narrative. `source-map.json` records the original source of every slide and hashes the source decks. The six-section bottom ribbon counts content steps rather than minutes.
@@ -35,7 +35,8 @@ Edit `content.json` / `spoken-notes.json`, then run `python3 build.py`. `outline
 
 ## Companions
 
-- [Submission checklist](submission-playbook.md)
+- [Publication guide: official links, simple steps and timing](publication-guide.html)
+- [Preparation checklist and timing evidence](submission-playbook.md)
 - [Ecosystem routes](ecosystem-routes.md)
 - [Package downloads and profile guide](https://eff-kay.github.io/talks/mcp/buyer/packages/)
 - [Run the store inside Codex](https://github.com/eff-kay/atlas-mcp-python-tutorials/tree/main/store/codex-demo)
@@ -44,7 +45,7 @@ Edit `content.json` / `spoken-notes.json`, then run `python3 build.py`. `outline
 - [Original 20-slide API experiment](https://eff-kay.github.io/talks/mcp/api-first/)
 - [Frozen final version 1](https://eff-kay.github.io/talks/mcp/final-version-1/)
 
-All store data, transactions and example package endpoints are fictional. Marketplace material is reused from version 1’s sourced research; this preview does not perform or claim submission/approval. Instinct’s public route remains unverified, as indicated on the ecosystem slide.
+All store data, transactions and example package endpoints are fictional. Publication routes were rechecked on November 3, 2026; slides 25–26 and 30–31 now include clickable official links, simpler steps and explicitly labeled planning buffers. This preview does not perform or claim submission/approval. Instinct’s public route remains unverified, as indicated on the ecosystem slide.
 
 ## Browser chatbot and provider switch
 

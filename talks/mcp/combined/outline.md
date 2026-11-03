@@ -26,11 +26,11 @@
 | 22 | Use the store | “I’ll take it.” Review, confirm, place the order. | final-version-1 9 |
 | 23 | Use the store | “Actually, cancel my order.” Check the state before acting. | final-version-1 10 |
 | 24 | Distribute the server | Your store’s assistant works. Let customers find it. | final-version-1 11 |
-| 25 | Distribute the server | ChatGPT: submit the package. Prove the connected experience. | final-version-1 12 |
-| 26 | Distribute the server | Claude: choose connector or plugin bundle. | final-version-1 13 |
+| 25 | Distribute the server | ChatGPT: package, prove, then publish. | final-version-1 12 |
+| 26 | Distribute the server | Claude: choose the route that matches what you ship. | final-version-1 13 |
 | 27 | Distribute the server | What goes in the package? | final-version-1 18 |
 | 28 | Distribute the server | One store. A wider ecosystem. | final-version-1 19 |
 | 29 | Launch and learn | A working server is useful. Make it easy to discover. | final-version-1 14 |
-| 30 | Launch and learn | What blocks submission or gets rejected in review. | final-version-1 15 |
-| 31 | Launch and learn | Submit a complete experience. Keep the promise after launch. | final-version-1 16 |
+| 30 | Launch and learn | Three things that block a good submission. | final-version-1 15 |
+| 31 | Launch and learn | Leave room for review. | final-version-1 16 |
 | 32 | QUESTIONS | What should your store let an assistant do? | final-version-1 20 |

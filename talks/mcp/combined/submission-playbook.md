@@ -1,39 +1,43 @@
-# Marketplace submission — presenter’s working checklist
+# Publish the store MCP: links, blockers and timing
 
-This supplements the three closing slides. It summarizes documented requirements and practical preparation; it is not a record of our own approvals or rejections, a complete error-code catalog, or an approval guarantee. Rechecked November 3, 2026. Platform-specific rules can change.
+Checked November 3, 2026. This is preparation guidance for the fictional store example, not a report of our own marketplace approvals. [Readable web version](publication-guide.html).
 
-## Why submit
+## Where to submit
 
-A compatible MCP endpoint enables a connection. A public directory adds a discovery and onboarding path. Decide whether that helps the intended customer; a private connector may be enough. A listing does not host the backend, confer every permission, guarantee traffic, or make both ecosystems behave identically.
+| Route | Submit here | Official instructions | What is submitted |
+|---|---|---|---|
+| ChatGPT plugin | [Plugins portal](https://platform.openai.com/plugins) | [Submission guide](https://developers.openai.com/plugins/deploy/submission) · [Review checklist](https://developers.openai.com/plugins/deploy/app-review) | Plugin ZIP plus hosted MCP connection |
+| Claude remote MCP connector | [Directory portal](https://claude.ai/directory/manage) → MCP connector | [Connector guide](https://claude.com/docs/connectors/building/submission) · [Tool checklist](https://claude.com/docs/connectors/building/review-criteria) | Public HTTPS endpoint, authentication and listing |
+| Claude plugin bundle | [Same portal](https://claude.ai/directory/manage) → Plugin | [Plugin guide](https://claude.com/docs/plugins/submit) | GitHub repository/folder, tracked branch or tag |
 
-## Before opening the portal
+For ChatGPT: upload, connect and test, submit for review, then publish the approved version. For an initial MCP review, prepare five positive and three negative cases, a walkthrough and private reviewer access. Use the current portal for publisher, domain, sign-in and scan requirements. Credentials belong in the secure review form, never the public ZIP. [Official process](https://developers.openai.com/plugins/deploy/submission).
 
-- State the user job and limits clearly. For the store: find an item, review and place a permitted order, then cancel an eligible order.
-- Rehearse as a new customer, not an administrator. Exercise sign-in, tool selection, normal outcomes, missing data, denied access and recovery.
-- Keep a populated review account available. Do not submit a real customer account or place credentials inside a public package.
-- Confirm ownership of the service and permission to use downstream APIs. Publish appropriate data-use, support and product information.
-- Keep backend authorization real. A “read-only” label is not access enforcement. Treat order cancellation and payment reversal as distinct outcomes.
+For Claude: a standard remote connector is screened automatically and normally listed as Community without another action. Some submissions need human review; per-customer URLs need Verified before listing. A plugin bundle follows repository scanning and a publishing gate; the portal identifies who publishes. If a bundle references your remote server, submit the server as a connector too. [Connector flow](https://claude.com/docs/connectors/building/submission), [plugin flow](https://claude.com/docs/plugins/submit).
 
-## Gotchas by failure stage
+## Three avoidable blockers
 
-| Stage | What can go wrong | Preparation |
+1. **Reviewers cannot connect.** Test the public endpoint and a populated reviewer account from outside your network. Keep access working throughout review.
+2. **Tools or evidence fail.** Rehearse the promised journey and refusal cases. Separate read/write operations; make titles, descriptions and hints accurate. For Maya: quoting must not buy, cancellation must respect ownership and order state. [ChatGPT checks](https://developers.openai.com/plugins/deploy/app-review), [Claude tool criteria](https://claude.com/docs/connectors/building/review-criteria).
+3. **The scope does not fit.** Make privacy, API rights and checkout behavior explicit. The simulated purchase workflow does not establish marketplace eligibility. Confirm the host’s permitted commerce experience before submitting. [ChatGPT policies](https://developers.openai.com/plugins/plugin-guidelines), [Claude scope criteria](https://claude.com/docs/connectors/building/review-criteria).
+
+## Rough approval timing
+
+These are **our scheduling buffers**, not vendor promises, measured averages or upper bounds. Rework and queues can extend them.
+
+| Route | What I would allow | What the platform actually promises |
 |---|---|---|
-| Package/setup validation | Wrong manifest or path, incomplete fields, unreachable endpoint, auth or domain setup failure | Use the correct route; resolve the exact portal error and recheck |
-| Tool scan/review | Definitions misdescribe behavior; hints or justifications are missing | Inspect the scanned inventory and test every operation |
-| Product review | Reviewers cannot reproduce the listing; unsupported scope or privacy issues | Match the promise to tested behavior and permitted data use |
-| Publication | Upload or approval mistaken for a live release | Complete the publication step and verify from a fresh user context |
-| Updates | Package changes confused with hosted-server changes | Follow each platform’s update route and preserve existing contracts |
+| ChatGPT MCP-backed plugin | **2–6+ weeks** after a complete submission | No fixed deadline; review duration varies |
+| Claude Community connector | Automated path first; no defensible fixed duration. A human hold can add weeks. | Default automatic policy screening/listing, with exceptions; no fixed deadline |
+| Claude plugin needing review | **Several weeks** | Scans and potential human review, followed by the applicable publishing gate; no fixed deadline |
 
-## ChatGPT details to remember
+Official timing statements: [OpenAI review FAQ](https://developers.openai.com/plugins/deploy/app-review), [Claude status guide](https://claude.com/docs/directory/submission-status). [Claude verification](https://claude.com/docs/connectors/verification) is separate from an ordinary Community listing; there is no application for the label.
 
-The current remote path requires publisher/access setup, a ZIP, HTTPS, domain verification and a current MCP scan. Check required annotation values and justifications. Review evidence includes five positive cases, three negative cases, release notes and an accessible walkthrough. Screenshots have UI-dependent eligibility and dimensions; follow the current portal rather than reusing another marketplace’s assets. Verify checkout eligibility separately from directory approval.
+### Why those buffers, rather than a promised date?
 
-## Claude details to remember
+- [October developer reports](https://www.reddit.com/r/mcp/comments/1wvazmg/submitted_to_claudes_connector_directory_or/) include self-reported ChatGPT approvals around two to three weeks. These are a small, self-selected sample, not a representative average.
+- [An OpenAI Community submitter](https://community.openai.com/t/system-bug-plugin-v3-0-0-never-reviewed-stuck-in-review-since-sep-18-while-the-list-shows-not-submitted/1407083) reported a wait exceeding five weeks, alongside much faster earlier versions. This illustrates possible delays, not a normal duration.
+- [Elastic’s firsthand Claude plugin account](https://www.elastic.co/search-labs/blog/publish-claude-plugin-directory) reports three weeks **from first commit to live**, including development. It is not a three-week approval measurement. The several-week plugin allowance is our scheduling judgment, not a derived median.
 
-Use the connector portal for a remote MCP server; GitHub source is the plugin-bundle route. Supply accurate titles and applicable hints. A single catch-all tool mixing reads and writes is explicitly rejected. Tool descriptions must describe the operation, not give unrelated instructions. Valid calls must work and errors should be actionable. Use first-party APIs or legitimate proxies. Review unsupported use cases before promising cross-platform parity.
+## During review and after launch
 
-## During and after review
-
-Keep a finding log: platform, version, failing scenario, expected result, actual result, correction and recheck. Treat a passing scan as one stage, not approval. After rejection, follow the stated feedback and the platform’s resubmission or appeal process. After approval, publish deliberately and monitor connection failures, tool outcomes, access boundaries and compatibility. Keep reviewer access current for subsequent checks.
-
-Supporting primary links are retained in research.md rather than on projected slides.
+Track each finding, fix the specific package/server/listing issue, and recheck. Keep the review account populated. Monitor the portal and follow its resubmission or appeal path. Confirm **Published**, then test the live listing and new-user connection. Track sign-in failures, tool outcomes and safe order state changes after launch. Approval does not host or operate the server for us.

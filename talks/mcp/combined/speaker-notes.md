@@ -146,17 +146,28 @@ Source: final-version-1 / slide 11.
 
 So far Maya has been using our own browser chatbot, whose backend calls OpenAI or Claude through an API. Now we introduce a separate distribution question: what if a shopper wants to use the store from the ChatGPT or Claude consumer applications instead? Publishing can help people discover and connect the store’s MCP capabilities in those products, subject to their supported features and policies. That is a new host and onboarding path, not the earlier model-provider switch. I still need a stable HTTPS service, appropriate account access, accurate tool descriptions, privacy/support information and reviewer cases. The directory does not host our backend or automatically transfer permissions. We test each host and follow its submission and review process.
 
-## Slide 25. ChatGPT: submit the package. Prove the connected experience.
+## Slide 25. ChatGPT: package, prove, then publish.
 
 Source: final-version-1 / slide 12.
 
-For ChatGPT, I use the Plugins portal with the correct organization permissions and verified publisher identity. I upload the package with our remote MCP configuration, connect the endpoint, verify the domain and complete authentication and scans. I include five positive cases, three negative cases and a walkthrough, with reviewer access when required. For this store, I’d demonstrate finding an item, placing one confirmed order, and cancelling an eligible order. I’d also test another customer’s order and an ineligible cancellation. I resolve findings, submit for review and publish after approval. Uploading is not approval, and checkout has separate rules: the usual route completes payment on our own domain; embedded checkout needs the permitted setup. Listing approval doesn’t itself enable Instant Checkout. We continue operating the service behind the listing.
+For ChatGPT, I upload our plugin ZIP through the Plugins portal and connect the hosted store server. I complete domain, sign-in and scan checks. Then I make the experience easy to reproduce: five positive cases, three negative cases, a working reviewer account and a video. I rehearse the exact account before submitting, and enter private credentials in the portal, never the ZIP. For Maya, that includes a quote, an authorized action and safe refusals. I fix the findings and submit. After approval, I select Publish and verify the live connection. The links below open the official portal, guide and checklist.
 
-## Slide 26. Claude: choose connector or plugin bundle.
+Portal: https://platform.openai.com/plugins
+Guide: https://developers.openai.com/plugins/deploy/submission
+Review checklist: https://developers.openai.com/plugins/deploy/app-review
+
+## Slide 26. Claude: choose the route that matches what you ship.
 
 Source: final-version-1 / slide 13.
 
-For Claude, I can submit our remote server as an MCP connector through the directory portal. I test it in Claude and provide the endpoint, authentication, listing details and reviewer access. The tools need accurate titles and the appropriate read or write hints, especially for placing and cancelling orders. The current portal supports paid plans with relevant account permissions. If I also distribute reusable workflow instructions, I can submit a GitHub plugin bundle; our remote server still needs its connector submission. I address the findings and publish after approval. Approval doesn’t transfer from ChatGPT, and I don’t assume every host permits the same commerce experience. I verify the supported flow in each one.
+For our hosted store, I choose MCP connector in Claude’s directory portal. I supply HTTPS, working authentication, listing details and reviewer access. The current default is automated policy screening followed by a Community listing; some submissions need a person to review them. Verified is a separate route selected by Anthropic, and per-customer server URLs require it before listing.
+
+If I also ship skills and workflow instructions, I submit a plugin from GitHub. That bundle is scanned, can be held for review, and has a publishing gate. The portal tells me whether I, a reviewer or the directory publishes it. A remote server referenced by the plugin still needs a connector submission. I check for Published rather than assuming a passing scan means it is live.
+
+Portal: https://claude.ai/directory/manage
+Connector guide: https://claude.com/docs/connectors/building/submission
+Plugin guide: https://claude.com/docs/plugins/submit
+Status meanings: https://claude.com/docs/directory/submission-status
 
 ## Slide 27. What goes in the package?
 
@@ -176,17 +187,30 @@ Source: final-version-1 / slide 14.
 
 Let me close with why I’d submit at all. MCP compatibility lets an application connect, but it doesn’t make our store discoverable. A directory listing gives customers another way to find us where they already ask for help. The connection flow then needs to make account access and our capabilities understandable. Finally, the workflow has to deliver what the listing promises: find the item, complete a permitted order, or cancel an eligible one. I can still use private connections without a public listing. Publication is a distribution choice, not a requirement of the protocol, and it doesn’t guarantee traffic or certify the whole service. The point is to turn a useful connection into an experience new customers can actually adopt.
 
-## Slide 30. What blocks submission or gets rejected in review.
+## Slide 30. Three things that block a good submission.
 
 Source: final-version-1 / slide 15.
 
-The gotchas fall into six buckets. First, reviewers can’t connect or sign in: I verify the real endpoint and a populated test account. Second, the tools are misleading or incomplete: I separate read and write operations and supply accurate metadata. Third, privacy or API ownership is unclear. Fourth, the tool instructions or actions violate platform policy. Fifth, the listing and evidence don’t let someone reproduce the promised workflow. Sixth, I’ve used the wrong packaging, screenshot rules or checkout route for that host. Some of these block submission automatically; others lead to review rejection. Claude explicitly rejects mixed read/write catch-all tools and unrelated behavioral instructions. OpenAI checks its domain challenge, current scan and required tool annotations. I follow the reported finding, not a guessed workaround. Passing validation is not approval.
+I reduce the gotchas to three questions. Can the reviewer connect and sign in? Do the tools deliver the outcome I promised? Is that experience permitted on this platform? These are a practical grouping, not a ranked rejection statistic.
 
-## Slide 31. Submit a complete experience. Keep the promise after launch.
+For access, I try the endpoint and populated test account outside our network. For behavior, I replay the success and refusal cases; a quote must not place an order, and a cancellation must enforce ownership and state. Claude specifically requires separate read and write tools, accurate titles and hints, and descriptions without unrelated behavioral instructions. For scope, I check privacy, API rights and commerce rules. The fictional purchase demo is a protocol example, not a promise that every marketplace accepts its checkout flow. I follow the actual finding: setup errors, scan findings and a reviewer’s rejection are different stages.
+
+ChatGPT: https://developers.openai.com/plugins/deploy/app-review
+Claude: https://claude.com/docs/connectors/building/review-criteria
+Policy: https://developers.openai.com/plugins/plugin-guidelines
+
+## Slide 31. Leave room for review.
 
 Source: final-version-1 / slide 16.
 
-My final takeaway is that I’m submitting an experience, not just an MCP endpoint. Before submission, I test the same account and customer journey the reviewer will use, including denied and failed requests. During review, I reproduce each finding, correct the right artifact and check it again: a package change and a hosted-tool change are not always the same release. After approval, I deliberately publish, verify the listing and connection flow, and keep the service healthy. I preserve compatible tools and safe purchase and cancellation outcomes. That brings our talk together: connect the store’s capabilities, make the shopping journey work, and publish it responsibly. The submission checklist is also a useful product-readiness checklist, whether or not I choose a public directory.
+I would not promise a launch date based on approval. Neither platform publishes a fixed review deadline. For ChatGPT, I would reserve two to six weeks or more in our schedule. That is my planning buffer, not an OpenAI estimate or a measured average. Small public reports include two-to-three-week approvals and waits exceeding five weeks, so there is a long tail.
+
+Claude has two different paths. A standard remote connector is automatically screened for a Community listing by default, so I would not assign it the same manual-review estimate. There is no published completion time; a human hold or the Verified requirement can add weeks. For a plugin bundle needing review, I would allow several weeks as a scheduling buffer, not an Anthropic target. Elastic reported three weeks from first commit to live, which includes building and must not be called three weeks of approval.
+
+I leave time for fixes and another pass, keep the review account working, and check who acts next in the portal. Approved and Published are different states. After launch, I monitor sign-in, tool failures and safe order outcomes. The companion records the dated sources and assumptions.
+
+Official timing: https://developers.openai.com/plugins/deploy/app-review
+Claude status: https://claude.com/docs/directory/submission-status
 
 ## Slide 32. What should your store let an assistant do?
 
