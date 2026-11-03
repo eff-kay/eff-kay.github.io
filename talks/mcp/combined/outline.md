@@ -33,4 +33,5 @@
 | 29 | Launch and learn | A working server is useful. Make it easy to discover. | final-version-1 14 |
 | 30 | Launch and learn | Three things that block a good submission. | final-version-1 15 |
 | 31 | Launch and learn | Leave room for review. | final-version-1 16 |
-| 32 | QUESTIONS | What should your store let an assistant do? | final-version-1 20 |
+| 32 | Launch and learn | What we haven’t covered. | combined-preview 32 |
+| 33 | QUESTIONS | What should your store let an assistant do? | final-version-1 20 |

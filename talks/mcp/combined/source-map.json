@@ -201,6 +201,12 @@
     },
     {
       "slide": 32,
+      "title": "What we haven’t covered.",
+      "edition": "combined-preview",
+      "original_slide": 32
+    },
+    {
+      "slide": 33,
       "title": "What should your store let an assistant do?",
       "edition": "final-version-1",
       "original_slide": 20
@@ -233,6 +239,12 @@
       ],
       "checked": "2026-11-03",
       "description": "Clickable official submission links; three-step ChatGPT flow; connector vs plugin Claude routes including automated Community listing; three gotcha groups and explicitly labeled planning buffers, not approval SLAs."
+    },
+    "production_scope": {
+      "slides": [
+        32
+      ],
+      "description": "New closing content slide before Q&A: authentication/authorization and observability remain separate production deep dives. Includes first-person scope notes and original diagrams."
     }
   }
 }

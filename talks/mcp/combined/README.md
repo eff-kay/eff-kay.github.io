@@ -1,6 +1,6 @@
 # From APIs to MCP to distribution — combined preview
 
-**32 slides**, combining the latest API-first experiment with the remaining version-1 material. This expanded review draft does not assert a 15-minute runtime. Both source decks remain separate.
+**33 slides**, combining the latest API-first experiment with the remaining version-1 material. This expanded review draft does not assert a 15-minute runtime. Both source decks remain separate.
 
 Local: http://127.0.0.1:8766/combined-preview/MCP-API-to-marketplace.html
 
@@ -17,7 +17,8 @@ Public: https://eff-kay.github.io/talks/mcp/combined/
 | 19–23 | Use the store | Version-1 tool menu and architecture, then search/quote, purchase and cancellation |
 | 24–28 | Distribute | Distribution motivation, ChatGPT, Claude, packages and ecosystem logos |
 | 29–31 | Launch and learn | Why distribute, three review blockers, rough approval timing |
-| 32 | Questions | Apply the model to another store |
+| 32 | Not covered | Production auth and observability |
+| 33 | Questions | Apply the model to another store |
 
 The imported slides are version-1 slides 7–20. Its supporting tool menu is moved before execution, and packages/ecosystem examples sit beside distribution. The opening, provider-API diagrams and transition notes are adapted for the combined narrative. `source-map.json` records the original source of every slide and hashes the source decks. The six-section bottom ribbon counts content steps rather than minutes.
 
@@ -25,7 +26,7 @@ The imported slides are version-1 slides 7–20. Its supporting tool menu is mov
 
 - Arrow keys navigate; Home/End jump to the first/last slide.
 - **N** opens first-person speaking notes.
-- **O** opens the 32-slide overview.
+- **O** opens the 33-slide overview.
 - **F** enters fullscreen; Escape dismisses panels.
 - The large JSON response on slide 18 can be scrolled.
 

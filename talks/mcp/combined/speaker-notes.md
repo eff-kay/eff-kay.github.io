@@ -1,6 +1,6 @@
 # From APIs to MCP to distribution — combined preview
 
-32 slides: presenter introduction, 30 content slides and Q&A. Expanded review draft; no timing target is asserted.
+33 slides: presenter introduction, 31 content slides and Q&A. Expanded review draft; no timing target is asserted.
 
 ## Slide 1. Faizan Khan
 
@@ -212,7 +212,23 @@ I leave time for fixes and another pass, keep the review account working, and ch
 Official timing: https://developers.openai.com/plugins/deploy/app-review
 Claude status: https://claude.com/docs/directory/submission-status
 
-## Slide 32. What should your store let an assistant do?
+## Slide 32. What we haven’t covered.
+
+Source: combined-preview / slide 32.
+
+Before questions, I want to be clear about what I haven’t covered. I showed how to expose the store’s capabilities, connect them to an AI application and approach distribution. We touched identity and confirmation, but we haven’t built a production authentication and authorization system.
+
+For a real Maya, I would need to work through sign-in, OAuth, token expiry and refresh, revocation, scopes and tenant isolation. Authenticating Maya and deciding whether she can cancel this particular order are separate checks. Tool permission hints don’t replace those checks in our backend. Our local teaching demo uses a fictional customer; it does not demonstrate a production identity system.
+
+The second topic is observability. If Maya’s order fails, I want to follow that request from the chatbot backend through the MCP server to the routing, delivery or order service. I would add correlated traces, operation timings, useful errors and an audit trail for changes. I would also monitor failures, usage and cost, while keeping credentials and unnecessary personal data out of telemetry. A trace helps explain execution; an audit record helps establish who changed what.
+
+These are two follow-up deep dives. A working protocol connection and a directory listing are the starting point for operating the service.
+
+Presenter references:
+https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization
+https://opentelemetry.io/docs/concepts/signals/traces/
+
+## Slide 33. What should your store let an assistant do?
 
 Source: final-version-1 / slide 20.
 
