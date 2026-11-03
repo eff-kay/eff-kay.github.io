@@ -1,0 +1,38 @@
+{
+  "_format": "Presenter worksheet, not an official import schema or API payload",
+  "example_only": true,
+  "portal": "https://claude.ai/directory/manage",
+  "submission_type": "MCP connector",
+  "connection": {
+    "url": "https://store.example/mcp",
+    "users_connect_to_different_urls": false
+  },
+  "listing": {
+    "name": "TrailShop Store Demo",
+    "one_liner": "Find products and manage your own eligible store orders.",
+    "documentation_url": "https://store.example/docs",
+    "privacy_url": "https://store.example/privacy",
+    "support_contact": "support@store.example",
+    "icon": "../chatgpt-upload/assets/icon.png"
+  },
+  "use_cases": [
+    "Find a product",
+    "Quote delivery",
+    "Review a permitted order action",
+    "Retrieve own order",
+    "Cancel an eligible order"
+  ],
+  "authentication": {
+    "required": true,
+    "method": "OAuth 2.0",
+    "planned_scopes": [
+      "store:read",
+      "store:write"
+    ],
+    "secrets": "Enter privately in the portal; absent from this kit"
+  },
+  "data_handling": "Complete the worksheet with the actual service owner. No production assertions are made here.",
+  "reviewer_access": "Provide a populated dedicated account through secure portal fields; no credentials in this file.",
+  "verification": "Standard shared URL sample. Per-customer URLs have separate Verified requirements.",
+  "status": "NOT SUBMITTED"
+}

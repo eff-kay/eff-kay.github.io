@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "trailshop": {
+      "type": "http",
+      "url": "https://store.example/mcp"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "example_only": true,
+  "checked": "2026-11-03",
+  "local_checks": [
+    "Portable plugin schema",
+    "Portable MCP base schema excluding documented OpenAI extension",
+    "OpenAI known metadata/auth field placement (scoped checks, not full host schema)",
+    "Claude required fields/paths, README/license and JSON structure",
+    "Shared skill identical across profiles",
+    "Five positive/three negative scenario counts and captured fixture outputs",
+    "No credential fields, absolute/archive traversal paths, system junk or omitted hidden manifests"
+  ],
+  "fixture_execution": {
+    "captured_at": "2026-11-03T22:06:20.726107+00:00",
+    "source": "store/06-review-evidence/demo.py",
+    "server_sha256": "443218484fc8e6b32e1744cbb1e27065d6f5d881ea5336e972099063f693d2e1",
+    "scope": "Successful local stdio fixture run: five expected successes and three expected denials. Fictional Maya, no payments or hosted OAuth. Not a ChatGPT/Claude conversation or portal validation.",
+    "command": "uv run python store/06-review-evidence/demo.py"
+  },
+  "not_run": [
+    "ChatGPT portal import/scan/review",
+    "Claude native CLI: not installed",
+    "Codex native validation: installed CLI exposes no validate command",
+    "Claude portal validation/security scan",
+    "Hosted HTTPS/OAuth or target-app conversation tests",
+    "Commerce eligibility review"
+  ],
+  "release_ready": false
+}

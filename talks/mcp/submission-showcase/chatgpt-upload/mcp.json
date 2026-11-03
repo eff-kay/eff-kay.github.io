@@ -1,0 +1,27 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "trailshop": {
+      "type": "streamable-http",
+      "url": "https://store.example/mcp",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "baseScopes": [
+              "store:read",
+              "store:write"
+            ],
+            "client": {
+              "mode": "provided",
+              "clientId": "trailshop-demo-client",
+              "tokenEndpointAuthMethod": "client_secret_basic"
+            },
+            "authorizationUrl": "https://store.example/oauth/authorize",
+            "tokenUrl": "https://store.example/oauth/token"
+          }
+        }
+      }
+    }
+  }
+}

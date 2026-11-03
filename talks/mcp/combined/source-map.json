@@ -245,6 +245,12 @@
         32
       ],
       "description": "New closing content slide before Q&A: authentication/authorization and observability remain separate production deep dives. Includes first-person scope notes and original diagrams."
+    },
+    "submission_showcase": {
+      "slides": [
+        27
+      ],
+      "description": "Native clickable link to inspectable ChatGPT/Claude packages, differences, presenter notes and fixture evidence."
     }
   }
 }

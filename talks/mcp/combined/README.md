@@ -36,6 +36,8 @@ Edit `content.json` / `spoken-notes.json`, then run `python3 build.py`. `outline
 
 ## Companions
 
+- [Interactive submission showcase and downloadable presenter kit](../submission-showcase/)
+
 - [Publication guide: official links, simple steps and timing](publication-guide.html)
 - [Preparation checklist and timing evidence](submission-playbook.md)
 - [Ecosystem routes](ecosystem-routes.md)

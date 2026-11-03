@@ -1,0 +1,120 @@
+[
+  {
+    "name": "Find the blue carry-on",
+    "tool": "search_products",
+    "arguments": {
+      "color": "blue"
+    },
+    "expected_error": false,
+    "actual": {
+      "products": [
+        {
+          "id": "blue-carryon",
+          "price_cents": 7900,
+          "currency": "USD"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Quote the delivery",
+    "tool": "quote_delivery",
+    "arguments": {
+      "product_id": "blue-carryon",
+      "address_ref": "demo-home"
+    },
+    "expected_error": false,
+    "actual": {
+      "quote_id": "q_07c2905f9dd04b11bf86b0c66025aef5",
+      "item_cents": 7900,
+      "shipping_cents": 1200,
+      "total_cents": 9100,
+      "currency": "USD",
+      "tax_included": true,
+      "distance_km": 12,
+      "eta": "Friday (fixture estimate)",
+      "expires_at": 1793743675
+    }
+  },
+  {
+    "name": "Place confirmed order",
+    "tool": "place_order",
+    "arguments": {
+      "quote_id": "q_07c2905f9dd04b11bf86b0c66025aef5",
+      "confirmed": true,
+      "idempotency_key": "review-1"
+    },
+    "expected_error": false,
+    "actual": {
+      "order_id": "order_e8e632e50bbd4c1286f6661cafc650a0",
+      "status": "placed",
+      "total_cents": 9100,
+      "payment": "simulated; no charge"
+    }
+  },
+  {
+    "name": "Read owned order",
+    "tool": "get_order",
+    "arguments": {
+      "order_id": "order_e8e632e50bbd4c1286f6661cafc650a0"
+    },
+    "expected_error": false,
+    "actual": {
+      "id": "order_e8e632e50bbd4c1286f6661cafc650a0",
+      "customer": "maya",
+      "status": "placed",
+      "total": 9100
+    }
+  },
+  {
+    "name": "Cancel eligible order",
+    "tool": "cancel_order",
+    "arguments": {
+      "order_id": "order_e8e632e50bbd4c1286f6661cafc650a0",
+      "confirmed": true
+    },
+    "expected_error": false,
+    "actual": {
+      "order_id": "order_e8e632e50bbd4c1286f6661cafc650a0",
+      "status": "cancelled",
+      "payment_reversal": "not simulated; not confirmed"
+    }
+  },
+  {
+    "name": "No checkout confirmation",
+    "tool": "place_order",
+    "arguments": {
+      "quote_id": "q_07c2905f9dd04b11bf86b0c66025aef5",
+      "confirmed": false,
+      "idempotency_key": "denied"
+    },
+    "expected_error": true,
+    "actual": [
+      "Error executing tool place_order: CONFIRMATION_REQUIRED: review the quote before ordering"
+    ]
+  },
+  {
+    "name": "Another customer's order",
+    "tool": "cancel_order",
+    "arguments": {
+      "order_id": "demo-other",
+      "confirmed": true
+    },
+    "expected_error": true,
+    "actual": [
+      "Error executing tool cancel_order: No accessible order"
+    ]
+  },
+  {
+    "name": "Already dispatched",
+    "tool": "cancel_order",
+    "arguments": {
+      "order_id": "demo-shipped",
+      "confirmed": true
+    },
+    "expected_error": true,
+    "actual": [
+      "Error executing tool cancel_order: ALREADY_DISPATCHED: cancellation is unavailable; use the store's return process"
+    ]
+  }
+]
