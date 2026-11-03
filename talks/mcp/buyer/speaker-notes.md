@@ -1,6 +1,6 @@
 # MCP from first principles — 15-minute speaking draft
 
-19 slides: biography + 15 one-minute content slides + two supporting slides + Q&A. Notes are a pacing draft, not a guarantee of delivery speed.
+20 slides: biography + 15 one-minute content slides + three supporting slides + Q&A. Notes are a pacing draft, not a guarantee of delivery speed.
 
 ## Slide 1. Faizan Khan
 
